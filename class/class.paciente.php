@@ -7,7 +7,7 @@ class Paciente extends Pessoa {
     protected $responsavel;
 
     public function __construct(string $rg, string $nascimento, $responsavel) {
-        parent::__construct();
+        parent::__construct(string $nome);
         $this->rg = $rg;
         $this->nascimento = $nascimento;
         $this->responsavel = $responsavel;
