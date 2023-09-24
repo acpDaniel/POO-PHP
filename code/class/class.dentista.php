@@ -1,34 +1,27 @@
 <?php
-    include_once("class.dentista.php")
-    class Dentista{
-        protected string $CRO;
+    include_once "class.profissional.php";
+    class Dentista extends Profissional{
+        protected string $cro;
         protected string $especialidade;
-        protected float $salario_fixo;
         
-        public function __construct(string $CRO, string $especialidade, float $salario_fixo){
-            $this->CRO = $CRIO;
+        public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, string $especialidade) {
+            parent::__construct($nome, $email, $telefone, $cpf, $endereco);
+            $this->cro = $cro;
             $this->especialidade = $especialidade;
-            $this->salario_fixo = $salario_fixo;
         }
         
-        public function getCRO(){
-            return $this->CRO;
+        public function getCro(){
+            return $this->cro;
         }
         public function getEspecialidade(){
             return $this->especialidade;
         }
-        public function getSalario(){
-            return $this->salario_fixo;
-        }
 
-        public function setCRO($CRO){
-            $this->CRO =  $CRO;
+        public function setCro($cro){
+            $this->cro =  $cro;
         }
         public function setEspecialidade($especialidade){
             $this->especialidade = $especialidade;
-        }
-        public function setSalario($salario_fixo){
-            $this->salario_fixo = salario_fixo;
         }
     }
 ?>

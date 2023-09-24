@@ -1,14 +1,15 @@
 <?php
 
 include_once "class.pessoa.php";
+include_once "class.cliente.php";
 
 class Paciente extends Pessoa {
     protected string $rg;
     protected string $nascimento;
-    protected string $responsavel;
+    protected Cliente $responsavel;
 
-    public function __construct(string $nome, string $email, int $telefone, string $rg, string $nascimento, string $responsavel) {
-        parent:: __construct($nome, $email, $telefone);
+    public function __construct(string $nome, string $email, int $telefone, string $rg, string $nascimento, Cliente $responsavel) {
+        parent::__construct($nome, $email, $telefone);
         $this->rg = $rg;
         $this->nascimento = $nascimento;
         $this->responsavel = $responsavel;

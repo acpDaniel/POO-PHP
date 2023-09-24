@@ -1,11 +1,11 @@
 <?php
 include_once "class.pessoa.php";
 class Profissional extends Pessoa {
-    protected $cpf;
-    protected $endereco;
+    protected string $cpf;
+    protected string $endereco;
 
-    public function __construct($nome,$email,$telefone,$cpf, $endereco) {
-        parent::__construct($nome,$email,$telefone);
+    public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco) {
+        parent::__construct($nome, $email, $telefone);
         $this->cpf = $cpf;
         $this->endereco = $endereco;
     }

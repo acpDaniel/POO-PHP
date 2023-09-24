@@ -1,16 +1,18 @@
 <?php
-    include_once("class.secretaria.php")
-    class Secretaria{
-        private float $salario_fixo;  
-        public function __construct(float $salario_fixo){
-            $this->salario_fixo = $salario_fixo;
+    include_once "class.secretaria.php";
+    class Secretaria extends Profissional {
+        private float $salario;
+
+        public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, float $salario){
+            parent::__construct($nome, $email, $telefone, $cpf, $endereco, $salario);
+            $this->salario = $salario;
         }
         
         public function getSalario(){
-            return $this->salario_fixo;
+            return $this->salario;
         }
-        public function setSalario($salario_fixo){
-            $this->salario_fixo = $salario_fixo;
+        public function setSalario($salario){
+            $this->salario = $salario;
         }
     }
 ?>
