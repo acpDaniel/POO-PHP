@@ -1,13 +1,14 @@
 <?php
-include_once("class.pessoa.php");
+
+include_once "class.pessoa.php";
 
 class Paciente extends Pessoa {
-    protected $rg;
-    protected $nascimento;
-    protected $responsavel;
+    protected string $rg;
+    protected string $nascimento;
+    protected string $responsavel;
 
-    public function __construct(string $rg, string $nascimento, $responsavel) {
-        parent::__construct(string $nome);
+    public function __construct(string $nome, string $email, int $telefone, string $rg, string $nascimento, string $responsavel) {
+        parent:: __construct($nome, $email, $telefone);
         $this->rg = $rg;
         $this->nascimento = $nascimento;
         $this->responsavel = $responsavel;
@@ -21,16 +22,6 @@ class Paciente extends Pessoa {
     }
     public function getResponsavel() {
         return $this->responsavel;
-    }
-
-    public function setRg(string $rg) {
-        $this->rg = $rg;
-    }
-    public function setNascimento(string $nascimento) {
-        $this->nascimento = $nascimento;
-    }
-    public function setResponsavel($responsavel) {
-        $this->responsavel = $responsavel;
     }
 }
 ?>
