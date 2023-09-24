@@ -1,3 +1,5 @@
+<?php
+include_once "class.pessoa.php";
 class Profissional extends Pessoa {
     protected $cpf;
     protected $endereco;
@@ -24,3 +26,4 @@ class Profissional extends Pessoa {
         $this->endereco = $endereco;
     }
 }
+?>
