@@ -1,64 +1,35 @@
 <?php
    
-	include_once("class.dentistaparceiro.php")
-	class DentistaParceiro {
-		// Atributos protegidos
-		protected $cro;
-		protected $especialidade;
-		protected $porcentagem;
-		protected $procedimentos;
-		protected $salario;
+	include_once "class.dentista.php";
+	
+	class DentistaParceiro extends Dentista {
+		private float $porcentagem;
+		private array $orcamentos = array(); // cria orcamentos como nulo
+		private float $salario;
 
-		// Construtor
-		public function __construct($cro, $especialidade, $porcentagem, $procedimentos, $salario) {
-			$this->cro = $cro;
-			$this->especialidade = $especialidade;
+		public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, string $especialidade, float $porcentagem) {
+			parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $porcentagem);
 			$this->porcentagem = $porcentagem;
-			$this->procedimentos = $procedimentos;
-			$this->salario = $salario;
-		}
-
-		// Métodos para obter os atributos
-		public function getCro() {
-			return $this->cro;
-		}
-
-		public function getEspecialidade() {
-			return $this->especialidade;
 		}
 
 		public function getPorcentagem() {
 			return $this->porcentagem;
 		}
 
-		public function getProcedimentos() {
-			return $this->procedimentos;
+		public function getOrcamentos() {
+			return $this->orcamentos;
 		}
 
+		// pega o valor de cada orcamento e soma
+		// (tem q transformar pra tratamento depois, mas to com preguiça de fazer a classe tratamentos agora)
 		public function getSalario() {
+			$this->salario = 0;
+			if ($this->orcamentos != null) { // se tiver algo no orçamentos ele irá fazer o calculo, se não, é 0
+				for ($i = 0; $i < count($this->orcamentos); $i++) {
+					$this->salario += $this->orcamentos[$i]->getValor();
+				}
+			}
 			return $this->salario;
 		}
-
-		// Métodos para definir os atributos
-		public function setCro($cro) {
-			$this->cro = $cro;
-		}
-
-		public function setEspecialidade($especialidade) {
-			$this->especialidade = $especialidade;
-		}
-
-		public function setPorcentagem($porcentagem) {
-			$this->porcentagem = $porcentagem;
-		}
-
-		public function setProcedimentos($procedimentos) {
-			$this->procedimentos = $procedimentos;
-		}
-
-		public function setSalario($salario) {
-			$this->salario = $salario;
-		}
 	}
-
 ?>

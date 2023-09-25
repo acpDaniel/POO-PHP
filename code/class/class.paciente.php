@@ -13,6 +13,7 @@ class Paciente extends Pessoa {
         $this->rg = $rg;
         $this->nascimento = $nascimento;
         $this->responsavel = $responsavel;
+        $responsavel->addPacientes($this); //testar essa relação
     }
 
     public function getRg() {

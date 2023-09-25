@@ -6,14 +6,14 @@ class Cliente extends Pessoa {
     // Atributos protegidos
     private string $rg;
     private string $cpf;
-    private array $lista_pacientes = array();
+    public array $pacientes; // mudar para privado e ver se acontece erro
     
     // Construtor
     public function __construct(string $nome, string $email, int $telefone, string $rg, string $cpf) {
         parent::__construct($nome, $email, $telefone);
         $this->rg = $rg;
         $this->cpf = $cpf;
-        // $this->lista_pacientes = array();
+        $this->pacientes = array();
     }
 
     // Métodos para obter os atributos
@@ -25,8 +25,8 @@ class Cliente extends Pessoa {
         return $this->cpf;
     }
 
-    public function getListaPacientes() {
-        return $this->lista_pacientes;
+    public function getPacientes() {
+        return $this->pacientes;
     }
 
     // Métodos para definir os atributos
@@ -38,8 +38,12 @@ class Cliente extends Pessoa {
         $this->cpf = $cpf;
     }
 
-    public function setListaPacientes($lista_pacientes) {
-        $this->lista_pacientes = $lista_pacientes;
+    public function setArrayPacientes(array $pacientes) {
+        $this->pacientes = $pacientes;
+    }
+
+    public function addPacientes(Paciente $novopaciente) {
+        array_push($this->pacientes, $novopaciente);
     }
 }
 ?>
