@@ -1,6 +1,9 @@
 <?php
 
 include_once "class.pessoa.php";
+include_once "class.paciente.php";
+include_once "class.orcamento.php";
+include_once "class.tratamento.php";
 
 class Cliente extends Pessoa {
     // Atributos protegidos
