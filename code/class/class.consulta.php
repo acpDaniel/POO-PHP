@@ -1,5 +1,5 @@
 <?php
-class ConsultaDentista {
+class Consulta {
     private $dentista_executor;
     private $data;
     private $horario;
