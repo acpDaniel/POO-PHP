@@ -1,6 +1,8 @@
 <?php
 
-include_once "class.includes.php";
+include_once "class.procedimento.php";
+include_once "class.paciente.php";
+include_once "class.dentista.php";
 
 class Orcamento {
     private Paciente $paciente;
