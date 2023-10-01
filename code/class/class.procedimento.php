@@ -14,12 +14,24 @@ class Procedimento {
         return $this->nome;
     }
 
+    public function setNome($nome) {
+        $this->data = $nome;
+    }
+
     public function getValor() {
         return $this->valor;
     }
 
+    public function setValor($valor) {
+        $this->data = $valor;
+    }
+
     public function getDescricao() {
         return $this->descricao;
+    }
+
+      public function setDescricao($descricao) {
+        $this->data = $descricao;
     }
 }
 ?>
