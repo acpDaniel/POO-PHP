@@ -1,7 +1,7 @@
 <?php
 
+// importa a classe mãe da herança "pessoa"
 include_once "class.pessoa.php";
-include_once "class.cliente.php";
 
 class Paciente extends Pessoa {
     protected string $rg;
@@ -13,7 +13,6 @@ class Paciente extends Pessoa {
         $this->rg = $rg;
         $this->nascimento = $nascimento;
         $this->responsavel = $responsavel;
-        $responsavel->addPacientes($this); //testar essa relação
     }
 
     public function getRg() {

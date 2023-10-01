@@ -1,5 +1,6 @@
 <?php
 
+// importa a classe mãe da herança "pessoa"
 include_once "class.pessoa.php";
 include_once "class.paciente.php";
 include_once "class.orcamento.php";
@@ -9,7 +10,7 @@ class Cliente extends Pessoa {
     // Atributos protegidos
     private string $rg;
     private string $cpf;
-    public array $pacientes; // mudar para privado e ver se acontece erro
+    private array $pacientes;
     
     // Construtor
     public function __construct(string $nome, string $email, int $telefone, string $rg, string $cpf) {
@@ -32,6 +33,11 @@ class Cliente extends Pessoa {
         return $this->pacientes;
     }
 
+    public function getPaciente(int $i) {
+        $paciente = $this->getPacientes();
+        return $paciente[$i];
+    }
+
     // Métodos para definir os atributos
     public function setRg($rg) {
         $this->rg = $rg;
@@ -39,6 +45,12 @@ class Cliente extends Pessoa {
 
     public function setCpf($cpf) {
         $this->cpf = $cpf;
+    }
+
+    public function criarPaciente(string $nome, string $email, int $telefone, string $rg, string $nascimento) {
+        $novopaciente = new Paciente ($nome, $email, $telefone, $rg, $nascimento, $this);
+        $this->addPacientes($novopaciente);
+        echo "Paciente " . $nome . " criado para " . $this->getNome() . "\n";
     }
 
     public function setArrayPacientes(array $pacientes) {

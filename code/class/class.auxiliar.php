@@ -1,5 +1,8 @@
 <?php
-    include_once "class.auxiliar.php";
+
+    // importa a classe mãe da herança "profissional"
+    include_once "class.profissional.php";
+
     class Auxiliar extends Profissional {
         private float $salario;  
         public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, float $salario) {
