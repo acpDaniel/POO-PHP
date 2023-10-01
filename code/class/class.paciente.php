@@ -1,7 +1,6 @@
 <?php
 
-include_once "class.pessoa.php";
-include_once "class.cliente.php";
+include_once "class.includes.php";
 
 class Paciente extends Pessoa {
     protected string $rg;

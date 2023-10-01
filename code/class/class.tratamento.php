@@ -1,6 +1,6 @@
 <?php
 
-include_once "class.orcamento.php";
+include_once "class.includes.php";
 
 class Tratamento extends Orcamento {
     private float $valor;

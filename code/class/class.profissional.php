@@ -1,5 +1,7 @@
 <?php
-include_once "class.pessoa.php";
+
+include_once "class.includes.php";
+
 class Profissional extends Pessoa {
     protected string $cpf;
     protected string $endereco;
