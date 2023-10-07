@@ -22,6 +22,12 @@ function linhaObjeto($objeto) {
             continue;
         }
 
+        // Se $value for objeto vai pular, porem tem que ser aqui  
+        // por causa do $value do tipo Cliente la em cima
+        if (is_object($value)) {
+            continue;
+        }
+
         $string .= " $$name($value)";
     }
     return $string;

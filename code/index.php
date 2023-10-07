@@ -14,7 +14,6 @@ $anderson = new Cliente ("anderson", "anderson@gmail", 989043325, "mg213", "6546
 $leo = $anderson->criarPaciente ("leonardo de sa", "leonardo@gmail", 982118390, "213", "18/09");
 $daniel = $anderson->criarPaciente ("daniel de sa", "daniel@gmail", 978516514, "sda", "10/09");
 
-//$leo->getResponsavel()->getCpf();
 
 echo linhaObjeto($leo);
 
