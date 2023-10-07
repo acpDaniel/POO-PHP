@@ -47,10 +47,11 @@ class Cliente extends Pessoa {
         $this->cpf = $cpf;
     }
 
-    public function criarPaciente(string $nome, string $email, int $telefone, string $rg, string $nascimento) {
+    public function criarPaciente(string $nome, string $email, int $telefone, string $rg, string $nascimento) : Paciente {
         $novopaciente = new Paciente ($nome, $email, $telefone, $rg, $nascimento, $this);
         $this->addPacientes($novopaciente);
         echo "Paciente " . $nome . " criado para " . $this->getNome() . "\n";
+        return $novopaciente;
     }
 
     public function setArrayPacientes(array $pacientes) {
