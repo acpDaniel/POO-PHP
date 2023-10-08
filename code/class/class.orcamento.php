@@ -36,7 +36,7 @@ class Orcamento {
     }
 
     public function getDetalhamento() {
-        return $this->procedimentos;
+        return $this->detalhamento;
     }
 
     public function setDetalhamento($detalhamento) {
