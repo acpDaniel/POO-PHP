@@ -7,7 +7,7 @@
 		private array $orcamentos = array(); // cria orcamentos como nulo
 		private float $salario;
 
-		public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, string $especialidade, float $porcentagem) {
+		public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, array $especialidade, float $porcentagem) {
 			parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $porcentagem);
 			$this->porcentagem = $porcentagem;
 		}
