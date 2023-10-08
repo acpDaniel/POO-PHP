@@ -15,7 +15,7 @@ class Procedimento {
     }
 
     public function setNome($nome) {
-        $this->data = $nome;
+        $this->nome = $nome;
     }
 
     public function getValor() {
@@ -23,7 +23,7 @@ class Procedimento {
     }
 
     public function setValor($valor) {
-        $this->data = $valor;
+        $this->valor = $valor;
     }
 
     public function getDescricao() {
@@ -31,7 +31,7 @@ class Procedimento {
     }
 
       public function setDescricao($descricao) {
-        $this->data = $descricao;
+        $this->descricao = $descricao;
     }
 }
 ?>
