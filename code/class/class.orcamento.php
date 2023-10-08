@@ -9,6 +9,7 @@ class Orcamento {
     private Dentista $dentista;
     private string $data;
     private array $procedimentos;
+    private $detalhamento;
 
     public function __construct(Paciente $paciente, Dentista $dentista, string $data, array $procedimentos)
     {
@@ -32,6 +33,14 @@ class Orcamento {
 
     public function getProcedimentos() {
         return $this->procedimentos;
+    }
+
+    public function getDetalhamento() {
+        return $this->procedimentos;
+    }
+
+    public function setDetalhamento($detalhamento) {
+        return $this->detalhamento = $detalhamento;
     }
 }
 
