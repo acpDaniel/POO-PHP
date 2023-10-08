@@ -40,7 +40,12 @@ class Orcamento {
     }
 
     public function setDetalhamento($detalhamento) {
-        return $this->detalhamento = $detalhamento;
+        $this->detalhamento = $detalhamento;
+    }
+
+    public function aprovarOrcamento($valor, $forma_pagamento, $data) {
+        $tratamento = new Tratamento($valor, $forma_pagamento, $data);
+        return $tratamento;
     }
 }
 
