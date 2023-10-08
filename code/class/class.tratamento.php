@@ -3,24 +3,47 @@
 include_once "class.orcamento.php";
 
 class Tratamento extends Orcamento {
-    private float $valor;
-    private Orcamento $orcamento;
+    private $valor;
+    private $forma_pagamento;
+    private $data;
+    private $consultas;
 
-    public function __construct(float $valor, Orcamento $orcamento) {
-        $this->orcamento = $orcamento;
-        $this->valor = $this->getValor();
+    public function __construct($valor, $forma_pagamento, $data) {
+        $this->valor = $valor;
+        $this->forma_pagamento = $forma_pagamento;
+        $this->data = $data;
     }
 
     public function getValor() {
-        // pega o array de procedimentos dentro do orçamento
-        $procedimentos = $this->orcamento->getProcedimentos();
-        $valor = 0;
+       return $this->valor;
+    }
 
-        //conta esses procedimentos e soma eles
-        for ($i = 0; $i < count($procedimentos); $i++) {
-            $valor += $procedimentos[$i]->getValor();
-        }
-        return $valor;
+    public function getFormaPagamento() {
+       return $this->forma_pagamento;
+    }
+
+    public function getData() {
+       return $this->data;
+    }
+
+    public function getConsultas() {
+       return $this->consultas;
+    }
+    
+    public function setValor($valor) {
+        $this->valor = $valor;
+    }
+
+    public function setFormaPagamento($forma_pagamento) {
+        $this->forma_pagamento = $forma_pagamento;
+    }
+
+    public function setData($data) {
+        $this->data = $data;
+    }
+
+     public function setConsultas($consultas) {
+        $this->consultas = $consultas;
     }
 
 }
