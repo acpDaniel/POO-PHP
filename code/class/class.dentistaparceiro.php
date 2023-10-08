@@ -8,7 +8,7 @@
 		private float $salario;
 
 		public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, array $especialidade, float $porcentagem) {
-			parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $porcentagem);
+			parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade);
 			$this->porcentagem = $porcentagem;
 		}
 
