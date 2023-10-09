@@ -3,9 +3,9 @@
 class Pessoa {
     protected string $nome;
     protected string $email;
-    protected int $telefone;
+    protected string $telefone;
 
-    public function __construct(string $nome, string $email, int $telefone) {
+    public function __construct(string $nome, string $email, string $telefone) {
         $this->nome = $nome;
         $this->email = $email;
         $this->telefone = $telefone;

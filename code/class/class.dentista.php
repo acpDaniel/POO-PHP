@@ -1,10 +1,11 @@
 <?php
     include_once "class.profissional.php";
+    include_once "class.especialidade.php";
     class Dentista extends Profissional{
         protected string $cro;
         protected array $especialidade;
         
-        public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, array $especialidade) {
+        public function __construct(string $nome, string $email, string $telefone, string $cpf, string $endereco, string $cro, array $especialidade) {
             parent::__construct($nome, $email, $telefone, $cpf, $endereco);
             $this->cro = $cro;
             $this->especialidade = $especialidade;
