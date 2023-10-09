@@ -31,7 +31,7 @@
 			$this->salario = 0;
 			if (count($this->tratamentos) != null) { // se tiver algo nos tratamentos ele irá fazer o calculo, se não, é 0
 				for ($i = 0; $i < count($this->tratamentos); $i++) {
-					$this->salario += this->$porcentagem*$this->tratamentos[$i]->getValor();
+					$this->salario += $this->porcentagem*$this->tratamentos[$i]->getValor();
 				}
 			}
 			return $this->salario;
