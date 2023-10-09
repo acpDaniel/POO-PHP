@@ -26,7 +26,7 @@
 			$this->salario = 0;
 			if ($this->orcamentos != null) { // se tiver algo no orçamentos ele irá fazer o calculo, se não, é 0
 				for ($i = 0; $i < count($this->orcamentos); $i++) {
-					$this->salario += $this->orcamentos[$i]->getValor();
+					$this->salario += this->$porcentagem*$this->orcamentos[$i]->getValor();
 				}
 			}
 			return $this->salario;
