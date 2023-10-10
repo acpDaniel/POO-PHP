@@ -34,6 +34,9 @@ class Pessoa {
     // mas se tiver entrada de strings pelo terminal precisa mudar
     public function validaTelefone(string $telefone) : bool {
         $validado = 1;
+
+        // o telefone so pode ter numeros
+
         // Um telefone tem que ter 11 digitos
         if (strlen($telefone) != 11)
             echo "Número de telefone não possui o tamanho esperado: 11 digitos \n";
