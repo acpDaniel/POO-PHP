@@ -8,15 +8,12 @@
     include_once "class/class.auxiliar.php";
     include_once "class/funct.txt.php";
 
-
-    // cliente
+    // cria um cliente
     $anderson = new Cliente ("anderson", "anderson@gmail", "989043325", "mg213", "65464546");
 
-    // pacientes
+    // cria dois pacientes
     $leo = $anderson->criarPaciente ("leonardo de sa", "leonardo@gmail", "982118390", "213", "18/09");
     $daniel = $anderson->criarPaciente ("daniel de sa", "daniel@gmail", "978516514", "sda", "10/09");
-
-    echo "\n" . linhaObjeto($leo) . "\n";
 
     // especialidades da rizia
     $especialidades_rizia = array (new Especialidade("estética"), new Especialidade("cirurgia"), new Especialidade("limpeza"));
