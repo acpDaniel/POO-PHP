@@ -14,17 +14,17 @@ class Pessoa {
     }
 
     // retornar o nome
-    public function getNome() {
+    public function getNome() : string {
         return $this->nome;
     }
     
     // retornar o email
-    public function getEmail() {
+    public function getEmail() : string {
         return $this->email;
     }
 
     // retornar o telefone
-    public function getTelefone() {
+    public function getTelefone() : string {
         return $this->telefone;
     }
 

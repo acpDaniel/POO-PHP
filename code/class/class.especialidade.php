@@ -8,7 +8,7 @@ class Especialidade {
     }
     
     public function getEspecialidade(){
-      return $this->nome;
+        return $this->nome;
     }
 
     public function setEspecialidade(string $nome){

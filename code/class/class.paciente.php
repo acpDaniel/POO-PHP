@@ -19,17 +19,17 @@ class Paciente extends Pessoa {
     }
 
     // retorna rg
-    public function getRg() {
+    public function getRg() : string {
         return $this->rg;
     }
 
     // retorna nascimento
-    public function getNascimento() {
+    public function getNascimento() : string {
         return $this->nascimento;
     }
 
     // retorna responsavel
-    public function getResponsavel() {
+    public function getResponsavel() : Cliente {
         return $this->responsavel;
     }
 
