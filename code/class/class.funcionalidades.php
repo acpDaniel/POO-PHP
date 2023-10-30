@@ -2,10 +2,6 @@
 class Funcionalidades {
    private array funcionalidades; #dicionario
   
-   public function __construct(){
-
-   }
-   
     public function AdicionaFuncionalidade(){
       
     }
