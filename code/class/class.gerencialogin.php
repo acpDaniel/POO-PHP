@@ -5,10 +5,6 @@ class GerenciaLogin {
    private static Profissional $usuario_logado;
    private Funcionalidades $funcionalidades;
 
-   public function __construct(){
-
-   }
-   
     public function ValidaLogin(): boolean{
       
     }
