@@ -1,19 +1,27 @@
 <?php
 
-class Especialidade {
+class Especialidade
+{
     protected string $nome;
-    
-    public function __construct(string $nome){
+    public $procedimentos_permitidos = array();
+
+    public function __construct(string $nome)
+    {
         $this->nome = $nome;
     }
-    
-    public function getEspecialidade(){
+
+    public function getEspecialidade()
+    {
         return $this->nome;
     }
 
-    public function setEspecialidade(string $nome){
+    public function setEspecialidade(string $nome)
+    {
         $this->nome = $nome;
     }
-}
 
-?>
+    public function adicionarProcedimento(Procedimento $procedimento)
+    {
+        $this->procedimentos_permitidos[] = $procedimento;
+    }
+}
