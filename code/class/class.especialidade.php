@@ -22,6 +22,6 @@ class Especialidade
 
     public function adicionarProcedimento(Procedimento $procedimento)
     {
-        $this->procedimentos_permitidos[] = $procedimento;
+        array_push($this->especialidades, $especialidade);
     }
 }
