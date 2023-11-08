@@ -33,6 +33,6 @@ class Dentista extends Profissional
 
     public function adicionarEspecialidade(Especialidade $especialidade)
     {
-        $this->especialidades[] = $especialidade;
+       array_push($this->especialidades, $especialidade);
     }
 }
