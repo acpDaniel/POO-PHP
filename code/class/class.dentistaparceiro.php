@@ -4,37 +4,48 @@
 	include_once"class.tratamento.php";
 	
 	class DentistaParceiro extends Dentista {
-		private float $porcentagem;
-		private array $tratamentos = array(); 
-		private float $salario;
+		
+		private $especialidades_porcentagem = [];
+		// a chave desse dicionario vai ser no formato : janeiro2023, fevereiro2024
+		private $salario_mes_ano = [];
 
 		public function __construct(string $nome, string $email, int $telefone, string $cpf, string $endereco, string $cro, array $especialidade, float $porcentagem) {
 			parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade);
 			$this->porcentagem = $porcentagem;
 		}
 
-		public function getPorcentagem() {
-			return $this->porcentagem;
+		// incrementa o valor se ja existir uma chave do mes, se nao existir vai criar
+		public function incrementaSalario($data, $valor) {
+			if (array_key_exists($data, $this->salario_mes_ano)) {
+				$this->salario_mes_ano[$data] += $valor;
+			} else {
+				$this->salario_mes_ano[$data] = $valor;
+			}
 		}
 
-		public function getTratamentos() {
-			return $this->tratamentos;
+		public function getSalarioMes($mes) {
+			if (array_key_exists($mes, $this->salario_mes_ano)) {
+				return $this->salario_mes_ano[$mes];
+			} else {
+				return "Mês não encontrado";
+			}
 		}
 
-		public function addTratamento(Tratamento $tratamento){
-			$this->tratamentos[] = $tratamento;
-		}
+		public function calculaValorProcedimento(Procedimento $procedimento){
+			$especialidade_para_procurar;
+			$porcentagem_para_procedimento;
 
-		// pega o valor de cada tratamento e soma
-		// (tem q transformar pra tratamento depois, mas to com preguiça de fazer a classe tratamentos agora)
-		public function getSalario() {
-			$this->salario = 0;
-			if (count($this->tratamentos) != null) { // se tiver algo nos tratamentos ele irá fazer o calculo, se não, é 0
-				for ($i = 0; $i < count($this->tratamentos); $i++) {
-					$this->salario += $this->porcentagem*$this->tratamentos[$i]->getValor();
+			// devemos achar qual é a especialidade que o procedimento faz parte
+			foreach ($this->especialidades as $especialidade) {
+				if (in_array($procedimento, $especialidade->procedimentos_permitidos, true)) {
+					$especialidade_para_procurar = $especialidade;
 				}
 			}
-			return $this->salario;
+
+			$porcentagem_para_procedimento = $this->especialidades_porcentagem[$especialidade];
+
+			return ($procedimento->valor * $porcentagem_para_procedimento);
+
 		}
 	}
 ?>
