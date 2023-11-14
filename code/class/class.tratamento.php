@@ -85,7 +85,7 @@ class Tratamento extends Orcamento
         $this->infos_procedimentos[$procedimento]['consultas'][] = $nova_consulta;
     }
 
-    public function caculaValorFaturuado($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final)
+    public function caculaValorFaturado($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final)
     {
         $data_inicio = new DateTime("$ano_inicial-$mes_inicial-$dia_inicial");
         $data_fim = new DateTime("$ano_final-$mes_final-$dia_final");
