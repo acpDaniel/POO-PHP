@@ -36,17 +36,20 @@ class Pessoa {
         $validado = 1;
 
         // o telefone so pode ter numeros
-
+        if (ctype_digit($telefone) == false){
+            echo "Número de telefone contém digitos não numéricos."
+            $validado = 0;
+        }
         // Um telefone tem que ter 11 digitos
-        if (strlen($telefone) != 11)
+        if (strlen($telefone) != 11){
             echo "Número de telefone não possui o tamanho esperado: 11 digitos \n";
             $validado = 0;
-
+        }
         // O terceiro digito de um telefone tem que ser um 9
-        if ($telefone[2] != 9)
+        if ($telefone[2] != 9){
             echo "Número de telefone não possui o formato esperado: xx9xxxxxxxx\n";
             $validado = 0;
-
+        }
         return $validado;
     }
 
@@ -54,6 +57,6 @@ class Pessoa {
     // funções para que o codigo rode
     // futuramente vai ir pra uma classe mãe da pessoa
     public function printMe(){}
-    public function getFilename(){}
+    public function getFileName(){}
 }
 ?>
