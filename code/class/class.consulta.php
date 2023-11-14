@@ -1,10 +1,10 @@
 <?php
 class Consulta
 {
-    private $dentista_executor;
+    private Dentista $dentista_executor;
     private Datetime $data;
-    private $horario;
-    private $duracao_consulta;
+    private string $horario;
+    private string $duracao_consulta;
 
     public function __construct($dentista_executor, Datetime $data, $horario, $duracao_consulta)
     {
