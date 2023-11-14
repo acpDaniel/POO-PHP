@@ -13,5 +13,9 @@
 		public function getSalario() {
 			return $this->salario_fixo;
 		}
+
+		protected function setSalario($salario){
+			$this->salario = $salario;
+		}
 	}
 ?>
