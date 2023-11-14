@@ -8,13 +8,14 @@ class Pagamento
     private $valor_total_pagamento;
     private $valor_pago_impostos;
     private $valor_do_taxamento;
-    private $data_pagamento;
+    // objeto de data instanciado com (ano,mes,dia)
+    private DateTime $data_pagamento;
 
-    public function __construct($forma_pagamento, $valor_total_pagamento, $data_pagamento, $taxa_imposto)
+    public function __construct($forma_pagamento, $valor_total_pagamento, $ano, $mes, $dia, $taxa_imposto)
     {
         $this->forma_pagamento = $forma_pagamento;
         $this->valor_total_pagamento = $valor_total_pagamento;
-        $this->data_pagamento = $data_pagamento;
+        $this->data_pagamento = new Datetime("$ano-$mes-$dia");
         $this->calculaValorImposto($taxa_imposto);
         $this->calculaValorTaxamento();
     }
