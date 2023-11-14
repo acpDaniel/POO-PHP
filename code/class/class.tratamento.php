@@ -9,7 +9,7 @@ class Tratamento extends Orcamento
 {
     private FormaPagamento $forma_pagamento_proposto;
     private Datetime $data;
-    private array $infos_procedimentos = [];
+    public $infos_procedimentos = [];
     private $pagamentos_efetuados = [];
 
     public function __construct($forma_pagamento_proposto, $data, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos)
