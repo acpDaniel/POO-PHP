@@ -56,4 +56,15 @@ class Orcamento
         $tratamento = new Tratamento($valor, $forma_pagamento, $data, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
         return $tratamento;
     }
+
+    public function setValor($valor)
+    {
+        $this->valor_total = $valor;
+    }
+
+    public function getValor()
+    {
+        return $this->valor_total;
+    }
+
 }
