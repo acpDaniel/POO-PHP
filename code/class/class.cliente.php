@@ -62,3 +62,4 @@ class Cliente extends Pessoa
         array_push($this->pacientes, $novopaciente);
     }
 }
+?>
