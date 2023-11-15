@@ -9,9 +9,9 @@ class Orcamento
     private Paciente $paciente;
     private Dentista $dentista_avaliador;
     private Datetime $data_orcamento;
-    private $procedimentos = array();
-    private $detalhamento;
     private $valor_total;
+    private $procedimentos = array();
+    private $detalhamentos_procedimento = [];
 
     public function __construct(Paciente $paciente, Dentista $dentista_avaliador, Datetime $data, array $procedimentos)
     {
@@ -42,14 +42,19 @@ class Orcamento
         return $this->procedimentos;
     }
 
-    public function getDetalhamento()
+    public function getDetalhamentos()
     {
-        return $this->detalhamento;
+        return $this->detalhamentos_procedimento;
     }
 
-    public function setDetalhamento($detalhamento)
+    public function getDetalhamentoProcedimento($procedimento)
     {
-        $this->detalhamento = $detalhamento;
+        return $this->detalhamentos_procedimento[$procedimento->getNome()];
+    }
+
+    public function setDetalhamentoProcedimento($procedimento, $detalhamento)
+    {
+        $this->detalhamentos_procedimento[$procedimento->getNome()] = $detalhamento;
     }
 
     public function aprovarOrcamento($forma_pagamento_proposto)
