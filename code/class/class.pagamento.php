@@ -1,6 +1,6 @@
 <?php
 
-include_once "FormaPagamento.php";
+include_once "class.formaPagamento.php";
 
 class Pagamento
 {

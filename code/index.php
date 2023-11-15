@@ -6,8 +6,9 @@ include_once "class/class.cliente.php";
 include_once "class/class.paciente.php";
 include_once "class/class.secretaria.php";
 include_once "class/class.auxiliar.php";
+include_once "class/class.formaPagamento.php";
 include_once "class/funct.txt.php";
-include_once "class/FormaPagamento.php";
+
 
 // cria um cliente
 $anderson = new Cliente("anderson", "anderson@gmail", "989043325", "mg213", "65464546");

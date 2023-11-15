@@ -1,8 +1,11 @@
 <?php
+class ConsultaAvaliacao extends Consulta
+{
+    private $paciente;
 
-include_once "class.consulta.php"
-class ConsultaAvaliacao extends Consulta{
-
+    public function __construct($paciente, $dentista_executor, $data, $horario)
+    {
+        parent::__construct($dentista_executor, $data, $horario, 30);
+        $this->paciente = $paciente;
+    }
 }
-
-?>

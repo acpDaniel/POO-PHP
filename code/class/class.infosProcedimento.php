@@ -1,7 +1,7 @@
 <?php
 
 include_once "class.procedimento.php";
-include_once "class.consultaexecucao.php";
+include_once "class.consultaExecucao.php";
 
 class InfosProcedimento
 {
