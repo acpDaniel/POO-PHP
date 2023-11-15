@@ -16,8 +16,10 @@ $anderson = new Cliente("anderson", "anderson@gmail", "989043325", "mg213", "654
 // especialidades da rizia
 $especialidades_rizia = array(new Especialidade("estética"), new Especialidade("cirurgia"), new Especialidade("limpeza"));
 
+$endereco = new Endereco("catalao", "123", "30", "1456", "bh", "mg", "casa");
+
 // dentista
-$rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", "rua sdasdasd", "MG 09321", $especialidades_rizia, 4000);
+$rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000);
 
 $forma_pagamento = new FormaPagamento("dinheiro", "0", "0");
 echo "<br>";

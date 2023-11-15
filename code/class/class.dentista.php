@@ -3,8 +3,8 @@ include_once "class.profissional.php";
 include_once "class.especialidade.php";
 class Dentista extends Profissional
 {
-    public string $cro;
-    public $especialidades = array();
+    protected  $cro;
+    protected $especialidades = array();
 
     public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade)
     {
@@ -31,7 +31,7 @@ class Dentista extends Profissional
         $this->especialidades = $especialidade;
     }
 
-    public function adicionarEspecialidade(Especialidade $especialidade)
+    public function adicionaEspecialidade(Especialidade $especialidade)
     {
         array_push($this->especialidades, $especialidade);
     }
