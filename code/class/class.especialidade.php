@@ -5,9 +5,10 @@ class Especialidade
     private $nome;
     private $procedimentos_permitidos = array();
 
-    public function __construct(string $nome)
+    public function __construct(string $nome, array $procedimentos_permitidos)
     {
         $this->nome = $nome;
+        $this->procedimentos_permitidos = $procedimentos_permitidos;
     }
 
     public function getNomeEspecialidade()
