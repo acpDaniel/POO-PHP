@@ -7,6 +7,8 @@ include_once "class/class.paciente.php";
 include_once "class/class.secretaria.php";
 include_once "class/class.auxiliar.php";
 include_once "class/class.formaPagamento.php";
+include_once "class/class.perfil.php";
+include_once "class/class.usuario.php";
 include_once "class/funct.txt.php";
 
 
@@ -18,8 +20,11 @@ $especialidades_rizia = array(new Especialidade("estética"), new Especialidade(
 
 $endereco = new Endereco("catalao", "123", "30", "1456", "bh", "mg", "casa");
 
+$perfil = new Perfil();
+$usuario_teste = new Usuario("nomeLogin", "senha", $pefil);
+
 // dentista
-$rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000);
+$rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000, $usuario_teste);
 
 $procedimento1 = new Procedimento("limpeza", "200", "limpar tudo");
 $procedimento2 = new Procedimento("retirar siso", "500", "tirar os 4 dentes");
@@ -35,7 +40,7 @@ $array_especialidades = array();
 $array_especialidades[] = $especilidade_estetica;
 $array_especialidades[] = $especialidade_cirurgia;
 
-$dentista_parceiro = new DentistaParceiro("dentista", "gmail", "123", "142", $endereco, "croo", $array_especialidades);
+$dentista_parceiro = new DentistaParceiro("dentista", "gmail", "123", "142", $endereco, "croo", $array_especialidades, $usuario_teste);
 $dentista_parceiro->setPorcentagemEspecialidade($especilidade_estetica, "0.15");
 $dentista_parceiro->calculaValorProcedimento($procedimento3);
 

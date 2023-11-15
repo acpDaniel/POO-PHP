@@ -7,8 +7,8 @@ class Profissional extends Pessoa
     protected string $cpf;
     protected  Endereco $endereco;
     protected  Usuario $usuario;
-   
-    public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco)
+
+    public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, Usuario $usuario)
     {
         parent::__construct($nome, $email, $telefone);
         $this->cpf = $cpf;
