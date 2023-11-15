@@ -6,7 +6,7 @@ class Dentista extends Profissional
     public string $cro;
     public $especialidades = array();
 
-    public function __construct(string $nome, string $email, string $telefone, string $cpf, string $endereco, string $cro, array $especialidade)
+    public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade)
     {
         parent::__construct($nome, $email, $telefone, $cpf, $endereco);
         $this->cro = $cro;
@@ -33,6 +33,6 @@ class Dentista extends Profissional
 
     public function adicionarEspecialidade(Especialidade $especialidade)
     {
-       array_push($this->especialidades, $especialidade);
+        array_push($this->especialidades, $especialidade);
     }
 }
