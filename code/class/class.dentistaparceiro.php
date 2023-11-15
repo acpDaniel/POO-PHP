@@ -11,7 +11,7 @@ class DentistaParceiro extends Dentista
 	// a chave desse dicionario vai ser no formato : janeiro2023, fevereiro2024
 	private $salario_mes_ano = [];
 
-	public function __construct(string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades, Usuario $usuario)
+	public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades, Usuario $usuario)
 	{
 		parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidades, $usuario);
 	}
