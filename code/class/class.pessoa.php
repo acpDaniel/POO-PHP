@@ -1,11 +1,13 @@
 <?php
+require_once("persist.php");
 
-class Pessoa
+class Pessoa extends persist
 {
 
     protected string $nome;
     protected string $email;
     protected string $telefone;
+    static $local_filename = "pessoa.txt";
 
     public function __construct(string $nome, string $email, string $telefone)
     {
@@ -42,5 +44,10 @@ class Pessoa
     public function setTelefone(string $telefone)
     {
         $this->telefone = $telefone;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

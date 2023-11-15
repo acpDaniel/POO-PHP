@@ -9,11 +9,17 @@ include_once "class/class.auxiliar.php";
 include_once "class/class.formaPagamento.php";
 include_once "class/class.perfil.php";
 include_once "class/class.usuario.php";
-include_once "class/funct.txt.php";
+include_once "class/persist.php";
+include_once "class/container.php";
+require_once "global.php";
 
+
+$pessoa = new pessoa("daniel", "gmail", "123");
+$pessoa->Save();
 
 // cria um cliente
 $anderson = new Cliente("anderson", "anderson@gmail", "989043325", "mg213", "65464546");
+$anderson->save();
 
 // especialidades da rizia
 $especialidades_rizia = array(new Especialidade("estética"), new Especialidade("cirurgia"), new Especialidade("limpeza"));
@@ -21,7 +27,7 @@ $especialidades_rizia = array(new Especialidade("estética"), new Especialidade(
 $endereco = new Endereco("catalao", "123", "30", "1456", "bh", "mg", "casa");
 
 $perfil = new Perfil();
-$usuario_teste = new Usuario("nomeLogin", "senha", $pefil);
+$usuario_teste = new Usuario("nomeLogin", "senha", $perfil);
 
 // dentista
 $rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000, $usuario_teste);

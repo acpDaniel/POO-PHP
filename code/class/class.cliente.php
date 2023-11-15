@@ -11,6 +11,7 @@ class Cliente extends Pessoa
     protected string $rg;
     protected string $cpf;
     protected array $pacientes;
+    static $local_filename = "clientes.txt";
 
     public function __construct(string $nome, string $email, int $telefone, string $rg, string $cpf)
     {
