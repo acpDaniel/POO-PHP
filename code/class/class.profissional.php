@@ -13,6 +13,12 @@ class Profissional extends Pessoa
         parent::__construct($nome, $email, $telefone);
         $this->cpf = $cpf;
         $this->endereco = $endereco;
+        $this->usuario = $usuario;
+    }
+
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 
     public function getCpf()
