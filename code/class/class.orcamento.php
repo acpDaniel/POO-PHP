@@ -8,12 +8,12 @@ class Orcamento
 {
     private Paciente $paciente;
     private Dentista $dentista_avaliador;
-    private string $data_orcamento;
+    private Datetime $data_orcamento;
     private  $procedimentos = array();
     private $detalhamento;
     private $valor_total;
 
-    public function __construct(Paciente $paciente, Dentista $dentista, string $data, array $procedimentos)
+    public function __construct(Paciente $paciente, Dentista $dentista, Datetime $data, array $procedimentos)
     {
         $this->paciente = $paciente;
         $this->dentista_avaliador = $dentista;
@@ -33,7 +33,7 @@ class Orcamento
 
     public function getData()
     {
-        return $this->data_orcamento;
+        return $this->data_orcamento->format('d-m-Y');
     }
 
     public function getProcedimentos()
@@ -66,5 +66,4 @@ class Orcamento
     {
         return $this->valor_total;
     }
-
 }

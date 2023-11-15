@@ -26,7 +26,7 @@ class Consulta
 
     public function getData()
     {
-        return $this->data;
+        return $this->data->format('d-m-Y');
     }
 
     public function setData($data)

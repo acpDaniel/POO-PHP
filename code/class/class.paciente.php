@@ -1,54 +1,48 @@
 <?php
 
-// importa a classe mãe da herança "pessoa"
 include_once "class.pessoa.php";
 
-// classe Paciente, filha da classe Pessoa
-class Paciente extends Pessoa {
-    // atributos protegidos
+class Paciente extends Pessoa
+{
     protected string $rg;
-    protected string $nascimento;
-    protected Cliente $responsavel;
+    protected Datetime $data_nascimento;
+    protected Cliente $cliente_responsavel;
 
-    // construtor de paciente
-    public function __construct(string $nome, string $email, int $telefone, string $rg, string $nascimento, Cliente $responsavel) {
-        parent::__construct($nome, $email, $telefone);  // construtor da classe mãe Pessoa
+    public function __construct(string $nome, string $email, int $telefone, string $rg, Datetime $data_nascimento, Cliente $cliente_responsavel)
+    {
+        parent::__construct($nome, $email, $telefone);
         $this->rg = $rg;
-        $this->nascimento = $nascimento;
-        $this->responsavel = $responsavel;
+        $this->data_nascimento = $data_nascimento;
+        $this->cliente_responsavel = $cliente_responsavel;
     }
 
-    // retorna rg
-    public function getRg() : string {
+    public function setRg(string $rg)
+    {
+        $this->rg = $rg;
+    }
+
+    public function setDataNascimento(Datetime $data_nascimento)
+    {
+        $this->data_nascimento = $data_nascimento;
+    }
+
+    public function setClienteResponsavel(Cliente $cliente_responsavel): void
+    {
+        $this->cliente_responsavel = $cliente_responsavel;
+    }
+
+    public function getRg()
+    {
         return $this->rg;
     }
 
-    // retorna nascimento
-    public function getNascimento() : string {
-        return $this->nascimento;
+    public function getNascimento()
+    {
+        return $this->data_nascimento->format('d-m-Y');
     }
 
-    // retorna responsavel
-    public function getResponsavel() : Cliente {
-        return $this->responsavel;
-    }
-
-    // valida o nascimento, do tipo dd/mm/aaaa, porem recebe a string como ddmmaaaa
-    public function validaNascimento($nascimento) : bool {
-        $validado = 1;
-        //o nascimento tem q ter 8 caracteres
-        if (strlen($nascimento) != 8)
-            echo "A data de nascimento não possui o tamanho esperado: 8 digitos \n";
-            $validado = 0;
-
-        // O terceiro digito de um telefone tem que ser um 9
-        if ($nascimento[0] . $nascimento[1] >= 31)
-            echo "O dia do nascimento foi excedido: > 31\n";
-            $validado = 0;
-            
-    
-
-        return $validado;
+    public function getClienteResponsavel()
+    {
+        return $this->cliente_responsavel;
     }
 }
-?>

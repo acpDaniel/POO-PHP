@@ -42,7 +42,7 @@ class Pagamento
 
     public function getDataPagamento()
     {
-        return $this->data_pagamento;
+        return $this->data_pagamento->format('d-m-Y');
     }
 
     public function setDataPagamento($data_pagamento)

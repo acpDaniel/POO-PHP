@@ -13,10 +13,6 @@ include_once "class/funct.txt.php";
 // cria um cliente
 $anderson = new Cliente("anderson", "anderson@gmail", "989043325", "mg213", "65464546");
 
-// cria dois pacientes
-$leo = $anderson->criarPaciente("leonardo de sa", "leonardo@gmail", "982118390", "213", "18/09");
-$daniel = $anderson->criarPaciente("daniel de sa", "daniel@gmail", "978516514", "sda", "10/09");
-
 // especialidades da rizia
 $especialidades_rizia = array(new Especialidade("estética"), new Especialidade("cirurgia"), new Especialidade("limpeza"));
 
@@ -36,11 +32,11 @@ $arrayProcedimentos = array($procedimento1, $procedimento2);
 
 
 $cliente_responsavel = new Cliente("naiara", "gmail", "123", "200", "142");
-$paciente = new Paciente("daniel", "gmail.com", "123", "200", "2021", $cliente_responsavel);
+$paciente = new Paciente("daniel", "gmail.com", "123", "200", new datetime('2023-01-20'), $cliente_responsavel);
 
 $tratamento = new Tratamento($forma_pagamento, new datetime('2023-01-20'), $paciente, $rizia, "2023", $arrayProcedimentos);
 echo "<br>";
-echo $tratamento->getData()->format('Y-m-d H:i:s');
+echo $tratamento->getData();
 
 //$tratamento->adicionaProcedimento($procedimento1);
 
