@@ -36,7 +36,8 @@ $array_especialidades[] = $especilidade_estetica;
 $array_especialidades[] = $especialidade_cirurgia;
 
 $dentista_parceiro = new DentistaParceiro("dentista", "gmail", "123", "142", $endereco, "croo", $array_especialidades);
-$dentista_parceiro->calculaValorProcedimento($procedimento1);
+$dentista_parceiro->setPorcentagemEspecialidade($especilidade_estetica, "0.15");
+$dentista_parceiro->calculaValorProcedimento($procedimento3);
 
 $forma_pagamento = new FormaPagamento("dinheiro", "0", "0");
 echo "<br>";
