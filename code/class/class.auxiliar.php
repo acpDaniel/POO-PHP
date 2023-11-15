@@ -22,5 +22,3 @@ class Auxiliar extends Profissional
         $this->salario = $salario;
     }
 }
-?>
-

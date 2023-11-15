@@ -6,11 +6,11 @@ class Dentista extends Profissional
     protected  $cro;
     protected $especialidades = array();
 
-    public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade)
+    public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades)
     {
         parent::__construct($nome, $email, $telefone, $cpf, $endereco);
         $this->cro = $cro;
-        $this->especialidades = $especialidade;
+        $this->especialidades = $especialidades;
     }
 
     public function getCro()

@@ -9,16 +9,17 @@ class Orcamento
     private Paciente $paciente;
     private Dentista $dentista_avaliador;
     private Datetime $data_orcamento;
-    private  $procedimentos = array();
+    private $procedimentos = array();
     private $detalhamento;
     private $valor_total;
 
-    public function __construct(Paciente $paciente, Dentista $dentista, Datetime $data, array $procedimentos)
+    public function __construct(Paciente $paciente, Dentista $dentista_avaliador, Datetime $data, array $procedimentos)
     {
         $this->paciente = $paciente;
-        $this->dentista_avaliador = $dentista;
+        $this->dentista_avaliador = $dentista_avaliador;
         $this->data_orcamento = $data;
         $this->procedimentos = $procedimentos;
+        $this->valor_total = $this->calculaValorTotal();
     }
 
     public function getPaciente()
@@ -51,10 +52,19 @@ class Orcamento
         $this->detalhamento = $detalhamento;
     }
 
-    public function aprovarOrcamento($valor, $forma_pagamento, $data)
+    public function aprovarOrcamento($forma_pagamento_proposto)
     {
-        $tratamento = new Tratamento($valor, $forma_pagamento, $data, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
+        $tratamento = new Tratamento($forma_pagamento_proposto, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
         return $tratamento;
+    }
+
+    public function calculaValorTotal()
+    {
+        $valor_total = 0;
+        foreach ($this->procedimentos as $procedimento) {
+            $valor_total += $procedimento->getValor();
+        }
+        return $valor_total;
     }
 
     public function setValor($valor)

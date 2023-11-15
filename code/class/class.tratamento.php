@@ -4,15 +4,16 @@ include_once "class.orcamento.php";
 include_once "class.formaPagamento.php";
 include_once "class.consultaExecucao.php";
 include_once "class.pagamento.php";
+include_once "class.infosProcedimento.php";
 
 class Tratamento extends Orcamento
 {
     private FormaPagamento $forma_pagamento_proposto;
-    private Datetime $data;
+    private Datetime $data_conclusao_tratamento;
     public $infos_procedimentos = array();
     private $pagamentos_efetuados = array();
 
-    public function __construct(FormaPagamento $forma_pagamento_proposto, Datetime $data, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos)
+    public function __construct(FormaPagamento $forma_pagamento_proposto, $paciente, $dentista_avaliador, Datetime $data_orcamento, $procedimentos)
     {
 
         parent::__construct($paciente, $dentista_avaliador, $data_orcamento, $procedimentos);
@@ -20,7 +21,6 @@ class Tratamento extends Orcamento
             $this->adicionaInfosProcedimento($procedimento);
         }
         $this->forma_pagamento_proposto = $forma_pagamento_proposto;
-        $this->data = $data;
     }
 
     public function getFormaPagamento()
@@ -30,7 +30,7 @@ class Tratamento extends Orcamento
 
     public function getData()
     {
-        return $this->data->format('d-m-Y');
+        return $this->data_conclusao_tratamento->format('d-m-Y');
     }
 
     public function setFormaPagamento($forma_pagamento)
@@ -38,9 +38,9 @@ class Tratamento extends Orcamento
         $this->forma_pagamento_proposto = $forma_pagamento;
     }
 
-    public function setData($data)
+    public function setDataConclusaoTratamento($data_conclusao_tratamento)
     {
-        $this->data = $data;
+        $this->data_conclusao_tratamento = $data_conclusao_tratamento;
     }
 
     public function validaInfosProcedimentoCadastradoExiste($procedimento)

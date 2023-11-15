@@ -21,35 +21,38 @@ $endereco = new Endereco("catalao", "123", "30", "1456", "bh", "mg", "casa");
 // dentista
 $rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000);
 
+$procedimento1 = new Procedimento("limpeza", "200", "limpar tudo");
+$procedimento2 = new Procedimento("retirar siso", "500", "tirar os 4 dentes");
+$procedimento3 = new Procedimento("clareamento", "1500", "clarear");
+
+$especilidade_estetica = new Especialidade("estética");
+$especilidade_estetica->adicionarProcedimento($procedimento1);
+$especilidade_estetica->adicionarProcedimento($procedimento2);
+
+$especialidade_cirurgia = new Especialidade("cirurgia");
+
+$array_especialidades = array();
+$array_especialidades[] = $especilidade_estetica;
+$array_especialidades[] = $especialidade_cirurgia;
+
+$dentista_parceiro = new DentistaParceiro("dentista", "gmail", "123", "142", $endereco, "croo", $array_especialidades);
+$dentista_parceiro->calculaValorProcedimento($procedimento1);
+
 $forma_pagamento = new FormaPagamento("dinheiro", "0", "0");
 echo "<br>";
 echo $forma_pagamento->getFormaPagamento();
 
 $data = new datetime('2023-01-20');
 
-$procedimento1 = new Procedimento("limpeza", "200", "limpar tudo");
-$procedimento2 = new Procedimento("retirar siso", "500", "tirar os 4 dentes");
 $arrayProcedimentos = array($procedimento1, $procedimento2);
-//$procedimento3 = new Procedimento("clareamento", "1500", "clarear");
-
 
 $cliente_responsavel = new Cliente("naiara", "gmail", "123", "200", "142");
 $paciente = new Paciente("daniel", "gmail.com", "123", "200", new datetime('2023-01-20'), $cliente_responsavel);
 
-$tratamento = new Tratamento($forma_pagamento, new datetime('2023-01-20'), $paciente, $rizia, "2023", $arrayProcedimentos);
+$tratamento = new Tratamento($forma_pagamento, $paciente, $rizia, new datetime('2023-01-20'), $arrayProcedimentos);
 echo "<br>";
-echo $tratamento->getData();
+
 
 //$tratamento->adicionaProcedimento($procedimento1);
 
-$procedimento3 = new Procedimento("clareamento", "1500", "clarear");
-$arrayProcedimentos = [];
-$chaveSerializada = serialize($procedimento1);
-
-$arrayProcedimentos[$chaveSerializada] = [
-    'status' => "Em andamento",
-    "data_conclusao" => new DateTime('0000-00-00 00:00:00'),
-    'consultas' => []
-];
-
-echo $arrayProcedimentos[$chaveSerializada]['status'];
+//$procedimento3 = new Procedimento("clareamento", "1500", "clarear");
