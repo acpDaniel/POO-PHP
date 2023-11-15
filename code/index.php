@@ -13,6 +13,11 @@ include_once "class/persist.php";
 include_once "class/container.php";
 require_once "global.php";
 
+function clientepaciente() {
+    // cria clientes    (string $nome, string $email, int $telefone, string $rg, string $cpf)
+    $cliente1 = new Cliente("John Doe", "johndoe@example.com", "1234567890", "123456789", "12345678901");
+    $cliente2 = new Cliente("Jane Smith", "janesmith@example.com", "0987654321", "987654321", "09876543210");
+    $cliente3 = new Cliente("Mike Johnson", "mikejohnson@example.com", "5555555555", "555555555", "55555555555");
 
 $pessoa = new pessoa("daniel", "gmail", "123");
 $pessoa->Save();
@@ -21,10 +26,17 @@ $pessoa->Save();
 $anderson = new Cliente("anderson", "anderson@gmail", "989043325", "mg213", "65464546");
 $anderson->save();
 
-// especialidades da rizia
-$especialidades_rizia = array(new Especialidade("estética"), new Especialidade("cirurgia"), new Especialidade("limpeza"));
+function dentistas(){
+    //cria especialidades (string $nome, array<Procedimentos> $procedimentospermitidos)
 
-$endereco = new Endereco("catalao", "123", "30", "1456", "bh", "mg", "casa");
+    //cria endereços ($rua, $bairro, $numero, $cep, $cidade, $estado, $complemento)
+    $endereco4 = new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "Casa 15");
+    $endereco5 = new Endereco("Rua E", "Bairro V", "135", "98765-432", "Cidade E", "Estado EE", "Apto 202");
+    $endereco6 = new Endereco("Rua F", "Bairro U", "802", "24680-135", "Cidade F", "Estado FF", "Casa 5");
+    $endereco7 = new Endereco("Rua G", "Bairro T", "975", "98765-432", "Cidade G", "Estado GG", "Apto 407");
+    $endereco8 = new Endereco("Rua H", "Bairro S", "531", "13579-246", "Cidade H", "Estado HH", "Casa 12");
+    $endereco9 = new Endereco("Rua I", "Bairro R", "642", "12345-678", "Cidade I", "Estado II", "Apto 503");
+    $endereco10 = new Endereco("Rua J", "Bairro Q", "753", "56789-012", "Cidade J", "Estado JJ", "Casa 8");
 
 $perfil = new Perfil();
 $usuario_teste = new Usuario("nomeLogin", "senha", $perfil);
@@ -32,19 +44,20 @@ $usuario_teste = new Usuario("nomeLogin", "senha", $perfil);
 // dentista
 $rizia = new DentistaFuncionario("Rízia Gonçalves Delgado", "rizia@gmail.com", "319890413122", "021939123", $endereco, "MG 09321", $especialidades_rizia, 4000, $usuario_teste);
 
-$procedimento1 = new Procedimento("limpeza", "200", "limpar tudo");
-$procedimento2 = new Procedimento("retirar siso", "500", "tirar os 4 dentes");
-$procedimento3 = new Procedimento("clareamento", "1500", "clarear");
+    //cria dentistas parceiros  (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
+    $dentistaparceiro1 = new DentistaParceiro("Dr. Carlos Silva", "carlos@example.com", "1112223333", "11122233344",
+    new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"),
+    "54321", ["Periodontia", "Endodontia"]);
 
-$especilidade_estetica = new Especialidade("estética");
-$especilidade_estetica->adicionarProcedimento($procedimento1);
-$especilidade_estetica->adicionarProcedimento($procedimento2);
+    $dentistaparceiro2 = new DentistaParceiro("Dra. Marina Oliveira", "marina@example.com", "2223334444", "22233344455",
+    new Endereco("Rua B", "Bairro Y", "456", "56789-012", "Cidade B", "Estado BB", "Casa 20"),
+    "98765", ["Odontopediatria", "Ortodontia"]);
 
-$especialidade_cirurgia = new Especialidade("cirurgia");
+    $dentistaparceiro3 = new DentistaParceiro("Dr. Eduardo Santos", "eduardo@example.com", "3334445555", "33344455566",
+    new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "Casa 15"),
+    "12345", ["Cirurgia Oral"]);
+}
 
-$array_especialidades = array();
-$array_especialidades[] = $especilidade_estetica;
-$array_especialidades[] = $especialidade_cirurgia;
 
 $dentista_parceiro = new DentistaParceiro("dentista", "gmail", "123", "142", $endereco, "croo", $array_especialidades, $usuario_teste);
 $dentista_parceiro->setPorcentagemEspecialidade($especilidade_estetica, "0.15");

@@ -13,7 +13,7 @@ class Cliente extends Pessoa
     protected array $pacientes;
     static $local_filename = "clientes.txt";
 
-    public function __construct(string $nome, string $email, int $telefone, string $rg, string $cpf)
+    public function __construct(string $nome, string $email, string $telefone, string $rg, string $cpf)
     {
         parent::__construct($nome, $email, $telefone);
         $this->rg = $rg;
