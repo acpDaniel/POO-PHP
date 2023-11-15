@@ -11,11 +11,11 @@ class Pagamento
     // objeto de data instanciado com (ano,mes,dia)
     private DateTime $data_pagamento;
 
-    public function __construct($forma_pagamento, $valor_total_pagamento, $ano, $mes, $dia, $taxa_imposto)
+    public function __construct(FormaPagamento $forma_pagamento, $valor_total_pagamento, Datetime $data_pagamento, $taxa_imposto)
     {
         $this->forma_pagamento = $forma_pagamento;
         $this->valor_total_pagamento = $valor_total_pagamento;
-        $this->data_pagamento = new Datetime("$ano-$mes-$dia");
+        $this->data_pagamento = $data_pagamento;
         $this->calculaValorImposto($taxa_imposto);
         $this->calculaValorTaxamento();
     }
