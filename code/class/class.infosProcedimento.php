@@ -16,6 +16,11 @@ class InfosProcedimento
         $this->status = "Em andamento";
     }
 
+    public function getProcedimento()
+    {
+        return $this->procedimento;
+    }
+
     public function adicionaConsulta(ConsultaExecucao $consulta)
     {
         $this->consultas[] = $consulta;
@@ -31,7 +36,7 @@ class InfosProcedimento
         return $this->status;
     }
 
-    public function setarDataConclusao(Datetime $data_conclusao)
+    public function setDataConclusao(Datetime $data_conclusao)
     {
         $this->data_conclusao = $data_conclusao;
     }

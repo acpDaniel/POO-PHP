@@ -1,21 +1,24 @@
 <?php
 
 include_once "class.orcamento.php";
-include_once "FormaPagamento.php";
-include_once "consultaExecucao.php";
-include_once "Pagamento.php";
+include_once "class.formaPagamento.php";
+include_once "class.consultaExecucao.php";
+include_once "class.pagamento.php";
 
 class Tratamento extends Orcamento
 {
     private FormaPagamento $forma_pagamento_proposto;
     private Datetime $data;
-    public $infos_procedimentos = [];
-    private $pagamentos_efetuados = [];
+    public $infos_procedimentos = array();
+    private $pagamentos_efetuados = array();
 
-    public function __construct($forma_pagamento_proposto, $data, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos)
+    public function __construct(FormaPagamento $forma_pagamento_proposto, Datetime $data, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos)
     {
 
         parent::__construct($paciente, $dentista_avaliador, $data_orcamento, $procedimentos);
+        foreach ($procedimentos as $procedimento) {
+            $this->adicionaInfosProcedimento($procedimento);
+        }
         $this->forma_pagamento_proposto = $forma_pagamento_proposto;
         $this->data = $data;
     }
@@ -41,48 +44,62 @@ class Tratamento extends Orcamento
         $this->data = $data;
     }
 
-    public function adicionaProcedimento($procedimento)
+    public function validaInfosProcedimentoCadastradoExiste($procedimento)
     {
-        // adicionando procedimentos novos ao tratamento, por enquanto a data de conclusao esta zerada e o array de consultas esta vazio
-        $this->infos_procedimentos[$procedimento] = [
-            'status' => "Em andamento",
-            "data_conclusao" => new Datetime('0000-00-00 00:00:00'),
-            'consultas' => []
-        ];
+        $procedimento_existe = false;
+        // validar se o procedimento em questao ja esta cadastrado como um infosProcedimento
+        foreach ($this->infos_procedimentos as $infos_procedimento) {
+            if ($infos_procedimento->getProcedimento() === $procedimento) {
+                $procedimento_existe = true;
+            }
+        }
+        return $procedimento_existe;
     }
 
-    public function finalizaProcedimento($procedimento)
+    public function adicionaInfosProcedimento($procedimento)
     {
-        // iniciar uma data muito antiga para servir de comparacao
-        $dataMaisRecente = new DateTime('0000-00-00');
+        // se nao tiver sido criado um infosProcedimento para certo procedimento temos que criar e adicionar no array da classe
+        if ($this->validaInfosProcedimentoCadastradoExiste($procedimento) == false) {
+            $novo_infos_procedimento = new InfosProcedimento($procedimento);
+            array_push($this->infos_procedimentos, $novo_infos_procedimento);
+        } else {
+            echo "Já existe um cadastro com as informações desse procedimento";
+        }
+    }
 
-        // encontrar o procedimento, alterar o status e pegar a data da ultima consulta
-        if (array_key_exists($procedimento, $this->infos_procedimentos)) {
-            $this->infos_procedimentos[$procedimento]['status'] = "Finalizado";
-
-            // procuramos a data da  ultima consulta realizada para setar como data de conclusao do procedimento
-            foreach ($this->infos_procedimentos[$procedimento]['consultas'] as $consulta) {
-                if ($consulta->getData() > $dataMaisRecente) {
-                    $dataMaisRecente = $consulta->getData();
+    public function finalizaProcedimento($procedimento, Datetime $data_conclusao)
+    {
+        // para finalizar um procedimento valida se as infos dele estao cadastradas
+        if ($this->validaInfosProcedimentoCadastradoExiste($procedimento) == false) {
+            echo "Procedimento não cadastrado";
+            return;
+        } else {
+            foreach ($this->infos_procedimentos as $infos_procedimento) {
+                if ($infos_procedimento->getProcedimento() === $procedimento) {
+                    $infos_procedimento->setStatus("Finalizado");
+                    $infos_procedimento->setDataConclusao($data_conclusao);
                 }
             }
-
-            $this->infos_procedimentos[$procedimento]['data_conclusao'] = $dataMaisRecente;
-        } else {
-            echo "Procedimento não encontrado\n";
         }
     }
 
     public function agendaConsulta($dentista, Datetime $data, $horario, $duracao_consulta, Procedimento $procedimento)
     {
-        // se o procedimento não foi adicionado nós temos que adicionar
-        if (!array_key_exists($procedimento, $this->infos_procedimentos)) {
-            $this->adicionaProcedimento($procedimento);
-        }
+        // garantir que existe o cadastro das informacoes do procedimento que se refere a consulta
+        $this->adicionaInfosProcedimento($procedimento);
 
         // instancia uma consulta e adiciona o respectivo procedimento
         $nova_consulta = new ConsultaExecucao($dentista, $data, $horario, $duracao_consulta, $procedimento);
-        $this->infos_procedimentos[$procedimento]['consultas'][] = $nova_consulta;
+        foreach ($this->infos_procedimentos as $infos_procedimento) {
+            if ($infos_procedimento->getProcedimento() === $procedimento) {
+                $infos_procedimento->adicionaConsulta($nova_consulta);
+            }
+        }
+    }
+
+    public function adiconaPagamentoEfetuado(Pagamento $pagamento)
+    {
+        array_push($this->pagamentos_efetuados, $pagamento);
     }
 
     public function caculaValorFaturado($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final)
@@ -144,7 +161,7 @@ class Tratamento extends Orcamento
 
     public function caculaReceita($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final)
     {
-        $valor_total_faturado = $this->caculaValorFaturuado($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final);
+        $valor_total_faturado = $this->caculaValorFaturado($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final);
         $valor_total_taxa_cartao = $this->caculaTaxaCartao($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final);
         $valor_total_imposto = $this->caculaImposto($dia_inicial, $mes_inicial, $ano_inicial, $dia_final, $mes_final, $ano_final);
 
