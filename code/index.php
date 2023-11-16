@@ -84,10 +84,18 @@ new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "
 new Usuario("eduardo", "123456", new Perfil()));
 
 //dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
-$dentistafuncionario1 = new DentistaFuncionario("Dr. Carlos Silva", "carlos@example.com", "1112223333", "11122233344",
-new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"), "23123123", [$especialidade1, $especialidade2], 3000,
-new Usuario("carloss", "123456", new Perfil())); //rever isso e a ideia de porcentafem
-// ta errado essa parte tbm
+$dentistafuncionario2 = new DentistaFuncionario("Dra. Ana Oliveira", "ana@example.com", "9876543210", "98765432109",
+new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), "98765432", [$especialidade3, $especialidade4], 3500,
+new Usuario("anao", "abcdef", new Perfil()));
+
+$dentistafuncionario3 = new DentistaFuncionario("Dr. Rafael Souza","rafael@example.com","5555555555","55555555555",
+new Endereco("Avenida Central", "Bairro Central", "789", "67890-123", "Cidade Central", "Estado CC", "Apto 303"),"11112222",[$especialidade5, $especialidade6],4000,
+new Usuario("rafaels", "password", new Perfil()));
+
+$dentistafuncionario4 = new DentistaFuncionario("Dra. Juliana Lima","juliana@example.com","9999999999","99999999999",
+new Endereco("Praça da Liberdade", "Bairro Liberdade", "101", "98765-432", "Cidade Livre", "Estado DD", "Apto 404"),"87654321",[$especialidade7, $especialidade8],4500,
+new Usuario("julianal", "senha123", new Perfil()));
+
 
 
 echo ":p";
