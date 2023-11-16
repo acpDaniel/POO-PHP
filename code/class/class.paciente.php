@@ -14,6 +14,7 @@ class Paciente extends Pessoa
         $this->rg = $rg;
         $this->data_nascimento = $data_nascimento;
         $this->cliente_responsavel = $cliente_responsavel;
+        $this->cliente_responsavel->adicionaPaciente($this);
     }
 
     public function setRg(string $rg)

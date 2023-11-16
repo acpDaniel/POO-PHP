@@ -11,7 +11,9 @@ include_once "class/class.perfil.php";
 include_once "class/class.usuario.php";
 include_once "class/persist.php";
 include_once "class/container.php";
+include_once "class/class.consultaavaliacao.php";
 require_once "global.php";
+
 
 // cria clientes    (string $nome, string $email, int $telefone, string $rg, string $cpf)
 $cliente1 = new Cliente("John Doe", "johndoe@example.com", "1234567890", "123456789", "12345678901");
@@ -84,17 +86,22 @@ new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "
 new Usuario("eduardo", "123456", new Perfil()));
 
 //dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
-$dentistafuncionario2 = new DentistaFuncionario("Dra. Ana Oliveira", "ana@example.com", "9876543210", "98765432109",
+$dentistafuncionario1 = new DentistaFuncionario("Dra. Ana Oliveira", "ana@example.com", "9876543210", "98765432109",
 new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), "98765432", [$especialidade3, $especialidade4], 3500,
 new Usuario("anao", "abcdef", new Perfil()));
 
-$dentistafuncionario3 = new DentistaFuncionario("Dr. Rafael Souza","rafael@example.com","5555555555","55555555555",
+$dentistafuncionario2 = new DentistaFuncionario("Dr. Rafael Souza","rafael@example.com","5555555555","55555555555",
 new Endereco("Avenida Central", "Bairro Central", "789", "67890-123", "Cidade Central", "Estado CC", "Apto 303"),"11112222",[$especialidade5, $especialidade6],4000,
 new Usuario("rafaels", "password", new Perfil()));
 
-$dentistafuncionario4 = new DentistaFuncionario("Dra. Juliana Lima","juliana@example.com","9999999999","99999999999",
+$dentistafuncionario3 = new DentistaFuncionario("Dra. Juliana Lima","juliana@example.com","9999999999","99999999999",
 new Endereco("Praça da Liberdade", "Bairro Liberdade", "101", "98765-432", "Cidade Livre", "Estado DD", "Apto 404"),"87654321",[$especialidade7, $especialidade8],4500,
 new Usuario("julianal", "senha123", new Perfil()));
+
+// consultas
+$consultaavaliacao1 =  new ConsultaAvaliacao($paciente1, $dentistafuncionario1, new DateTime("18-11-2023 14:30"));
+
+
 
 
 

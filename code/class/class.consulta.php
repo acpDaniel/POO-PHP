@@ -2,15 +2,13 @@
 class Consulta
 {
     private Dentista $dentista_executor;
-    private Datetime $data;
-    private $horario;
+    private Datetime $data_horario;
     private $duracao_consulta;
 
-    public function __construct($dentista_executor, Datetime $data, $horario, $duracao_consulta)
+    public function __construct($dentista_executor, Datetime $data_horario, $duracao_consulta)
     {
         $this->dentista_executor = $dentista_executor;
-        $this->data = $data;
-        $this->horario = $horario;
+        $this->data_horario = $data_horario;
         $this->duracao_consulta = $duracao_consulta;
     }
 
@@ -24,24 +22,14 @@ class Consulta
         $this->dentista_executor = $dentista_executor;
     }
 
-    public function getData()
+    public function getDataHorario()
     {
-        return $this->data->format('d-m-Y');
+        return $this->data_horario->format('d-m-Y H-i');
     }
 
-    public function setData($data)
+    public function setDataHoario($data_horario)
     {
-        $this->data = $data;
-    }
-
-    public function getHorario()
-    {
-        return $this->horario;
-    }
-
-    public function setHorario($horario)
-    {
-        $this->horario = $horario;
+        $this->data_horario = $data_horario;
     }
 
     public function getDuracaoConsulta()

@@ -6,9 +6,9 @@ class ConsultaAvaliacao extends Consulta
 {
     private $paciente;
 
-    public function __construct($paciente, $dentista_executor, $data, $horario)
+    public function __construct($paciente, $dentista_executor, $data_horario)
     {
-        parent::__construct($dentista_executor, $data, $horario, "30 minutos");
+        parent::__construct($dentista_executor, $data_horario, "30 minutos");
         $this->paciente = $paciente;
     }
 
