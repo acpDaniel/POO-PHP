@@ -3,6 +3,7 @@ include_once "class.secretaria.php";
 class Secretaria extends Profissional
 {
     private float $salario;
+    static $local_filename = "secretarias.txt";
 
     public function __construct(string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, float $salario, Usuario $usuario)
     {

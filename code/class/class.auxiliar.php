@@ -5,6 +5,7 @@ include_once "class.profissional.php";
 class Auxiliar extends Profissional
 {
     private float $salario;
+    static $local_filename = "auxiliares.txt";
 
     public function __construct(string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, float $salario, Usuario $usuario)
     {

@@ -1,9 +1,11 @@
 <?php
-class Consulta
+require_once("persist.php");
+class Consulta extends persist
 {
     private Dentista $dentista_executor;
     private Datetime $data_horario;
     private $duracao_consulta;
+    static $local_filename = "consultas.txt";
 
     public function __construct($dentista_executor, Datetime $data_horario, $duracao_consulta)
     {
@@ -40,5 +42,10 @@ class Consulta
     public function setDuracaoConsulta($duracao_consulta)
     {
         $this->duracao_consulta = $duracao_consulta;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

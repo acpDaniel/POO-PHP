@@ -1,9 +1,10 @@
 <?php
-
-class Especialidade
+require_once("persist.php");
+class Especialidade extends persist
 {
     private $nome;
     private $procedimentos_permitidos = array();
+    static $local_filename = "especialidades.txt";
 
     public function __construct(string $nome, array $procedimentos_permitidos)
     {
@@ -29,5 +30,10 @@ class Especialidade
     public function adicionarProcedimento(Procedimento $procedimento)
     {
         array_push($this->procedimentos_permitidos, $procedimento);
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

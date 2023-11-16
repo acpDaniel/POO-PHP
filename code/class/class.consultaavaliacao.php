@@ -5,6 +5,7 @@ include_once "class.orcamento.php";
 class ConsultaAvaliacao extends Consulta
 {
     private $paciente;
+    static $local_filename = "consultas_avaliacao.txt";
 
     public function __construct($paciente, $dentista_executor, $data_horario)
     {

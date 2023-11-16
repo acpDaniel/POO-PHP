@@ -5,6 +5,7 @@ include_once "class.dentista.php";
 class DentistaFuncionario extends Dentista
 {
 	private float $salario_fixo;
+	static $local_filename = "dentistas_funcionario.txt";
 
 	public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
 	{

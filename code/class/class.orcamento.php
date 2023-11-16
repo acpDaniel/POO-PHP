@@ -3,6 +3,7 @@
 include_once "class.procedimento.php";
 include_once "class.paciente.php";
 include_once "class.dentista.php";
+require_once("persist.php");
 
 class Orcamento
 {
@@ -12,6 +13,7 @@ class Orcamento
     private $valor_total;
     private $procedimentos = array();
     private $detalhamentos_procedimento = [];
+    static $local_filename = "orcamentos.txt";
 
     public function __construct(Paciente $paciente, Dentista $dentista_avaliador, Datetime $data, array $procedimentos)
     {
@@ -80,5 +82,10 @@ class Orcamento
     public function getValor()
     {
         return $this->valor_total;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

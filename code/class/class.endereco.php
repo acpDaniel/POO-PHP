@@ -1,6 +1,6 @@
 <?php
-
-class Endereco
+require_once("persist.php");
+class Endereco extends persist
 {
     private $rua;
     private $bairro;
@@ -9,6 +9,7 @@ class Endereco
     private $cidade;
     private $estado;
     private $complemento;
+    static $local_filename = "enderecos.txt";
 
     public function __construct($rua, $bairro, $numero, $cep, $cidade, $estado, $complemento)
     {
@@ -91,5 +92,10 @@ class Endereco
     public function setComplemento($complemento)
     {
         $this->complemento = $complemento;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

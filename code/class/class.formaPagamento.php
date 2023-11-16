@@ -1,9 +1,11 @@
 <?php
-class FormaPagamento
+require_once("persist.php");
+class FormaPagamento extends persist
 {
     private $nome_forma_pagamento;
     private $numero_parcelas;
     private $taxa_pagamento;
+    static $local_filename = "formas_pagamento.txt";
 
     public function __construct($nome_forma_pagamento, $numero_parcelas, $taxa_pagamento)
     {
@@ -40,5 +42,10 @@ class FormaPagamento
     public function setTaxaPagamento($taxa_pagamento)
     {
         $this->taxa_pagamento = $taxa_pagamento;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

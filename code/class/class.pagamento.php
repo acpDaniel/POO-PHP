@@ -1,8 +1,9 @@
 <?php
 
 include_once "class.formaPagamento.php";
+require_once("persist.php");
 
-class Pagamento
+class Pagamento extends persist
 {
     private FormaPagamento $forma_pagamento;
     private $valor_total_pagamento;
@@ -10,6 +11,7 @@ class Pagamento
     private $valor_do_taxamento;
     // objeto de data instanciado com (ano,mes,dia)
     private DateTime $data_pagamento;
+    static $local_filename = "pagamentos.txt";
 
     public function __construct(FormaPagamento $forma_pagamento, $valor_total_pagamento, Datetime $data_pagamento, $taxa_imposto)
     {
@@ -68,5 +70,10 @@ class Pagamento
     public function getValorTaxamento()
     {
         return $this->valor_do_taxamento;
+    }
+
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

@@ -7,6 +7,7 @@ class Paciente extends Pessoa
     protected string $rg;
     protected Datetime $data_nascimento;
     protected Cliente $cliente_responsavel;
+    static $local_filename = "pacientes.txt";
 
     public function __construct(string $nome, string $email, int $telefone, string $rg, Datetime $data_nascimento, Cliente $cliente_responsavel)
     {

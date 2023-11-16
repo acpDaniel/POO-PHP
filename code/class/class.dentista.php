@@ -5,6 +5,7 @@ class Dentista extends Profissional
 {
     protected  $cro;
     protected $especialidades = array();
+    static $local_filename = "dentistas.txt";
 
     public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades, Usuario $usuario)
     {

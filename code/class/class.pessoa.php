@@ -7,7 +7,7 @@ class Pessoa extends persist
     protected string $nome;
     protected string $email;
     protected string $telefone;
-    static $local_filename = "pessoa.txt";
+    static $local_filename = "pessoas.txt";
 
     public function __construct(string $nome, string $email, string $telefone)
     {

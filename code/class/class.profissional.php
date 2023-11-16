@@ -7,6 +7,7 @@ class Profissional extends Pessoa
     protected string $cpf;
     protected  Endereco $endereco;
     protected  Usuario $usuario;
+    static $local_filename = "profissionais.txt";
 
     public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, Usuario $usuario)
     {

@@ -2,13 +2,15 @@
 
 include_once "class.procedimento.php";
 include_once "class.consultaExecucao.php";
+require_once("persist.php");
 
-class InfosProcedimento
+class InfosProcedimento extends persist
 {
     private $procedimento;
     private $consultas = [];
     private $status;
     private Datetime $data_conclusao;
+    static $local_filename = "infos_procedimentos.txt";
 
     public function __construct($procedimento)
     {
@@ -44,5 +46,9 @@ class InfosProcedimento
     public function getDataConclusao()
     {
         return $this->data_conclusao->format('d-m-Y');
+    }
+    static public function getFilename()
+    {
+        return get_called_class()::$local_filename;
     }
 }

@@ -4,6 +4,7 @@ include_once "class.consulta.php";
 
 class ConsultaExecucao extends Consulta
 {
+    static $local_filename = "consultas_execucao.txt";
 
     public function __construct($dentista_executor, Datetime $data, $horario, $duracao_consulta, $procedimento)
     {

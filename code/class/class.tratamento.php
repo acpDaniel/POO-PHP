@@ -12,6 +12,7 @@ class Tratamento extends Orcamento
     private Datetime $data_conclusao_tratamento;
     private $infos_procedimentos = array();
     private $pagamentos_efetuados = array();
+    static $local_filename = "tratamentos.txt";
 
     public function __construct(FormaPagamento $forma_pagamento_proposto, $paciente, $dentista_avaliador, Datetime $data_orcamento, $procedimentos)
     {
