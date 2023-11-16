@@ -73,13 +73,19 @@ $endereco10 = new Endereco("Rua J", "Bairro Q", "753", "56789-012", "Cidade J", 
 //cria dentistas parceiros (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
 $dentistaparceiro1 = new DentistaParceiro("Dr. Carlos Silva", "carlos@example.com", "1112223333", "11122233344",
 new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"), "23123123", [$especialidade1, $especialidade2],
-new Usuario()); //editar aq
+new Usuario("carloss", "123456", new Perfil()));
 
-/*
+
 $dentistaparceiro2 = new DentistaParceiro("Dra. Marina Oliveira", "marina@example.com", "2223334444", "22233344455",
 new Endereco("Rua B", "Bairro Y", "456", "56789-012", "Cidade B", "Estado BB", "Casa 20"),
-"98765", ["Odontopediatria", "Ortodontia"]);
+"98765", [$especialidade4, $especialidade11, $especialidade5],
+new Usuario("marina", "123456", new Perfil()));
 
 $dentistaparceiro3 = new DentistaParceiro("Dr. Eduardo Santos", "eduardo@example.com", "3334445555", "33344455566",
 new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "Casa 15"),
-"12345", ["Cirurgia Oral"]);
+"12345", [$especialidade7, $especialidade8, $especialidade5],
+new Usuario("eduardo", "123456", new Perfil()));
+
+
+
+echo ":p";
