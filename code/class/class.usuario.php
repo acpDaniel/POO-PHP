@@ -6,7 +6,7 @@ class Usuario {
     protected string $senha;
     protected Perfil $perfil;
   
-    public function cadastraUsuario(string $login, string $senha, Perfil $perfil){
+    public function __construct(string $login, string $senha, Perfil $perfil) {
         $this->login = $login;
         $this->senha = $senha;
         $this->perfil = $perfil; 
