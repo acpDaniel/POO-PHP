@@ -2,7 +2,13 @@
 
 class Perfil
 {
+
     private array $funcionalidade_permitidas;
+
+    public function __construct()
+    {
+        
+    }
 
     protected function getFuncionalidades()
     {
