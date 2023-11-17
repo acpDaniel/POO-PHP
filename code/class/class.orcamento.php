@@ -5,17 +5,17 @@ include_once "class.paciente.php";
 include_once "class.dentista.php";
 require_once("persist.php");
 
-class Orcamento
+class Orcamento extends persist
 {
     private Paciente $paciente;
-    private Dentista $dentista_avaliador;
+    private $dentista_avaliador;
     private Datetime $data_orcamento;
     private $valor_total;
     private $procedimentos = array();
     private $detalhamentos_procedimento = [];
     static $local_filename = "orcamentos.txt";
 
-    public function __construct(Paciente $paciente, Dentista $dentista_avaliador, Datetime $data, array $procedimentos)
+    public function __construct(Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
     {
         $this->paciente = $paciente;
         $this->dentista_avaliador = $dentista_avaliador;
@@ -34,7 +34,7 @@ class Orcamento
         return $this->dentista_avaliador;
     }
 
-    public function getData()
+    public function getDataOrcamento()
     {
         return $this->data_orcamento->format('d-m-Y');
     }

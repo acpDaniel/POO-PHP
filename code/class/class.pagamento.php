@@ -44,7 +44,7 @@ class Pagamento extends persist
 
     public function getDataPagamento()
     {
-        return $this->data_pagamento->format('d-m-Y');
+        return $this->data_pagamento;
     }
 
     public function setDataPagamento($data_pagamento)

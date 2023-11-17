@@ -30,17 +30,28 @@ $especialidade3 = new Especialidade("Cirurgia", [$procedimento5]);
 $especialidade4 = new Especialidade("Estética", [$procedimento6, $procedimento7]);
 
 //dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
-$dentistafuncionario1 = new DentistaFuncionario("Ana Oliveira", "ana@example.com", "9876543210", "98765432109",
-    new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), "98765432",
-    [$especialidade1, $especialidade2, $especialidade3], 5000,
-    new Usuario("anao", "abcdef", new Perfil())
+$dentistafuncionario1 = new DentistaFuncionario(
+    "Ana Oliveira",
+    "ana@example.com",
+    "9876543210",
+    "98765432109",
+    new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"),
+    "98765432",
+    [$especialidade1, $especialidade2, $especialidade3],
+    5000,
+    new Usuario("anao", "abcdef", new Perfil("perfil1", ["a"]))
 );
 
 //cria dentistas parceiros (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
-$dentistaparceiro1 = new DentistaParceiro("Carlos Silva", "carlos@example.com", "1112223333", "11122233344",
-    new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"), "23123123",
+$dentistaparceiro1 = new DentistaParceiro(
+    "Carlos Silva",
+    "carlos@example.com",
+    "1112223333",
+    "11122233344",
+    new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"),
+    "23123123",
     [$especialidade1, $especialidade4],
-    new Usuario("carloss", "123456", new Perfil())
+    new Usuario("carloss", "123456", new Perfil("perfil2", ["b"]))
 );
 
 // cria clientes
@@ -54,7 +65,7 @@ $paciente1 = new Paciente("Bob Smith", "bob@example.com", "5556667777", "9876543
 $consultaavaliacao1 =  new ConsultaAvaliacao($paciente1, $dentistaparceiro1, new DateTime("06-11-2023 14:00"));
 // $orcamento1 = new Orcamento();
 
-$cliente1->aprovarOrcamento($orcamento1); //aprovaOrçamento vai fazer uma variavel do orçamento ser igual a 1
+$cliente1; //aprovaOrçamento vai fazer uma variavel do orçamento ser igual a 1
 
 // $consultaexecucao1 = new ConsultaExecucao(); 
 // $consultaexecucao2 = new ConsultaExecucao(); 
@@ -77,8 +88,17 @@ $pessoa->Save();
 
 //print_r(Cliente::getRecords());
 //$clienteAnderson = Cliente::getRecordsByField("nome", "anderson");
+//$clienteCerto = $clienteAnderson[0];
+//$clienteCerto->setNome("alex");
+//$clienteCerto->save();
 //print_r($clienteAnderson);
 //print_r($clienteAnderson[1]->getCpf());
+
+
+$data = new DateTime('2023-11-16');
+setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
+echo strftime('%B', $data->getTimestamp()) . $data->format('Y');
+
 
 
 echo ":p";

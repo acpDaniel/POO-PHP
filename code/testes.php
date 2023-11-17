@@ -81,7 +81,7 @@ $dentistaparceiro1 = new DentistaParceiro(
     new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"),
     "23123123",
     [$especialidade1, $especialidade2],
-    new Usuario("carloss", "123456", new Perfil())
+    new Usuario("carloss", "123456", new Perfil("perfil2", ["b"]))
 );
 
 $dentistaparceiro2 = new DentistaParceiro(
@@ -92,7 +92,7 @@ $dentistaparceiro2 = new DentistaParceiro(
     new Endereco("Rua B", "Bairro Y", "456", "56789-012", "Cidade B", "Estado BB", "Casa 20"),
     "98765",
     [$especialidade4, $especialidade11, $especialidade5],
-    new Usuario("marina", "123456", new Perfil())
+    new Usuario("marina", "123456", new Perfil("perfil2", ["b"]))
 );
 
 $dentistaparceiro3 = new DentistaParceiro(
@@ -103,7 +103,7 @@ $dentistaparceiro3 = new DentistaParceiro(
     new Endereco("Rua D", "Bairro W", "246", "13579-246", "Cidade D", "Estado DD", "Casa 15"),
     "12345",
     [$especialidade7, $especialidade8, $especialidade5],
-    new Usuario("eduardo", "123456", new Perfil())
+    new Usuario("eduardo", "123456", new Perfil("perfil2", ["b"]))
 );
 
 //dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
@@ -116,7 +116,7 @@ $dentistafuncionario1 = new DentistaFuncionario(
     "98765432",
     [$especialidade3, $especialidade4],
     3500,
-    new Usuario("anao", "abcdef", new Perfil())
+    new Usuario("anao", "abcdef", new Perfil("perfil2", ["b"]))
 );
 
 $dentistafuncionario2 = new DentistaFuncionario(
@@ -128,7 +128,7 @@ $dentistafuncionario2 = new DentistaFuncionario(
     "11112222",
     [$especialidade5, $especialidade6],
     4000,
-    new Usuario("rafaels", "password", new Perfil())
+    new Usuario("rafaels", "password", new Perfil("perfil2", ["b"]))
 );
 
 $dentistafuncionario3 = new DentistaFuncionario(
@@ -140,7 +140,7 @@ $dentistafuncionario3 = new DentistaFuncionario(
     "87654321",
     [$especialidade7, $especialidade8],
     4500,
-    new Usuario("julianal", "senha123", new Perfil())
+    new Usuario("julianal", "senha123", new Perfil("perfil2", ["b"]))
 );
 
 // consultas

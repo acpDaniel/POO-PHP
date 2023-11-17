@@ -29,7 +29,7 @@ class Tratamento extends Orcamento
         return $this->forma_pagamento_proposto;
     }
 
-    public function getData()
+    public function getDataConclusao()
     {
         return $this->data_conclusao_tratamento->format('d-m-Y');
     }
@@ -97,9 +97,17 @@ class Tratamento extends Orcamento
         }
     }
 
-    public function adiconaPagamentoEfetuado(Pagamento $pagamento)
+    public function adiconaPagamentoEfetuado(Pagamento $pagamento, Procedimento $procedimento)
     {
+        setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
         array_push($this->pagamentos_efetuados, $pagamento);
+        $valor_a_ser_pago = 0;
+        $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp() . $pagamento->getDataPagamento()->format('Y'));
+        // se for dentista parceiro o responsavel devemos realizar o pagamento dele
+        if ($this->getDentista() instanceof DentistaParceiro) {
+            $valor_a_ser_pago = $this->getDentista()->calculaValorProcedimento($procedimento);
+            $this->getDentista()->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago);
+        }
     }
 
     public function caculaValorFaturado(Datetime $data_inicio, Datetime $data_fim)
