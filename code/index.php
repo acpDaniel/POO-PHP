@@ -95,9 +95,18 @@ $pessoa->Save();
 //print_r($clienteAnderson[1]->getCpf());
 
 
+//$data = new DateTime('2023-11-16');
+//setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
+//echo strftime('%B', $data->getTimestamp()) . $data->format('Y');
+
 $data = new DateTime('2023-11-16');
+
 setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
-echo strftime('%B', $data->getTimestamp()) . $data->format('Y');
+$mesAno_do_pagamento = strftime('%B', $data->getTimestamp()) . $data->format('Y');
+echo $mesAno_do_pagamento;
+
+
+
 
 
 

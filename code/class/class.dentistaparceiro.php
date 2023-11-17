@@ -19,19 +19,19 @@ class DentistaParceiro extends Dentista
 	}
 
 	// incrementa o valor se ja existir uma chave do mes, se nao existir vai criar
-	public function incrementaSalario($anoMes, $valor)
+	public function incrementaSalario($mesAno, $valor)
 	{
-		if (array_key_exists($anoMes, $this->salario_mes_ano)) {
-			$this->salario_mes_ano[$anoMes] += $valor;
+		if (array_key_exists($mesAno, $this->salario_mes_ano)) {
+			$this->salario_mes_ano[$mesAno] += $valor;
 		} else {
-			$this->salario_mes_ano[$anoMes] = $valor;
+			$this->salario_mes_ano[$mesAno] = $valor;
 		}
 	}
 
-	public function getSalarioAnoMes($anoMes)
+	public function getSalarioMesAno($mesAno)
 	{
-		if (array_key_exists($anoMes, $this->salario_mes_ano)) {
-			return $this->salario_mes_ano[$anoMes];
+		if (array_key_exists($mesAno, $this->salario_mes_ano)) {
+			return $this->salario_mes_ano[$mesAno];
 		} else {
 			return "Salário referente ao ano e mês não encontrado.";
 		}
