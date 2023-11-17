@@ -1,15 +1,39 @@
 <?php
 require_once('class.profissional.php');
 require_once('class.funcionalidades.php');
-class GerenciaLogin
+class GerenciaLogin extends log
 {
-    private static Profissional $usuario_logado;
+    
+    static private GerenciaLogin $usuario_logado = null;
     private Funcionalidades $funcionalidades;
-
-    public function ValidaLogin()
+    private function __construct(true)
     {
+        
     }
-    public function ControlaLogins()
+    
+    static function ValidaLogin():bool
     {
+        return 0;
     }
+    static function Logout()
+    {
+        if($usuario_logado != null){
+            print("Logout efetuado.");
+            $usuario_logado = null
+        }
+        else{
+            print("Nenhum usuário em uso, impossível deslogar.")
+        }
+    }
+    static function ControlaLogins(true){
+        if(self::$usuario_logado == null){
+            self::$usuario_logado == new GerenciaLogin();
+            print("Login efetuado com sucesso");
+        }
+        else{
+            print("Desconecte da sessão atual para poder logar.");
+        }
+        return self::$usuario_logado;
+    } 
 }
+?>
