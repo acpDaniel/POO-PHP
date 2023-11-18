@@ -1,7 +1,7 @@
 <?php
 require_once('class.profissional.php');
 require_once('class.funcionalidades.php');
-class GerenciaLogin extends log
+class GerenciaLogin
 {
     
     static private GerenciaLogin $usuario_logado = null;
