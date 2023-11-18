@@ -35,7 +35,7 @@ class GerenciaLogin
     static function ControlaLogins($usuario, $senha){
         if(self::$usuario_logado == null){
             if(ValidaLogin($usuario, $senha)==true){
-                self::$usuario_logado == new GerenciaLogin();
+                self::$usuario_logado == new GerenciaLogin($usuario, $senha);
             }
         }
         else{
