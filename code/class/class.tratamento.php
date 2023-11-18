@@ -83,13 +83,13 @@ class Tratamento extends Orcamento
         }
     }
 
-    public function agendaConsulta($dentista, Datetime $data, $horario, $duracao_consulta, Procedimento $procedimento)
+    public function agendaConsulta($dentista, Datetime $dataehorario, $duracao_consulta, Procedimento $procedimento)
     {
         // garantir que existe o cadastro das informacoes do procedimento que se refere a consulta
         $this->adicionaInfosProcedimento($procedimento);
 
         // instancia uma consulta e adiciona o respectivo procedimento
-        $nova_consulta = new ConsultaExecucao($dentista, $data, $horario, $duracao_consulta, $procedimento);
+        $nova_consulta = new ConsultaExecucao($dentista, $dataehorario, $duracao_consulta, $procedimento);
         foreach ($this->infos_procedimentos as $infos_procedimento) {
             if ($infos_procedimento->getProcedimento() === $procedimento) {
                 $infos_procedimento->adicionaConsulta($nova_consulta);
@@ -97,7 +97,7 @@ class Tratamento extends Orcamento
         }
     }
 
-    public function adiconaPagamentoEfetuado(Pagamento $pagamento, Procedimento $procedimento)
+    public function adicionaPagamentoEfetuado(Pagamento $pagamento, Procedimento $procedimento)
     {
         setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
         array_push($this->pagamentos_efetuados, $pagamento);
@@ -110,7 +110,7 @@ class Tratamento extends Orcamento
         }
     }
 
-    public function caculaValorFaturado(Datetime $data_inicio, Datetime $data_fim)
+    public function calculaValorFaturado(Datetime $data_inicio, Datetime $data_fim)
     {
 
         $pagamentos_data_filtrada = [];
@@ -127,7 +127,7 @@ class Tratamento extends Orcamento
         return $valor_faturado_total;
     }
 
-    public function caculaTaxaCartao(Datetime $data_inicio, Datetime $data_fim)
+    public function calculaTaxaCartao(Datetime $data_inicio, Datetime $data_fim)
     {
         $pagamentos_data_filtrada = [];
         $valor_taxado_cartao_total = 0;
@@ -143,7 +143,7 @@ class Tratamento extends Orcamento
         return $valor_taxado_cartao_total;
     }
 
-    public function caculaImposto(Datetime $data_inicio, Datetime $data_fim)
+    public function calculaImposto(Datetime $data_inicio, Datetime $data_fim)
     {
         $pagamentos_data_filtrada = [];
         $valor_imposto_total = 0;
@@ -159,11 +159,11 @@ class Tratamento extends Orcamento
         return $valor_imposto_total;
     }
 
-    public function caculaReceita(Datetime $data_inicio, Datetime $data_fim)
+    public function calculaReceita(Datetime $data_inicio, Datetime $data_fim)
     {
-        $valor_total_faturado = $this->caculaValorFaturado($data_inicio, $data_fim);
-        $valor_total_taxa_cartao = $this->caculaTaxaCartao($data_inicio, $data_fim);
-        $valor_total_imposto = $this->caculaImposto($data_inicio, $data_fim);
+        $valor_total_faturado = $this->calculaValorFaturado($data_inicio, $data_fim);
+        $valor_total_taxa_cartao = $this->calculaTaxaCartao($data_inicio, $data_fim);
+        $valor_total_imposto = $this->calculaImposto($data_inicio, $data_fim);
 
         return ($valor_total_faturado - $valor_total_taxa_cartao - $valor_total_imposto);
     }
