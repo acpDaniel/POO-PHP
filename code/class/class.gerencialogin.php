@@ -17,7 +17,7 @@ class GerenciaLogin
     }
     static function Logout()
     {
-        if($usuario_logado != null){
+        if(self::$usuario_logado != null){
             print("Logout efetuado.");
             $usuario_logado = null;
         }
