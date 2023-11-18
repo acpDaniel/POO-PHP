@@ -19,10 +19,10 @@ class GerenciaLogin
     {
         if($usuario_logado != null){
             print("Logout efetuado.");
-            $usuario_logado = null
+            $usuario_logado = null;
         }
         else{
-            print("Nenhum usuário em uso, impossível deslogar.")
+            print("Nenhum usuário em uso, impossível deslogar.");
         }
     }
     static function ControlaLogins(true){
