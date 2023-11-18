@@ -25,7 +25,7 @@ class GerenciaLogin
             print("Nenhum usuário em uso, impossível deslogar.");
         }
     }
-    static function ControlaLogins(true){
+    static function ControlaLogins(){
         if(self::$usuario_logado == null){
             self::$usuario_logado == new GerenciaLogin();
             print("Login efetuado com sucesso");
