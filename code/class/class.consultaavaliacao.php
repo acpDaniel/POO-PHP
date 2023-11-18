@@ -13,9 +13,9 @@ class ConsultaAvaliacao extends Consulta
         $this->paciente = $paciente;
     }
 
-    public function criaOrcamento(Datetime $data_orcamento, array $procedimentos)
+    public function criaOrcamento($id, Datetime $data_orcamento, array $procedimentos)
     {
-        $novo_orcamento = new Orcamento($this->paciente, $this->getDentistaExecutor(), $data_orcamento, $procedimentos);
+        $novo_orcamento = new Orcamento($id, $this->paciente, $this->getDentistaExecutor(), $data_orcamento, $procedimentos);
         return $novo_orcamento;
     }
 }

@@ -19,12 +19,12 @@ require_once "global.php";
 //Criação usuário 2 com acesso a todas as funcionalidades
 
 //Acesso funcionalidade sem login
-    //resultado esperado -> exceção
+//resultado esperado -> exceção
 
 //Login usuário 1
 
 //Cadastro de procedimento com usuário 1
-    //resultado esperado -> exceção
+//resultado esperado -> exceção
 $procedimentoLimpeza = new Procedimento("Limpeza", 200, "");
 
 //Logout usuário 1
@@ -39,6 +39,9 @@ $procedimentoCanal = new Procedimento("Canal", 800, "");
 $procedimentoExtracaoSiso = new Procedimento("Extração de Siso", 400, "Valor por dente.");
 $procedimentoClareamentoLaser = new Procedimento("Clareamento a laser", 1700, "");
 $procedimentoClareamentoMoldeira = new Procedimento("Clareamento de moldeira", 900, "Clareamento caseiro.");
+
+
+funcionalidades.cadastroProcedimento(usuario_logado,"Extração Comum", 280, "Não inclui dente siso.")
 
 //Cria objetos das formas de pagamento
 $formapagDinheiro = new FormaPagamento("Dinheiro à vista", 0, 0);
@@ -70,56 +73,56 @@ $dentistafuncionarioAnaOliveira = new DentistaFuncionario(
     new Usuario("anao", "abcdef", new Perfil("perfil1", ["a"]))
 );
 
-//cria dentistas parceiros (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
-$dentistaparceiroCarlosSilva = new DentistaParceiro(
-    "Carlos Silva",
-    "carlos@example.com",
-    "1112223333",
-    "11122233344",
-    new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"),
-    "23123123",
-    [$especialidadeClinicoGeral => 0.4, $especialidadeEstetica => 0.4],
-    new Usuario("carloss", "123456", new Perfil("perfil2", ["b"]))
-);
+// cria dentistas parceiros (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
+// $dentistaparceiroCarlosSilva = new DentistaParceiro(
+//     "Carlos Silva",
+//     "carlos@example.com",
+//     "1112223333",
+//     "11122233344",
+//     new Endereco("Rua A", "Bairro X", "123", "12345-678", "Cidade A", "Estado AA", "Apto 101"),
+//     "23123123",
+//     [$especialidadeClinicoGeral, $especialidadeEstetica,
+//     new Usuario("carloss", "123456", new Perfil("perfil2", ["b"]))
+// );
 
-//Cadastra cliente
-$clienteJohnSmith = new Cliente("John Smith", "johnsmith@example.com", "1234567890", "123456789", "12345678901");
+// //Cadastra cliente
+// $clienteJohnSmith = new Cliente("John Smith", "johnsmith@example.com", "1234567890", "123456789", "12345678901");
 
-//Cadastra paciente dependente financeiro do cliente acima
-$pacienteBobSmith = new Paciente("Bob Smith", "bob@example.com", "5556667777", "9876543", new DateTime("1985-08-22"), $clienteJohnSmith);
+// //Cadastra paciente dependente financeiro do cliente acima
+// $pacienteBobSmith = new Paciente("Bob Smith", "bob@example.com", "5556667777", "9876543", new DateTime("1985-08-22"), $clienteJohnSmith);
 
-//Agendamento de uma consulta de avaliação
-$consultaavaliacaoBobSmith =  new ConsultaAvaliacao($pacienteBobSmith, $dentistaparceiroCarlosSilva, new DateTime("06-11-2023 14:00"));
+// //Agendamento de uma consulta de avaliação
+// //$consultaavaliacaoBobSmith =  new ConsultaAvaliacao($pacienteBobSmith, $dentistaparceiroCarlosSilva, new DateTime("06-11-2023 14:00"));
 
-//Criação de um orçamento a partir de uma consulta de avaliação
-$orcamentoBobSmith = $consultaavaliacaoBobSmith->criaOrcamento($consultaavaliacaoBobSmith->getDataHorario(), [$procedimentoLimpeza, $procedimentoClareamentoLaser, $procedimentoRestauracao, $procedimentoRestauracao]);
+// //Criação de um orçamento a partir de uma consulta de avaliação
+// //$orcamentoBobSmith = $consultaavaliacaoBobSmith->criaOrcamento($consultaavaliacaoBobSmith->getDataHorario(), [$procedimentoLimpeza, $procedimentoClareamentoLaser, $procedimentoRestauracao, $procedimentoRestauracao]);
 
-//Criação de um tratamento a partir da aprovação do orçamento
-$tratamentoBobSmith = $orcamentoBobSmith->aprovarOrcamento($formapagPix);
+// //Criação de um tratamento a partir da aprovação do orçamento
+// $tratamentoBobSmith = $orcamentoBobSmith->aprovarOrcamento($formapagPix);
 
-//Agendamento das consultas de realização
-$tratamentoBobSmith->agendaConsulta($dentistafuncionarioAnaOliveira, new DateTime("05-12-2023 15:00"), "30 minutos", $procedimentoLimpeza); 
-$tratamentoBobSmith->agendaConsulta($dentistafuncionarioAnaOliveira, new DateTime("12-12-2023 09:00"), "30 minutos", $procedimentoClareamentoLaser); 
-$tratamentoBobSmith->agendaConsulta($dentistaparceiroCarlosSilva, new DateTime("20-12-2023 17:00"), "60 minutos", $procedimentoRestauracao); 
-$tratamentoBobSmith->agendaConsulta($dentistaparceiroCarlosSilva, new DateTime("03-01-2024 14:00"), "60 minutos", $procedimentoRestauracao); 
+// //Agendamento das consultas de realização
+// $tratamentoBobSmith->agendaConsulta($dentistafuncionarioAnaOliveira, new DateTime("05-12-2023 15:00"), "30 minutos", $procedimentoLimpeza);
+// $tratamentoBobSmith->agendaConsulta($dentistafuncionarioAnaOliveira, new DateTime("12-12-2023 09:00"), "30 minutos", $procedimentoClareamentoLaser);
+// $tratamentoBobSmith->agendaConsulta($dentistaparceiroCarlosSilva, new DateTime("20-12-2023 17:00"), "60 minutos", $procedimentoRestauracao);
+// $tratamentoBobSmith->agendaConsulta($dentistaparceiroCarlosSilva, new DateTime("03-01-2024 14:00"), "60 minutos", $procedimentoRestauracao);
 
-//Adiciona os pagamentos
-//$tratamentoBobSmith->adicionaPagamentoEfetuado();
-//$tratamentoBobSmith->adicionaPagamentoEfetuado();
+// //Adiciona os pagamentos
+// //$tratamentoBobSmith->adicionaPagamentoEfetuado();
+// //$tratamentoBobSmith->adicionaPagamentoEfetuado();
 
-$pessoa = new pessoa("daniel", "gmail", "123");
-$pessoa->Save();
+// $pessoa = new pessoa("daniel", "gmail", "123");
+// $pessoa->Save();
 
-$data = new DateTime('2023-11-16');
+// $data = new DateTime('2023-11-16');
 
-setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
+// setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
 
-$mesAno_do_pagamento = $data->format('m') . $data->format('Y');
-echo $mesAno_do_pagamento;
-
-
+// $mesAno_do_pagamento = $data->format('m') . $data->format('Y');
+// echo $mesAno_do_pagamento;
 
 
 
 
-echo ":p";
+
+
+// echo ":p";

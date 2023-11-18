@@ -7,7 +7,7 @@ class Usuario extends persist
     protected string $login;
     protected string $senha;
     protected Perfil $perfil;
-    static $local_filename = "perfis.txt";
+    static $local_filename = "usuarios.txt";
 
     public function __construct(string $login, string $senha, Perfil $perfil)
     {

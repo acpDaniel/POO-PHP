@@ -13,15 +13,22 @@ class Orcamento extends persist
     private $valor_total;
     private $procedimentos = array();
     private $detalhamentos_procedimento = [];
+    private $id;
     static $local_filename = "orcamentos.txt";
 
-    public function __construct(Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
+    public function __construct($id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
     {
+        $this->id = $id;
         $this->paciente = $paciente;
         $this->dentista_avaliador = $dentista_avaliador;
         $this->data_orcamento = $data;
         $this->procedimentos = $procedimentos;
         $this->valor_total = $this->calculaValorTotal();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getPaciente()
@@ -61,7 +68,7 @@ class Orcamento extends persist
 
     public function aprovarOrcamento($forma_pagamento_proposto)
     {
-        $tratamento = new Tratamento($forma_pagamento_proposto, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
+        $tratamento = new Tratamento($this->id, $forma_pagamento_proposto, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
         return $tratamento;
     }
 

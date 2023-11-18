@@ -37,7 +37,7 @@ class DentistaParceiro extends Dentista
 		}
 	}
 
-	public function calculaValorProcedimento(Procedimento $procedimento)
+	public function calculaValorProcedimento(Procedimento $procedimento, $porcentagem_realizada_pagamento)
 	{
 		$especialidade_para_procurar = null;
 		$porcentagem_para_procedimento = 0;
@@ -58,7 +58,7 @@ class DentistaParceiro extends Dentista
 		// procura no dicionario qual a porcentagem de determinada especialidade
 		$porcentagem_para_procedimento = $this->especialidades_porcentagem[$especialidade_para_procurar->getNomeEspecialidade()];
 		echo ($procedimento->getValor() * $porcentagem_para_procedimento);
-		return ($procedimento->getValor() * $porcentagem_para_procedimento);
+		return ($procedimento->getValor() * $porcentagem_para_procedimento * $porcentagem_realizada_pagamento);
 	}
 
 	public function setPorcentagemEspecialidade($especialidade, $porcentagem)

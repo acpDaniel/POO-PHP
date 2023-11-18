@@ -14,10 +14,10 @@ class Tratamento extends Orcamento
     private $pagamentos_efetuados = array();
     static $local_filename = "tratamentos.txt";
 
-    public function __construct(FormaPagamento $forma_pagamento_proposto, $paciente, $dentista_avaliador, Datetime $data_orcamento, $procedimentos)
+    public function __construct($id, FormaPagamento $forma_pagamento_proposto, $paciente, $dentista_avaliador, Datetime $data_orcamento, $procedimentos)
     {
 
-        parent::__construct($paciente, $dentista_avaliador, $data_orcamento, $procedimentos);
+        parent::__construct($id, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos);
         foreach ($procedimentos as $procedimento) {
             $this->adicionaInfosProcedimento($procedimento);
         }
@@ -97,16 +97,21 @@ class Tratamento extends Orcamento
         }
     }
 
-    public function adicionaPagamentoEfetuado(Pagamento $pagamento, Procedimento $procedimento)
+    public function adicionaPagamentoEfetuado(Pagamento $pagamento)
     {
         setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
+        // adicionar pagamento no pagamentos efetuados
         array_push($this->pagamentos_efetuados, $pagamento);
-        $valor_a_ser_pago = 0;
+        $valor_a_ser_pago_procedimento = 0;
         $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp() . $pagamento->getDataPagamento()->format('Y'));
+
+        $porcentagem_realizada_pagamento = (($pagamento->getValorTotalPagamento()) / ($this->getValor()));
         // se for dentista parceiro o responsavel devemos realizar o pagamento dele
         if ($this->getDentista() instanceof DentistaParceiro) {
-            $valor_a_ser_pago = $this->getDentista()->calculaValorProcedimento($procedimento);
-            $this->getDentista()->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago);
+            foreach ($this->getProcedimentos() as $procedimento) {
+                $valor_a_ser_pago_procedimento = $this->getDentista()->calculaValorProcedimento($procedimento, $porcentagem_realizada_pagamento);
+                $this->getDentista()->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
+            }
         }
     }
 

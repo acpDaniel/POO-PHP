@@ -18,25 +18,6 @@ class Funcionalidades extends persist
         return $this->imposto_da_clinica;
     }
 
-    public function executaFuncionalidade($nome_funcionalidade, Profissional $profissional_logado, $objeto_referencia, $objeto_opcional_mudanca = "")
-    {
-        if ($this->validaPermissao($nome_funcionalidade, $profissional_logado) == true) {
-            switch ($nome_funcionalidade) {
-                case "cadastroProcedimento":
-                    $this->cadastroProcedimento($objeto_referencia);
-                    break;
-                case "cadastroEspecialidade":
-                    $this->cadastroEspecialidade($objeto_referencia);
-                    break;
-                case "cadastroPagamentoDoTratamento":
-                    $this->cadastroPagamentoDoTratamento($objeto_referencia, $objeto_opcional_mudanca);
-                    break;
-            }
-        } else {
-            echo "Você não possui permissão para executar a funcionalidade :" . $nome_funcionalidade;
-        }
-    }
-
     public function validaPermissao($nome_funcionalidade, Profissional $profissional_logado)
     {
         // array de funcionalidades permitidas obtida do perfil do profissional
@@ -86,27 +67,30 @@ class Funcionalidades extends persist
         return ($receita_total_tratamentos_mes - $salario_total_dentistas_parceiro_mes - $salario_total_dentistas_funcionario_mes);
     }
 
-    public function cadastroProcedimento($objeto)
+    public function cadastroProcedimento($usuario_logado, $nome, $valor, $descricao)
     {
-        $objeto->save();
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novaEspecialidade = new Especialidade($nome, $valor, $descricao);
+        $novaEspecialidade->save();
     }
 
-    public function cadastroEspecialidade($objeto)
+    public function cadastroPagamentoDoTratamento($usuario_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
     {
-        $objeto->save();
-    }
-
-    public function cadastroPagamentoDoTratamento($objeto_referencia, $objeto_mudanca)
-    {
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novo_pagamento = new Pagamento($forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto);
         $lista_tratamentos_possiveis = Tratamento::getRecords();
         $objeto_alvo_modificacao = null;
         // encontrar o tratamento que devemos alterar
         foreach ($lista_tratamentos_possiveis as $tratamento_possivel) {
-            if ($tratamento_possivel->getDataOrcamento() === $objeto_referencia->getDataOrcamento() &&  $tratamento_possivel->getPaciente() === $objeto_referencia->getPaciente()) {
+            if ($tratamento_possivel->getId() == $id) {
                 $objeto_alvo_modificacao = $tratamento_possivel;
             }
         }
-        $objeto_alvo_modificacao->adiconaPagamentoEfetuado($objeto_mudanca);
+        $objeto_alvo_modificacao->adiconaPagamentoEfetuado($novo_pagamento);
         $objeto_alvo_modificacao->save();
     }
 
