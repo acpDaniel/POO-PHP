@@ -26,7 +26,7 @@ class Consulta extends persist
 
     public function getDataHorario()
     {
-        return $this->data_horario->format('d-m-Y H-i');
+        return $this->data_horario;
     }
 
     public function setDataHoario($data_horario)
