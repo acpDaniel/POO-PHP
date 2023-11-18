@@ -6,7 +6,7 @@ class GerenciaLogin
     
     static private GerenciaLogin $usuario_logado = null;
     private Funcionalidades $funcionalidades;
-    private function __construct(true)
+    private function __construct()
     {
         
     }
