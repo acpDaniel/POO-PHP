@@ -6,12 +6,12 @@ class ConsultaExecucao extends Consulta
 {
     static $local_filename = "consultas_execucao.txt";
 
-    public function __construct($dentista_executor, Datetime $data, $horario, $duracao_consulta, $procedimento)
+    public function __construct($dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
         if ($this->validaDentistaExecutor($dentista_executor, $procedimento) == false) {
             throw new InvalidArgumentException("O dentista não tem permissão para realizar essa consulta.");
         } else {
-            parent::__construct($dentista_executor, $data, $horario, $duracao_consulta);
+            parent::__construct($dentista_executor, $dataehorario, $duracao_consulta);
         }
     }
 
