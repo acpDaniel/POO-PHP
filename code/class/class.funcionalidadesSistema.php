@@ -34,7 +34,7 @@ class FuncionalidadesSistema extends persist
         }
     }
 
-    public function calculaResultadoMensal(Datetime $data_inicio_mes, Datetime $data_final_mes)
+    public function calcularResultadoMensal(Datetime $data_inicio_mes, Datetime $data_final_mes)
     {
         // valida se as datas sao do mesmo ano e mes
         if (!($data_inicio_mes->format('Y-m') === $data_final_mes->format('Y-m'))) {
@@ -75,8 +75,8 @@ class FuncionalidadesSistema extends persist
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novaProcedimento = new Procedimento($nome, $valor, $descricao);
-        $novaProcedimento->save();
+        $novoProcedimento = new Procedimento($nome, $valor, $descricao);
+        $novoProcedimento->save();
     }
 
     public function cadastrarPagamentoDoTratamento($profissional_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
@@ -160,7 +160,6 @@ class FuncionalidadesSistema extends persist
             }
         }
         $objeto_alvo_modificacao->aprovarOrcamento($forma_pagamento_proposto);
-        $objeto_alvo_modificacao->save();
     }
 
     public function cadastrarEspecialidade($profissional_logado, $nome, $procedimentos_permitidos)
