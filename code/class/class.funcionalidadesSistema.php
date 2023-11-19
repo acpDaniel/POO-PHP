@@ -102,4 +102,96 @@ class FuncionalidadesSistema extends persist
     {
         return get_called_class()::$local_filename;
     }
+
+    public function cadastrarPaciente($usuario_logado, $nome, $email, $telefone, $rg, $data_nascimento, Cliente $cliente_responsavel){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novoPaciente = new Paciente($nome,  $email, $telefone, $rg, $data_nascimento, $cliente_responsavel);
+        $novoPaciente->save();
+    }
+
+    public function cadastrarCliente($usuario_logado, $nome, $email, $telefone, $rg, $cpf){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novoCliente = new Cliente($nome, $email, $telefone, $rg, $cpf);
+        $novoCliente->save(); 
+    }
+
+    public function marcarConsultaAvaliacao($usuario_logado, $paciente, $dentista_executor, $data_horario){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novaConsultaAvaliacao = new ConsultaAvaliacao($paciente, $dentista_executor, $data_horario);
+        $novaConsultaAvaliacao->save(); 
+    }
+
+    public function marcarConsultaExecucao($usuario_logado, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novaConsultaExecucao = new ConsultaExecucao($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
+        $novaConsultaExecucao->save(); 
+    }
+
+    public function cadastrarOrcamento($usuario_logado, $id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $novoOrcamento = new Orcamento($id, $paciente, $dentista_avaliador, $data, $procedimentos);
+        $novoOrcamento->save();
+    }
+
+    public function aprovarOrcamento($usuario_logado, $id, $forma_pagamento_proposto){
+        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+            return;
+        }
+        $lista_orcamentos_possiveis = Orcamento::getRecords();
+        $objeto_alvo_modificacao = null;
+        // encontrar o tratamento que devemos alterar
+        foreach ($lista_orcamentos_possiveis as $orcamento_possivel) {
+            if ($orcamento_possivel->getId() == $id) {
+                $objeto_alvo_modificacao = $orcamento_possivel;
+            }
+        }
+        $objeto_alvo_modificacao->aprovarOrcamento($forma_pagamento_proposto);
+        $objeto_alvo_modificacao->save();
+    }
+
+    public function cadastrarEspecialidade($profissional_logado, $nome, $procedimentos_permitidos)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novaEspecialidade = new Especialidade($nome, $procedimentos_permitidos);
+        $novaEspecialidade->save();
+    }
+
+    public function cadastrarFormaPagamento($profissional_logado, $nome_forma_pagamento, $numero_parcelas, $taxa_pagamento)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novaFormaPagamento = new FormaPagamento($nome_forma_pagamento, $numero_parcelas, $taxa_pagamento);
+        $novaFormaPagamento->save();
+    }
+
+    public function cadastrarDentistaParceiro($profissional_logado, $nome, $email, $telefone, $cpf, $endereco, $cro, $especialidades, Usuario $usuario)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novoDentistaParceiro = new DentistaParceiro($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidades, $usuario);
+        $novoDentistaParceiro->save();
+    }
+
+    public function cadastrarDentistaFuncionario($profissional_logado, $nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $salario, $usuario)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novoDentistaFuncionario = new DentistaFuncionario($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $salario, $usuario);
+        $novoDentistaFuncionario->save();
+    }
 }
