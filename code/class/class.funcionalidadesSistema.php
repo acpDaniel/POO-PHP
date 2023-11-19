@@ -4,7 +4,7 @@ require_once("class.profissional.php");
 require_once("class.tratamento.php");
 class FuncionalidadesSistema extends persist
 {
-    private $nomes_todas_funcionalidades = ["cadastroProcedimento", "cadastroEspecialidade", "cadastroPagamentoDoTratamento"];
+    private $nomes_todas_funcionalidades = ["cadastroProcedimento", "cadastroEspecialidade", "cadastrarPagamentoDoTratamento"];
     private $imposto_da_clinica = 0.2;
     static $local_filename = "funcionalidades.txt";
 
@@ -83,18 +83,21 @@ class FuncionalidadesSistema extends persist
     public function cadastrarPagamentoDoTratamento($profissional_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
     {
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            echo "nao foi permitido";
             return;
         }
         $novo_pagamento = new Pagamento($forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto);
         $lista_tratamentos_possiveis = Tratamento::getRecords();
         $objeto_alvo_modificacao = null;
         // encontrar o tratamento que devemos alterar
+        echo "entrou aqui";
         foreach ($lista_tratamentos_possiveis as $tratamento_possivel) {
-            if ($tratamento_possivel->getId() == $id) {
+            if ($tratamento_possivel->getId() === $id) {
+                echo "achou";
                 $objeto_alvo_modificacao = $tratamento_possivel;
             }
         }
-        $objeto_alvo_modificacao->adiconaPagamentoEfetuado($novo_pagamento);
+        $objeto_alvo_modificacao->adicionaPagamentoEfetuado($novo_pagamento);
         $objeto_alvo_modificacao->save();
     }
 

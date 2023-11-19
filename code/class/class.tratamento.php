@@ -11,7 +11,7 @@ class Tratamento extends Orcamento
     private FormaPagamento $forma_pagamento_proposto;
     private Datetime $data_conclusao_tratamento;
     private $infos_procedimentos = array();
-    private $pagamentos_efetuados = array();
+    private $pagamentos_efetuados = [];
     static $local_filename = "tratamentos.txt";
 
     public function __construct($id, FormaPagamento $forma_pagamento_proposto, $paciente, $dentista_avaliador, Datetime $data_orcamento, $procedimentos)
@@ -22,6 +22,11 @@ class Tratamento extends Orcamento
             $this->adicionaInfosProcedimento($procedimento);
         }
         $this->forma_pagamento_proposto = $forma_pagamento_proposto;
+    }
+
+    public function getPagamentosEfetuados()
+    {
+        return $this->pagamentos_efetuados;
     }
 
     public function getFormaPagamento()
@@ -101,7 +106,7 @@ class Tratamento extends Orcamento
     {
         setlocale(LC_TIME, 'pt_BR.utf-8', 'portuguese');
         // adicionar pagamento no pagamentos efetuados
-        array_push($this->pagamentos_efetuados, $pagamento);
+        $this->pagamentos_efetuados[] = $pagamento;
         $valor_a_ser_pago_procedimento = 0;
         $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp() . $pagamento->getDataPagamento()->format('Y'));
 

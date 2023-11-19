@@ -61,7 +61,7 @@ $especialidadeCirurgia = new Especialidade("Cirurgia", [$procedimentoExtracaoSis
 $especialidadeEstetica = new Especialidade("Estética", [$procedimentoClareamentoLaser, $procedimentoClareamentoMoldeira]);
 
 
-$perfil_teste = new Perfil("perfilTeste", ["cadastroProcedimento", "cadastroPagamentoDoTratamento"]);
+$perfil_teste = new Perfil("perfilTeste", ["cadastroProcedimento", "cadastrarPagamentoDoTratamento"]);
 $usuario = new Usuario("login123", "senha123", $perfil_teste);
 $profissional_logado = new Profissional("daniel", "gmail", "12345678", "142", new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), $usuario);
 $funcionalidades_sistema = new FuncionalidadesSistema();
@@ -78,12 +78,22 @@ $clienteJohnSmith = new Cliente("John Smith", "johnsmith@example.com", "12345678
 $pacienteBobSmith = new Paciente("Bob Smith", "bob@example.com", "5556667777", "9876543", new DateTime("1985-08-22"), $clienteJohnSmith);
 $dentista_parceiro = new DentistaParceiro("Pedro", "pedro@gmail", "123", "142", new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), "cro123", [$especialidadeClinicoGeral, $especialidadeEndontia], $usuario, $especialidadesPorcentagens);
 $tratamento = new Tratamento("142", $forma_pagamento, $pacienteBobSmith, $dentista_parceiro, new datetime("2023-08-22"), [$procedimentoLimpeza, $procedimentoCanal]);
+$pagamento_efetuado = new Pagamento($formapagDinheiro, "777", new DateTime("2023-08-22"), "0.2");
+//$tratamento->adicionaPagamentoEfetuado($pagamento_efetuado);
+//echo "<Br>";
+//echo $tratamento->getPagamentosEfetuados()[0]->getValorTotalPagamento();
+//$funcionalidades_sistema->cadastrarPagamentoDoTratamento($profissional_logado, "142", $formapagDinheiro, "777", new DateTime("2023-08-22"), "0.2");
 
-echo $tratamento->getid();
-echo "<Br>";
-echo $tratamento->getFormaPagamento()->getNomeFormaPagamento();
-echo "<Br>";
-echo $tratamento->getDentista()->getPorcentagemEspecialidade("Endodontia");
+
+//$pegar_tratamento = Tratamento::getRecords();
+//echo $pegar_tratamento[0]->getPagamentosEfetuados()[0]->getDataPagamento();
+
+
+// echo $tratamento->getid();
+// echo "<Br>";
+// echo $tratamento->getFormaPagamento()->getNomeFormaPagamento();
+// echo "<Br>";
+// echo $tratamento->getDentista()->getPorcentagemEspecialidade("Endodontia");
 
 
 //dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
