@@ -177,8 +177,8 @@ class FuncionalidadesSistema extends persist
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novaFormaPagamento = new FormaPagamento($nome_forma_pagamento, $numero_parcelas, $taxa_pagamento);
-        $novaFormaPagamento->save();
+        $novoFormaPagamento = new FormaPagamento($nome_forma_pagamento, $numero_parcelas, $taxa_pagamento);
+        $novoFormaPagamento->save();
     }
 
     public function cadastrarDentistaParceiro($profissional_logado, $nome, $email, $telefone, $cpf, $endereco, $cro, $especialidades, Usuario $usuario, $especialidades_porcentagem)
@@ -197,5 +197,23 @@ class FuncionalidadesSistema extends persist
         }
         $novoDentistaFuncionario = new DentistaFuncionario($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidade, $salario, $usuario);
         $novoDentistaFuncionario->save();
+    }
+
+    public function cadastrarProfissional($profissional_logado, $nome, $email, $telefone, $cpf, $endereco, $usuario)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novoProfissional = new Profissional($nome, $email, $telefone, $cpf, $endereco, $usuario);
+        $novoProfissional->save();
+    }
+
+    public function cadastrarPerfil($profissional_logado, $nome_perfil, $funcionalidades_permitidas)
+    {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
+            return;
+        }
+        $novoPerfil = new Perfil($nome_perfil, $funcionalidades_permitidas);
+        $novoPerfil->save();
     }
 }
