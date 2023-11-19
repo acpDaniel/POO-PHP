@@ -8,7 +8,7 @@ class ConsultaExecucao extends Consulta
 
     public function __construct($dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
-        if ($this->validaDentistaExecutor($dentista_executor, $procedimento) == false) {
+        if ($this->validaDentistaExecutor($dentista_executor, $procedimento) === 0) {
             throw new InvalidArgumentException("O dentista não tem permissão para realizar essa consulta.");
         } else {
             parent::__construct($dentista_executor, $dataehorario, $duracao_consulta);
@@ -19,12 +19,11 @@ class ConsultaExecucao extends Consulta
     {
         $permissaoDentista = false;
         // validar em todas especialidades do dentista se tem o procedimento permitido
-        foreach ($dentista_executor->especialidades as $especialidade) {
-            if (in_array($procedimento, $especialidade->procedimentos_permitidos, true)) {
+        foreach ($dentista_executor->getEspecialidades() as $especialidade) {
+            if (in_array($procedimento, $especialidade->getProcedimentosPermitidos(), true)) {
                 $permissaoDentista = true;
             }
         }
-
         return $permissaoDentista;
     }
 }

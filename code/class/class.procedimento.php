@@ -2,7 +2,7 @@
 require_once("persist.php");
 class Procedimento  extends persist
 {
-    private string $nome;
+    protected string $nome;
     private float $valor;
     private string $descricao;
     static $local_filename = "procedimentos.txt";

@@ -2,7 +2,7 @@
 require_once("persist.php");
 class Especialidade extends persist
 {
-    private $nome;
+    protected $nome;
     private $procedimentos_permitidos = array();
     static $local_filename = "especialidades.txt";
 

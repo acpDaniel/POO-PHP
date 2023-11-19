@@ -34,7 +34,7 @@ class FuncionalidadesSistema extends persist
         }
     }
 
-    public function calculaResultadoMensal(Datetime $data_inicio_mes, Datetime $data_final_mes)
+    public function calcularResultadoMensal(Datetime $data_inicio_mes, Datetime $data_final_mes)
     {
         // valida se as datas sao do mesmo ano e mes
         if (!($data_inicio_mes->format('Y-m') === $data_final_mes->format('Y-m'))) {
@@ -75,8 +75,8 @@ class FuncionalidadesSistema extends persist
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novaProcedimento = new Procedimento($nome, $valor, $descricao);
-        $novaProcedimento->save();
+        $novoProcedimento = new Procedimento($nome, $valor, $descricao);
+        $novoProcedimento->save();
     }
 
     public function cadastrarPagamentoDoTratamento($profissional_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
@@ -128,21 +128,22 @@ class FuncionalidadesSistema extends persist
         $novaConsultaAvaliacao->save();
     }
 
-    public function marcarConsultaExecucao($profissional_logado, $id, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
+    public function marcarConsultaExecucao($profissional_logado, $id_tratamento, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novaConsultaExecucao = new ConsultaExecucao($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
-        $novaConsultaExecucao->save();
+        $tratamento_certo = Tratamento::getRecordsByField("id", $id_tratamento)[0];
+        $tratamento_certo->agendaConsulta($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
+        $tratamento_certo->save();
     }
 
-    public function cadastrarOrcamento($profissional_logado, $id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
+    public function cadastrarOrcamento($profissional_logado, $id, Datetime $data, array $procedimentos, ConsultaAvaliacao $consulta_avaliacao)
     {
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novoOrcamento = new Orcamento($id, $paciente, $dentista_avaliador, $data, $procedimentos);
+        $novoOrcamento = $consulta_avaliacao->criaOrcamento($id, $data, $procedimentos);
         $novoOrcamento->save();
     }
 
@@ -160,7 +161,6 @@ class FuncionalidadesSistema extends persist
             }
         }
         $objeto_alvo_modificacao->aprovarOrcamento($forma_pagamento_proposto);
-        $objeto_alvo_modificacao->save();
     }
 
     public function cadastrarEspecialidade($profissional_logado, $nome, $procedimentos_permitidos)
@@ -215,5 +215,16 @@ class FuncionalidadesSistema extends persist
         }
         $novoPerfil = new Perfil($nome_perfil, $funcionalidades_permitidas);
         $novoPerfil->save();
+    }
+
+    public function selecionarConsultasAvaliacao(Paciente $paciente, DateTime $dataehorario)
+    {
+        $todas_consultas_avaliacao = ConsultaAvaliacao::getRecords();
+        foreach($todas_consultas_avaliacao as $consulta_avaliacao){
+            if ($consulta_avaliacao->getPaciente()->getRG() == $paciente->getRG() && $consulta_avaliacao->getDataHorario() == $dataehorario){
+                 return $consulta_avaliacao;
+             }
+            echo $consulta_avaliacao->getPaciente()->getNome();
+        }
     }
 }

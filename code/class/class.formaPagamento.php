@@ -2,7 +2,7 @@
 require_once("persist.php");
 class FormaPagamento extends persist
 {
-    private string $nome_forma_pagamento;
+    protected string $nome_forma_pagamento;
     private int $numero_parcelas;
     private float $taxa_pagamento;
     static $local_filename = "formas_pagamento.txt";
