@@ -96,8 +96,9 @@ class Tratamento extends Orcamento
         // instancia uma consulta e adiciona o respectivo procedimento
         $nova_consulta = new ConsultaExecucao($dentista, $dataehorario, $duracao_consulta, $procedimento);
         foreach ($this->infos_procedimentos as $infos_procedimento) {
-            if ($infos_procedimento->getProcedimento() === $procedimento) {
+            if ($infos_procedimento->getProcedimento()->getNome() == $procedimento->getNome()) {
                 $infos_procedimento->adicionaConsulta($nova_consulta);
+                $nova_consulta->save();
             }
         }
     }

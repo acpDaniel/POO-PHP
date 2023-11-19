@@ -13,7 +13,7 @@ class Orcamento extends persist
     private $valor_total;
     private $procedimentos = array();
     private $detalhamentos_procedimento = [];
-    private $id;
+    protected $id;
     static $local_filename = "orcamentos.txt";
 
     public function __construct($id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
