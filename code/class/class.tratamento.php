@@ -111,11 +111,14 @@ class Tratamento extends Orcamento
         $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp() . $pagamento->getDataPagamento()->format('Y'));
 
         $porcentagem_realizada_pagamento = (($pagamento->getValorTotalPagamento()) / ($this->getValor()));
-        // se for dentista parceiro o responsavel devemos realizar o pagamento dele
-        if ($this->getDentista() instanceof DentistaParceiro) {
-            foreach ($this->getProcedimentos() as $procedimento) {
-                $valor_a_ser_pago_procedimento = $this->getDentista()->calculaValorProcedimento($procedimento, $porcentagem_realizada_pagamento);
-                $this->getDentista()->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
+
+        // cada procedimento pode ser feito por um dentista diferente entao temos que checar todos procedimentos pegando a informacao do dentista de alguma consulta. Todas consultas desse procedimento sao realizadas pelo meno dentista
+        foreach ($this->infos_procedimentos as $infos_procedimento) {
+            $dentista_reponsavel_procedimento = $infos_procedimento->getConsultas()[0]->getDentistaExecutor();
+            if ($dentista_reponsavel_procedimento instanceof DentistaParceiro) {
+                $valor_a_ser_pago_procedimento = $dentista_reponsavel_procedimento->calculaValorProcedimento($infos_procedimento->getProcedimento(), $porcentagem_realizada_pagamento);
+                $dentista_reponsavel_procedimento->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
+                $dentista_reponsavel_procedimento->save();
             }
         }
     }

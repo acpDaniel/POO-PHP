@@ -28,6 +28,11 @@ class InfosProcedimento extends persist
         $this->consultas[] = $consulta;
     }
 
+    public function getConsultas()
+    {
+        return $this->consultas;
+    }
+
     public function setStatus($novo_status)
     {
         $this->status = $novo_status;

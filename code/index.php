@@ -79,6 +79,13 @@ $pacienteBobSmith = new Paciente("Bob Smith", "bob@example.com", "5556667777", "
 $dentista_parceiro = new DentistaParceiro("Pedro", "pedro@gmail", "123", "142", new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), "cro123", [$especialidadeClinicoGeral, $especialidadeEndontia], $usuario, $especialidadesPorcentagens);
 $tratamento = new Tratamento("142", $forma_pagamento, $pacienteBobSmith, $dentista_parceiro, new datetime("2023-08-22"), [$procedimentoLimpeza, $procedimentoCanal]);
 $pagamento_efetuado = new Pagamento($formapagDinheiro, "777", new DateTime("2023-08-22"), "0.2");
+
+
+$orcamento = new Orcamento("123", $pacienteBobSmith, $dentista_parceiro, new datetime("2023-08-22"), [$procedimentoLimpeza, $procedimentoCanal]);
+$orcamento->save();
+echo "salvou um";
+$novo = new Orcamento("123", $pacienteBobSmith, $dentista_parceiro, new datetime("2021-08-22"), [$procedimentoLimpeza, $procedimentoCanal]);
+
 //$tratamento->adicionaPagamentoEfetuado($pagamento_efetuado);
 //echo "<Br>";
 //echo $tratamento->getPagamentosEfetuados()[0]->getValorTotalPagamento();

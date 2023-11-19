@@ -18,6 +18,15 @@ class Orcamento extends persist
 
     public function __construct($id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
     {
+        $orcamentos_cadastrados = Orcamento::getRecords();
+        if (!(is_array($orcamentos_cadastrados) && empty($orcamentos_cadastrados))) {
+            foreach ($orcamentos_cadastrados as $orcamento) {
+                if ($orcamento->getId() == $id) {
+                    return new InvalidArgumentException("Outro orçamento com esse id já foi cadastrado.");
+                }
+            }
+        }
+
         $this->id = $id;
         $this->paciente = $paciente;
         $this->dentista_avaliador = $dentista_avaliador;
