@@ -22,7 +22,7 @@ class Orcamento extends persist
         if (!(is_array($orcamentos_cadastrados) && empty($orcamentos_cadastrados))) {
             foreach ($orcamentos_cadastrados as $orcamento) {
                 if ($orcamento->getId() == $id) {
-                    return new InvalidArgumentException("Outro orçamento com esse id já foi cadastrado.");
+                    throw new InvalidArgumentException("Outro orçamento com esse id já foi cadastrado.");
                 }
             }
         }

@@ -133,9 +133,13 @@ class FuncionalidadesSistema extends persist
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $tratamento_certo = Tratamento::getRecordsByField("id", $id_tratamento)[0];
-        $tratamento_certo->agendaConsulta($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
-        $tratamento_certo->save();
+        try {
+            $tratamento_certo = Tratamento::getRecordsByField("id", $id_tratamento)[0];
+            $tratamento_certo->agendaConsulta($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
+            $tratamento_certo->save();
+        } catch (InvalidArgumentException $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function cadastrarOrcamento($profissional_logado, $id, Datetime $data, array $procedimentos, ConsultaAvaliacao $consulta_avaliacao)
@@ -143,8 +147,12 @@ class FuncionalidadesSistema extends persist
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
-        $novoOrcamento = $consulta_avaliacao->criaOrcamento($id, $data, $procedimentos);
-        $novoOrcamento->save();
+        try {
+            $novoOrcamento = $consulta_avaliacao->criaOrcamento($id, $data, $procedimentos);
+            $novoOrcamento->save();
+        } catch (InvalidArgumentException $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function aprovarOrcamento($profissional_logado, $id, $forma_pagamento_proposto)
@@ -220,10 +228,10 @@ class FuncionalidadesSistema extends persist
     public function selecionarConsultasAvaliacao(Paciente $paciente, DateTime $dataehorario)
     {
         $todas_consultas_avaliacao = ConsultaAvaliacao::getRecords();
-        foreach($todas_consultas_avaliacao as $consulta_avaliacao){
-            if ($consulta_avaliacao->getPaciente()->getRG() == $paciente->getRG() && $consulta_avaliacao->getDataHorario() == $dataehorario){
-                 return $consulta_avaliacao;
-             }
+        foreach ($todas_consultas_avaliacao as $consulta_avaliacao) {
+            if ($consulta_avaliacao->getPaciente()->getRG() == $paciente->getRG() && $consulta_avaliacao->getDataHorario() == $dataehorario) {
+                return $consulta_avaliacao;
+            }
             echo $consulta_avaliacao->getPaciente()->getNome();
         }
     }
