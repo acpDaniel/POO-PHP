@@ -101,54 +101,54 @@ class FuncionalidadesSistema extends persist
     }
 
 
-    public function cadastrarPaciente($usuario_logado, $nome, $email, $telefone, $rg, $data_nascimento, Cliente $cliente_responsavel)
+    public function cadastrarPaciente($profissional_logado, $nome, $email, $telefone, $rg, $data_nascimento, Cliente $cliente_responsavel)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novoPaciente = new Paciente($nome,  $email, $telefone, $rg, $data_nascimento, $cliente_responsavel);
         $novoPaciente->save();
     }
 
-    public function cadastrarCliente($usuario_logado, $nome, $email, $telefone, $rg, $cpf)
+    public function cadastrarCliente($profissional_logado, $nome, $email, $telefone, $rg, $cpf)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novoCliente = new Cliente($nome, $email, $telefone, $rg, $cpf);
         $novoCliente->save();
     }
 
-    public function marcarConsultaAvaliacao($usuario_logado, $paciente, $dentista_executor, $data_horario)
+    public function marcarConsultaAvaliacao($profissional_logado, $paciente, $dentista_executor, $data_horario)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novaConsultaAvaliacao = new ConsultaAvaliacao($paciente, $dentista_executor, $data_horario);
         $novaConsultaAvaliacao->save();
     }
 
-    public function marcarConsultaExecucao($usuario_logado, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
+    public function marcarConsultaExecucao($profissional_logado, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novaConsultaExecucao = new ConsultaExecucao($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
         $novaConsultaExecucao->save();
     }
 
-    public function cadastrarOrcamento($usuario_logado, $id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
+    public function cadastrarOrcamento($profissional_logado, $id, Paciente $paciente, $dentista_avaliador, Datetime $data, array $procedimentos)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novoOrcamento = new Orcamento($id, $paciente, $dentista_avaliador, $data, $procedimentos);
         $novoOrcamento->save();
     }
 
-    public function aprovarOrcamento($usuario_logado, $id, $forma_pagamento_proposto)
+    public function aprovarOrcamento($profissional_logado, $id, $forma_pagamento_proposto)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $lista_orcamentos_possiveis = Orcamento::getRecords();
