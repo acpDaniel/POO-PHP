@@ -8,6 +8,10 @@ class Funcionalidades extends persist
     private $imposto_da_clinica = 0.2;
     static $local_filename = "funcionalidades.txt";
 
+    public function __construct()
+    {
+    }
+
     public function adicionaFuncionalidade($nome_funcionalidade)
     {
         $this->nomes_todas_funcionalidades[] = $nome_funcionalidade;
