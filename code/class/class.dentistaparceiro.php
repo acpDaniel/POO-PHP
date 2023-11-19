@@ -13,9 +13,10 @@ class DentistaParceiro extends Dentista
 
 	static $local_filename = "dentistas_parceiro.txt";
 
-	public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades, Usuario $usuario)
+	public function __construct(string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidades, Usuario $usuario, $especialidades_porcentagem)
 	{
 		parent::__construct($nome, $email, $telefone, $cpf, $endereco, $cro, $especialidades, $usuario);
+		$this->especialidades_porcentagem = $especialidades_porcentagem;
 	}
 
 	// incrementa o valor se ja existir uma chave do mes, se nao existir vai criar
@@ -61,8 +62,13 @@ class DentistaParceiro extends Dentista
 		return ($procedimento->getValor() * $porcentagem_para_procedimento * $porcentagem_realizada_pagamento);
 	}
 
-	public function setPorcentagemEspecialidade($especialidade, $porcentagem)
+	public function getPorcentagemEspecialidade(string $nome_especialidade)
 	{
-		$this->especialidades_porcentagem[$especialidade->getNomeEspecialidade()] = $porcentagem;
+		return $this->especialidades_porcentagem[$nome_especialidade];
+	}
+
+	public function setPorcentagemEspecialidade(string $nome_especialidade, $porcentagem)
+	{
+		$this->especialidades_porcentagem[$nome_especialidade] = $porcentagem;
 	}
 }

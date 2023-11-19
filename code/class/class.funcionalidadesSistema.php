@@ -71,18 +71,18 @@ class FuncionalidadesSistema extends persist
         return ($receita_total_tratamentos_mes - $salario_total_dentistas_parceiro_mes - $salario_total_dentistas_funcionario_mes);
     }
 
-    public function cadastroProcedimento($usuario_logado, $nome, $valor, $descricao)
+    public function cadastrarProcedimento($profissional_logado, $nome, $valor, $descricao)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novaProcedimento = new Procedimento($nome, $valor, $descricao);
         $novaProcedimento->save();
     }
 
-    public function cadastroPagamentoDoTratamento($usuario_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
+    public function cadastrarPagamentoDoTratamento($profissional_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
     {
-        if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
+        if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
         }
         $novo_pagamento = new Pagamento($forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto);

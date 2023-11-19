@@ -14,12 +14,12 @@ class FormaPagamento extends persist
         $this->taxa_pagamento = $taxa_pagamento;
     }
 
-    public function getFormaPagamento()
+    public function getNomeFormaPagamento()
     {
         return $this->nome_forma_pagamento;
     }
 
-    public function setFormaPagamento($nome_forma_pagamento)
+    public function setNomeFormaPagamento($nome_forma_pagamento)
     {
         $this->nome_forma_pagamento = $nome_forma_pagamento;
     }
