@@ -20,7 +20,7 @@ class ConsultaExecucao extends Consulta
         $permissaoDentista = false;
         // validar em todas especialidades do dentista se tem o procedimento permitido
         foreach ($dentista_executor->especialidades as $especialidade) {
-            if (in_array($especialidade->procedimentos_permitidos, $procedimento, true)) {
+            if (in_array($procedimento, $especialidade->procedimentos_permitidos, true)) {
                 $permissaoDentista = true;
             }
         }

@@ -2,7 +2,7 @@
 require_once("persist.php");
 require_once("class.profissional.php");
 require_once("class.tratamento.php");
-class Funcionalidades extends persist
+class FuncionalidadesSistema extends persist
 {
     private $nomes_todas_funcionalidades = ["cadastroProcedimento", "cadastroEspecialidade", "cadastroPagamentoDoTratamento"];
     private $imposto_da_clinica = 0.2;
@@ -28,7 +28,7 @@ class Funcionalidades extends persist
         $funcionalidades_permitidas_usuario_logado = $profissional_logado->getUsuario()->getPerfil()->getFuncionalidadesPermitidas();
 
         // verificar que a funcionalidade é permitida para o usuario e que existe na classe funcionalidades
-        if (in_array($funcionalidades_permitidas_usuario_logado, $nome_funcionalidade) && in_array($this->nomes_todas_funcionalidades, $nome_funcionalidade)) {
+        if (in_array($nome_funcionalidade, $funcionalidades_permitidas_usuario_logado) && in_array($nome_funcionalidade, $this->nomes_todas_funcionalidades)) {
             return true;
         } else {
             return false;
@@ -76,8 +76,8 @@ class Funcionalidades extends persist
         if (!$this->validaPermissao(__FUNCTION__, $usuario_logado)) {
             return;
         }
-        $novaEspecialidade = new Especialidade($nome, $valor, $descricao);
-        $novaEspecialidade->save();
+        $novaProcedimento = new Procedimento($nome, $valor, $descricao);
+        $novaProcedimento->save();
     }
 
     public function cadastroPagamentoDoTratamento($usuario_logado, $id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)

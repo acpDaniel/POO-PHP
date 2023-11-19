@@ -12,6 +12,7 @@ include_once "class/class.usuario.php";
 include_once "class/persist.php";
 include_once "class/container.php";
 include_once "class/class.consultaavaliacao.php";
+include_once "class/class.funcionalidadesSistema.php";
 require_once "global.php";
 
 //Criação usuário 1 com perfil com acesso a todas menos Cadastrar Procedimento
@@ -31,6 +32,12 @@ $procedimentoLimpeza = new Procedimento("Limpeza", 200, "");
 
 //Login usuário 2
 
+$perfil_teste = new Perfil("perfilTeste", ["cadastroProcedimento", "cadastroPagamentoDoTratamento"]);
+$usuario = new Usuario("login123", "senha123", $perfil_teste);
+$profissional_logado = new Profissional("daniel", "gmail", "12345678", "142", new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), $usuario);
+$funcionalidades_sistema = new FuncionalidadesSistema();
+$funcionalidades_sistema->cadastroProcedimento($profissional_logado, "Limpeza", 200, "");
+
 //cria procedimentos (string $nome, float $valor, string $descricao)
 $procedimentoLimpeza = new Procedimento("Limpeza", 200, "");
 $procedimentoRestauracao = new Procedimento("Restauração", 185, "");
@@ -40,8 +47,6 @@ $procedimentoExtracaoSiso = new Procedimento("Extração de Siso", 400, "Valor p
 $procedimentoClareamentoLaser = new Procedimento("Clareamento a laser", 1700, "");
 $procedimentoClareamentoMoldeira = new Procedimento("Clareamento de moldeira", 900, "Clareamento caseiro.");
 
-
-funcionalidades.cadastroProcedimento(usuario_logado,"Extração Comum", 280, "Não inclui dente siso.")
 
 //Cria objetos das formas de pagamento
 $formapagDinheiro = new FormaPagamento("Dinheiro à vista", 0, 0);
