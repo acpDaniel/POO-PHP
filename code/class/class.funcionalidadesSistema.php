@@ -4,7 +4,6 @@ require_once("class.profissional.php");
 require_once("class.tratamento.php");
 class FuncionalidadesSistema extends persist
 {
-    private $nomes_todas_funcionalidades = ["cadastroProcedimento", "cadastroEspecialidade", "cadastrarPagamentoDoTratamento"];
     private $imposto_da_clinica = 0.2;
     static $local_filename = "funcionalidades.txt";
 
@@ -12,9 +11,9 @@ class FuncionalidadesSistema extends persist
     {
     }
 
-    public function adicionaFuncionalidade($nome_funcionalidade)
+    static public function getFilename()
     {
-        $this->nomes_todas_funcionalidades[] = $nome_funcionalidade;
+        return get_called_class()::$local_filename;
     }
 
     public function getImpostoDaClinica()
@@ -27,8 +26,8 @@ class FuncionalidadesSistema extends persist
         // array de funcionalidades permitidas obtida do perfil do profissional
         $funcionalidades_permitidas_usuario_logado = $profissional_logado->getUsuario()->getPerfil()->getFuncionalidadesPermitidas();
 
-        // verificar que a funcionalidade é permitida para o usuario e que existe na classe funcionalidades
-        if (in_array($nome_funcionalidade, $funcionalidades_permitidas_usuario_logado) && in_array($nome_funcionalidade, $this->nomes_todas_funcionalidades)) {
+        // verificar que a funcionalidade é permitida para o usuario 
+        if (in_array($nome_funcionalidade, $funcionalidades_permitidas_usuario_logado)) {
             return true;
         } else {
             return false;
@@ -101,10 +100,6 @@ class FuncionalidadesSistema extends persist
         $objeto_alvo_modificacao->save();
     }
 
-    static public function getFilename()
-    {
-        return get_called_class()::$local_filename;
-    }
 
     public function cadastrarPaciente($usuario_logado, $nome, $email, $telefone, $rg, $data_nascimento, Cliente $cliente_responsavel)
     {
