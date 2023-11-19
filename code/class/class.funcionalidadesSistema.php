@@ -128,7 +128,7 @@ class FuncionalidadesSistema extends persist
         $novaConsultaAvaliacao->save();
     }
 
-    public function marcarConsultaExecucao($profissional_logado, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
+    public function marcarConsultaExecucao($profissional_logado, $id, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
         if (!$this->validaPermissao(__FUNCTION__, $profissional_logado)) {
             return;
