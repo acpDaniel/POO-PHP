@@ -45,20 +45,22 @@ class DentistaParceiro extends Dentista
 
 		// devemos achar qual é a especialidade que o procedimento faz parte
 		foreach ($this->especialidades as $especialidade) {
-			if (in_array($procedimento, $especialidade->getProcedimentosPermitidos(), true)) {
+			if (in_array($procedimento, $especialidade->getProcedimentosPermitidos()) == true) {
 				$especialidade_para_procurar = $especialidade;
+				echo "<Br>";
 				echo "Procedimento  " . $procedimento->getNome() . "  pertence a especialidade: " . $especialidade_para_procurar->getNomeEspecialidade();
+				echo "<Br>";
 			}
 		}
 
 		if ($especialidade_para_procurar == null) {
 			echo "Procedimento " . $procedimento->getNome() . " não está nas especialidades do dentista.";
+			echo "<Br>";
 			return;
 		}
 
 		// procura no dicionario qual a porcentagem de determinada especialidade
 		$porcentagem_para_procedimento = $this->especialidades_porcentagem[$especialidade_para_procurar->getNomeEspecialidade()];
-		echo ($procedimento->getValor() * $porcentagem_para_procedimento);
 		return ($procedimento->getValor() * $porcentagem_para_procedimento * $porcentagem_realizada_pagamento);
 	}
 

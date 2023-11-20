@@ -109,7 +109,7 @@ class Tratamento extends Orcamento
         // adicionar pagamento no pagamentos efetuados
         $this->pagamentos_efetuados[] = $pagamento;
         $valor_a_ser_pago_procedimento = 0;
-        $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp() . $pagamento->getDataPagamento()->format('Y'));
+        $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp()) . $pagamento->getDataPagamento()->format('Y');
 
         $porcentagem_realizada_pagamento = (($pagamento->getValorTotalPagamento()) / ($this->getValor()));
 

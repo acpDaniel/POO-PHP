@@ -75,9 +75,9 @@ class Orcamento extends persist
         $this->detalhamentos_procedimento[$procedimento->getNome()] = $detalhamento;
     }
 
-    public function aprovarOrcamento($forma_pagamento_proposto)
+    public function aprovarOrcamento($id, $forma_pagamento_proposto)
     {
-        $tratamento = new Tratamento($this->id, $forma_pagamento_proposto, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
+        $tratamento = new Tratamento($id, $forma_pagamento_proposto, $this->paciente, $this->dentista_avaliador, $this->data_orcamento, $this->procedimentos);
         $tratamento->save();
         return $tratamento;
     }
