@@ -49,49 +49,24 @@ class Tratamento extends Orcamento
         $this->data_conclusao_tratamento = $data_conclusao_tratamento;
     }
 
-    public function validaInfosProcedimentoCadastradoExiste($procedimento)
-    {
-        $procedimento_existe = false;
-        // validar se o procedimento em questao ja esta cadastrado como um infosProcedimento
-        foreach ($this->infos_procedimentos as $infos_procedimento) {
-            if ($infos_procedimento->getProcedimento() === $procedimento) {
-                $procedimento_existe = true;
-            }
-        }
-        return $procedimento_existe;
-    }
-
     public function adicionaInfosProcedimento($procedimento)
     {
-        // se nao tiver sido criado um infosProcedimento para certo procedimento temos que criar e adicionar no array da classe
-        if ($this->validaInfosProcedimentoCadastradoExiste($procedimento) == false) {
-            $novo_infos_procedimento = new InfosProcedimento($procedimento);
-            array_push($this->infos_procedimentos, $novo_infos_procedimento);
-        } else {
-            echo "Já existe um cadastro com as informações desse procedimento";
-        }
+        $novo_infos_procedimento = new InfosProcedimento($procedimento);
+        array_push($this->infos_procedimentos, $novo_infos_procedimento);
     }
 
     public function finalizaProcedimento($procedimento, Datetime $data_conclusao)
     {
-        // para finalizar um procedimento valida se as infos dele estao cadastradas
-        if ($this->validaInfosProcedimentoCadastradoExiste($procedimento) == false) {
-            echo "Procedimento não cadastrado";
-            return;
-        } else {
-            foreach ($this->infos_procedimentos as $infos_procedimento) {
-                if ($infos_procedimento->getProcedimento() === $procedimento) {
-                    $infos_procedimento->setStatus("Finalizado");
-                    $infos_procedimento->setDataConclusao($data_conclusao);
-                }
+        foreach ($this->infos_procedimentos as $infos_procedimento) {
+            if ($infos_procedimento->getProcedimento()->getNome() == $procedimento->getNome()) {
+                $infos_procedimento->setStatus("Finalizado");
+                $infos_procedimento->setDataConclusao($data_conclusao);
             }
         }
     }
 
     public function agendaConsulta($dentista, Datetime $dataehorario, $duracao_consulta, Procedimento $procedimento)
     {
-        // garantir que existe o cadastro das informacoes do procedimento que se refere a consulta
-        $this->adicionaInfosProcedimento($procedimento);
 
         // instancia uma consulta e adiciona o respectivo procedimento
         $nova_consulta = new ConsultaExecucao($dentista, $dataehorario, $duracao_consulta, $procedimento);
@@ -115,11 +90,12 @@ class Tratamento extends Orcamento
 
         // cada procedimento pode ser feito por um dentista diferente entao temos que checar todos procedimentos pegando a informacao do dentista de alguma consulta. Todas consultas desse procedimento sao realizadas pelo meno dentista
         foreach ($this->infos_procedimentos as $infos_procedimento) {
-            $dentista_reponsavel_procedimento = $infos_procedimento->getConsultas()[0]->getDentistaExecutor();
+            $dentista_reponsavel_procedimento = $infos_procedimento->getDentistaExecutor();
             if ($dentista_reponsavel_procedimento instanceof DentistaParceiro) {
-                $valor_a_ser_pago_procedimento = $dentista_reponsavel_procedimento->calculaValorProcedimento($infos_procedimento->getProcedimento(), $porcentagem_realizada_pagamento);
-                $dentista_reponsavel_procedimento->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
-                $dentista_reponsavel_procedimento->save();
+                $objeto_dentista_parceiro_salvo_clinica = DentistaParceiro::getRecordsByField("cpf", $dentista_reponsavel_procedimento->getCpf())[0];
+                $valor_a_ser_pago_procedimento = $objeto_dentista_parceiro_salvo_clinica->calculaValorProcedimento($infos_procedimento->getProcedimento(), $porcentagem_realizada_pagamento);
+                $objeto_dentista_parceiro_salvo_clinica->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
+                $objeto_dentista_parceiro_salvo_clinica->save();
             }
         }
     }

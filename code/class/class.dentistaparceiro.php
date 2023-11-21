@@ -47,9 +47,9 @@ class DentistaParceiro extends Dentista
 		foreach ($this->especialidades as $especialidade) {
 			if (in_array($procedimento, $especialidade->getProcedimentosPermitidos()) == true) {
 				$especialidade_para_procurar = $especialidade;
-				echo "<Br>";
-				echo "Procedimento  " . $procedimento->getNome() . "  pertence a especialidade: " . $especialidade_para_procurar->getNomeEspecialidade();
-				echo "<Br>";
+				//echo "<Br>";
+				//echo "Procedimento  " . $procedimento->getNome() . "  pertence a especialidade: " . $especialidade_para_procurar->getNomeEspecialidade();
+				//echo "<Br>";
 			}
 		}
 

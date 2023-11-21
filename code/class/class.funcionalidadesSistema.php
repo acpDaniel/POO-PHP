@@ -26,7 +26,7 @@ class FuncionalidadesSistema extends persist
     {
 
         $usuario_logado = GerenciaLogin::getUsuarioLogado();
-        if($usuario_logado==null){
+        if ($usuario_logado == null) {
             echo "Nenhum usuário logado.";
             echo "<br>";
             return false;
@@ -62,21 +62,27 @@ class FuncionalidadesSistema extends persist
         foreach ($lista_tratamentos as $tratamento) {
             $receita_total_tratamentos_mes += $tratamento->calculaReceita($data_inicio_mes, $data_final_mes);
         }
-
+        echo "<br>";
+        echo "Receita: " . $receita_total_tratamentos_mes;
+        echo "<br>";
         // pegar despesas com dentistas parceiro
         $lista_dentistas_parceiro = DentistaParceiro::getRecords();
         $salario_total_dentistas_parceiro_mes = 0;
         foreach ($lista_dentistas_parceiro as $dentista_parceiro) {
             $salario_total_dentistas_parceiro_mes += $dentista_parceiro->getSalarioMesAno($mesAno);
         }
-
+        echo "<br>";
+        echo "Despesas dentistas parceiro: " . $salario_total_dentistas_parceiro_mes;
+        echo "<br>";
         // pegar despesas com dentistas funcionario
         $lista_dentistas_funcionario = DentistaFuncionario::getRecords();
         $salario_total_dentistas_funcionario_mes = 0;
         foreach ($lista_dentistas_funcionario as $dentista_funcionario) {
             $salario_total_dentistas_funcionario_mes += $dentista_funcionario->getSalario();
         }
-
+        echo "<br>";
+        echo "Despesas dentistas funcionario: " . $salario_total_dentistas_funcionario_mes;
+        echo "<br>";
         return ($receita_total_tratamentos_mes - $salario_total_dentistas_parceiro_mes - $salario_total_dentistas_funcionario_mes);
     }
 
@@ -177,7 +183,7 @@ class FuncionalidadesSistema extends persist
                 $objeto_alvo_modificacao = $orcamento_possivel;
             }
         }
-        $objeto_alvo_modificacao->aprovarOrcamento($id+1, $forma_pagamento_proposto);
+        $objeto_alvo_modificacao->aprovarOrcamento($id + 1, $forma_pagamento_proposto);
     }
 
     public function cadastrarEspecialidade($nome, $procedimentos_permitidos)

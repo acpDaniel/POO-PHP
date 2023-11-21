@@ -7,6 +7,7 @@ require_once("persist.php");
 class InfosProcedimento extends persist
 {
     private $procedimento;
+    private $dentista_executor = null;
     private $consultas = [];
     private $status;
     private Datetime $data_conclusao;
@@ -18,6 +19,20 @@ class InfosProcedimento extends persist
         $this->status = "Em andamento";
     }
 
+    public function getDentistaExecutor()
+    {
+        return $this->dentista_executor;
+    }
+
+    public function setDentistaExecutor($dentista_executor)
+    {
+        if ($this->dentista_executor == null || $this->dentista_executor->getcpf() != $dentista_executor->getCpf()) {
+            return;
+        } else {
+            $this->dentista_executor = $dentista_executor;
+        }
+    }
+
     public function getProcedimento()
     {
         return $this->procedimento;
@@ -25,7 +40,12 @@ class InfosProcedimento extends persist
 
     public function adicionaConsulta(ConsultaExecucao $consulta)
     {
-        $this->consultas[] = $consulta;
+        if ($this->dentista_executor != null && $this->dentista_executor->getcpf() != $consulta->getDentistaExecutor()->getCpf()) {
+            return;
+        } else {
+            $this->consultas[] = $consulta;
+            $this->dentista_executor = $consulta->getDentistaExecutor();
+        }
     }
 
     public function getConsultas()

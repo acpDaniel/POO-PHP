@@ -19,37 +19,41 @@ require_once "global.php";
 //PROVISORIO
 $perfil_adm = new Perfil(
     "perfilTeste",
-    ["cadastrarDentistaParceiro",
-    "cadastrarDentistaFuncionario" ,
-    "cadastrarProcedimento", 
-    "cadastrarFormaPagamento", 
-    "cadastrarPaciente", 
-    "cadastrarEspecialidade", 
-    "cadastrarPagamentoDoTratamento",
-    "cadastrarCliente",
-    "marcarConsultaAvaliacao",
-    "marcarConsultaExecucao",
-    "cadastrarOrcamento",
-    "aprovarOrcamento",
-    "calcularResultadoMensal",
-    "selecionarConsultasAvaliacao"]
+    [
+        "cadastrarDentistaParceiro",
+        "cadastrarDentistaFuncionario",
+        "cadastrarProcedimento",
+        "cadastrarFormaPagamento",
+        "cadastrarPaciente",
+        "cadastrarEspecialidade",
+        "cadastrarPagamentoDoTratamento",
+        "cadastrarCliente",
+        "marcarConsultaAvaliacao",
+        "marcarConsultaExecucao",
+        "cadastrarOrcamento",
+        "aprovarOrcamento",
+        "calcularResultadoMensal",
+        "selecionarConsultasAvaliacao"
+    ]
 );
 
 $perfil_restricao = new Perfil(
     "perfilTeste",
-    ["cadastrarDentistaParceiro",
-    "cadastrarDentistaFuncionario" ,
-    "cadastrarFormaPagamento", 
-    "cadastrarPaciente", 
-    "cadastrarEspecialidade", 
-    "cadastrarPagamentoDoTratamento",
-    "cadastrarCliente",
-    "marcarConsultaAvaliacao",
-    "marcarConsultaExecucao",
-    "cadastrarOrcamento",
-    "aprovarOrcamento",
-    "calcularResultadoMensal",
-    "selecionarConsultasAvaliacao"]
+    [
+        "cadastrarDentistaParceiro",
+        "cadastrarDentistaFuncionario",
+        "cadastrarFormaPagamento",
+        "cadastrarPaciente",
+        "cadastrarEspecialidade",
+        "cadastrarPagamentoDoTratamento",
+        "cadastrarCliente",
+        "marcarConsultaAvaliacao",
+        "marcarConsultaExecucao",
+        "cadastrarOrcamento",
+        "aprovarOrcamento",
+        "calcularResultadoMensal",
+        "selecionarConsultasAvaliacao"
+    ]
 );
 
 $funcionalidades_sistema = new FuncionalidadesSistema();
@@ -68,7 +72,7 @@ $profissional_logado = new Profissional("daniel", "gmail", "12345678", "142", ne
 
 echo "Teste 1: Acesso funcionalidade sem login <br>";
 //Acesso funcionalidade sem login
-    //resultado esperado -> exceção
+//resultado esperado -> exceção
 $funcionalidades_sistema->cadastrarProcedimento($profissional_logado, "Limpeza", 200, "");
 echo "<br>";
 
@@ -79,7 +83,7 @@ echo "<br>";
 
 echo "Teste 3: Cadastro de procedimento sem permissao <br>";
 //Cadastro de procedimento com usuário 1
-    //resultado esperado -> exceção
+//resultado esperado -> exceção
 $funcionalidades_sistema->cadastrarProcedimento($profissional_logado, "Limpeza", 200, "");
 $procedimentos_cadastrados = Procedimento::getRecords();
 echo "Array de procedimentos:";
@@ -137,23 +141,27 @@ echo "Número de formas de pagamento cadastradas: " . count($formas_pagamento_ca
 echo "Teste 7: Cadastros das especialidades<br>";
 //cria especialidades (string $nome, array<Procedimentos> $procedimentospermitidos)
 $funcionalidades_sistema->cadastrarEspecialidade(
-    "Clínica Geral", 
-    [Procedimento::getRecordsByField("nome", "Limpeza")[0], 
-    Procedimento::getRecordsByField("nome", "Restauração")[0], 
-    Procedimento::getRecordsByField("nome", "Extração Comum")[0]]
+    "Clínica Geral",
+    [
+        Procedimento::getRecordsByField("nome", "Limpeza")[0],
+        Procedimento::getRecordsByField("nome", "Restauração")[0],
+        Procedimento::getRecordsByField("nome", "Extração Comum")[0]
+    ]
 );
 $funcionalidades_sistema->cadastrarEspecialidade(
-    "Endodontia", 
+    "Endodontia",
     [Procedimento::getRecordsByField("nome", "Canal")[0]]
 );
 $funcionalidades_sistema->cadastrarEspecialidade(
-    "Cirurgia", 
+    "Cirurgia",
     [Procedimento::getRecordsByField("nome", "Extração de Siso")[0]]
 );
 $funcionalidades_sistema->cadastrarEspecialidade(
-    "Estética", 
-    [Procedimento::getRecordsByField("nome", "Clareamento a laser")[0], 
-    Procedimento::getRecordsByField("nome", "Clareamento de moldeira")[0]]
+    "Estética",
+    [
+        Procedimento::getRecordsByField("nome", "Clareamento a laser")[0],
+        Procedimento::getRecordsByField("nome", "Clareamento de moldeira")[0]
+    ]
 );
 
 $especialidades_cadastradas = Especialidade::getRecords();
@@ -194,7 +202,7 @@ $funcionalidades_sistema->cadastrarDentistaParceiro(
     "23123123",
     [Especialidade::getRecordsByField("nome", "Clínica Geral")[0], Especialidade::getRecordsByField("nome", "Estética")[0]],
     $usuario_adm,
-    ["Clínica Geral" => 0.4,"Estética" => 0.4]
+    ["Clínica Geral" => 0.4, "Estética" => 0.4]
 );
 
 $dentistas_parceiros_cadastrados = DentistaParceiro::getRecords();
@@ -206,10 +214,10 @@ echo "Número de dentistas parceiros cadastrados:" . count($dentistas_parceiros_
 echo "Teste 10: Cadastro de cliente<br>";
 //Cadastra cliente responsável financeiro do paciente
 $funcionalidades_sistema->cadastrarCliente(
-    "John Smith", 
-    "johnsmith@example.com", 
-    "1234567890", 
-    "123456789", 
+    "John Smith",
+    "johnsmith@example.com",
+    "1234567890",
+    "123456789",
     "12345678901"
 );
 
@@ -224,11 +232,11 @@ echo "Número de clientes cadastrados:" . count($clientes_cadastrados) . "<br> <
 echo "Teste 11: Cadastro de Paciente<br>";
 //Cadastra paciente
 $funcionalidades_sistema->cadastrarPaciente(
-    "Bob Smith", 
-    "bob@example.com", 
-    "5556667777", 
-    "9876543", 
-    new DateTime("1985-08-22"), 
+    "Bob Smith",
+    "bob@example.com",
+    "5556667777",
+    "9876543",
+    new DateTime("1985-08-22"),
     Cliente::getRecordsByField("cpf", "12345678901")[0]
 );
 
@@ -243,8 +251,8 @@ echo "Número de Pacientes cadastrados:" . count($pacientes_cadastrados) . "<br>
 //Agendamento de uma consulta de avaliação
 echo "Teste 12: Marcar consulta de avaliação<br>";
 $funcionalidades_sistema->marcarConsultaAvaliacao(
-    Paciente::getRecordsByField("rg", "9876543")[0], 
-    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0], 
+    Paciente::getRecordsByField("rg", "9876543")[0],
+    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
     new DateTime("2023-11-06 14:00")
 );
 
@@ -259,11 +267,13 @@ echo "Teste 13: Cadastro de Orçamento<br>";
 $funcionalidades_sistema->cadastrarOrcamento(
     1,
     new DateTime("2023-11-06 14:00"),
-    [Procedimento::getRecordsByField("nome", "Limpeza")[0], 
-    Procedimento::getRecordsByField("nome", "Clareamento a laser")[0], 
-    Procedimento::getRecordsByField("nome", "Restauração")[0], 
-    Procedimento::getRecordsByField("nome", "Restauração")[0]],
-    $funcionalidades_sistema->selecionarConsultasAvaliacao(Paciente::getRecordsByField("rg", "9876543")[0], new DateTime("2023-11-06 14:00")), 
+    [
+        Procedimento::getRecordsByField("nome", "Limpeza")[0],
+        Procedimento::getRecordsByField("nome", "Clareamento a laser")[0],
+        Procedimento::getRecordsByField("nome", "Restauração")[0],
+        Procedimento::getRecordsByField("nome", "Restauração")[0]
+    ],
+    $funcionalidades_sistema->selecionarConsultasAvaliacao(Paciente::getRecordsByField("rg", "9876543")[0], new DateTime("2023-11-06 14:00")),
 
 );
 
@@ -276,7 +286,7 @@ echo "Número de orçamentos cadastrados:" . count($orcamentos_cadastrados) . "<
 echo "Teste 14: Cadastro de tratamento<br>";
 //Criação de um tratamento a partir da aprovação do orçamento
 $funcionalidades_sistema->aprovarOrcamento(
-    1, 
+    1,
     FormaPagamento::getRecordsByField("nome_forma_pagamento", "Pix")[0]
 );
 
@@ -290,33 +300,33 @@ echo "Teste 15: Cadastro de consulta de execução<br>";
 // //Agendamento das consultas de realização
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
-    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0], 
-    new DateTime("2023-12-05 15:00"), 
-    "30 minutos", 
+    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
+    new DateTime("2023-12-05 15:00"),
+    "30 minutos",
     Procedimento::getRecordsByField("nome", "Limpeza")[0]
 );
 
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
-    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0], 
-    new DateTime("2023-12-12 09:00"), 
-    "30 minutos", 
+    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
+    new DateTime("2023-12-12 09:00"),
+    "30 minutos",
     Procedimento::getRecordsByField("nome", "Clareamento a laser")[0]
 );
 
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
-    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0], 
-    new DateTime("2023-12-20 17:00"), 
-    "60 minutos", 
+    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
+    new DateTime("2023-12-20 17:00"),
+    "60 minutos",
     Procedimento::getRecordsByField("nome", "Restauração")[0]
 );
 
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
-    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0], 
-    new DateTime("2024-01-03 14:00"), 
-    "60 minutos", 
+    DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
+    new DateTime("2024-01-03 14:00"),
+    "60 minutos",
     Procedimento::getRecordsByField("nome", "Restauração")[0]
 );
 
@@ -330,33 +340,33 @@ echo "Teste 16: Cadastro de pagamentos<br>";
 // //Adiciona os pagamentos
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Pix")[0], 
-    0.5*Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal(),
-    new DateTime("2023-11-03 14:00"), 
+    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Pix")[0],
+    0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal(),
+    new DateTime("2023-11-03 14:00"),
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0], 
-    (0.5*Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal())/3,
-    new DateTime("2023-11-15 14:00"), 
+    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
+    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
+    new DateTime("2023-11-15 14:00"),
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0], 
-    (0.5*Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal())/3,
-    new DateTime("2023-12-15 14:00"), 
+    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
+    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
+    new DateTime("2023-12-15 14:00"),
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0], 
-    (0.5*Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal())/3,
-    new DateTime("2024-01-15 14:00"), 
+    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
+    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
+    new DateTime("2024-01-15 14:00"),
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
@@ -369,7 +379,7 @@ echo "Número de pagamentos cadastrados:" . count($pagamentos_cadastrados) . "<b
 
 echo "Teste 17: Cálculo do resultado mensal da clínica<br>";
 //Calcular resultado mensal da clínica em novembro 2023
-echo $funcionalidades_sistema->calcularResultadoMensal(new DateTime("2023-11-01"), new DateTime("2023-11-30"));
+echo "Resultado mensal: " . $funcionalidades_sistema->calcularResultadoMensal(new DateTime("2023-11-01"), new DateTime("2023-11-30"));
 echo "<br>";
 
 GerenciaLogin::Logout();
