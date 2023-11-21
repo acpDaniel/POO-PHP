@@ -143,14 +143,14 @@ class FuncionalidadesSistema extends persist
         $novaConsultaAvaliacao->save();
     }
 
-    public function marcarConsultaExecucao($id_tratamento, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
+    public function marcarConsultaExecucao($id_tratamento, $id_infos_procedimento, $dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
         if (!$this->validaPermissao(__FUNCTION__)) {
             return;
         }
         try {
             $tratamento_certo = Tratamento::getRecordsByField("id", $id_tratamento)[0];
-            $tratamento_certo->agendaConsulta($dentista_executor, $dataehorario, $duracao_consulta, $procedimento);
+            $tratamento_certo->agendaConsulta($dentista_executor, $dataehorario, $duracao_consulta, $procedimento, $id_infos_procedimento);
             $tratamento_certo->save();
         } catch (InvalidArgumentException $e) {
             echo $e->getMessage();
@@ -170,7 +170,7 @@ class FuncionalidadesSistema extends persist
         }
     }
 
-    public function aprovarOrcamento($id, $forma_pagamento_proposto)
+    public function aprovarOrcamento($id_orcamento, $forma_pagamento_proposto)
     {
         if (!$this->validaPermissao(__FUNCTION__)) {
             return;
@@ -179,11 +179,11 @@ class FuncionalidadesSistema extends persist
         $objeto_alvo_modificacao = null;
         // encontrar o tratamento que devemos alterar
         foreach ($lista_orcamentos_possiveis as $orcamento_possivel) {
-            if ($orcamento_possivel->getId() == $id) {
+            if ($orcamento_possivel->getId() == $id_orcamento) {
                 $objeto_alvo_modificacao = $orcamento_possivel;
             }
         }
-        $objeto_alvo_modificacao->aprovarOrcamento($id + 1, $forma_pagamento_proposto);
+        $objeto_alvo_modificacao->aprovarOrcamento($id_orcamento + 1, $forma_pagamento_proposto);
     }
 
     public function cadastrarEspecialidade($nome, $procedimentos_permitidos)

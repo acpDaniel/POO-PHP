@@ -7,16 +7,23 @@ require_once("persist.php");
 class InfosProcedimento extends persist
 {
     private $procedimento;
+    private $id;
     private $dentista_executor = null;
     private $consultas = [];
     private $status;
     private Datetime $data_conclusao;
     static $local_filename = "infos_procedimentos.txt";
 
-    public function __construct($procedimento)
+    public function __construct($id, $procedimento)
     {
         $this->procedimento = $procedimento;
+        $this->id = $id;
         $this->status = "Em andamento";
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getDentistaExecutor()

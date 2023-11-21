@@ -18,8 +18,10 @@ class Tratamento extends Orcamento
     {
 
         parent::__construct($id, $paciente, $dentista_avaliador, $data_orcamento, $procedimentos);
+        $id_procedimento = 1;
         foreach ($procedimentos as $procedimento) {
-            $this->adicionaInfosProcedimento($procedimento);
+            $this->adicionaInfosProcedimento($id_procedimento, $procedimento);
+            $id_procedimento += 1;
         }
         $this->forma_pagamento_proposto = $forma_pagamento_proposto;
     }
@@ -49,29 +51,29 @@ class Tratamento extends Orcamento
         $this->data_conclusao_tratamento = $data_conclusao_tratamento;
     }
 
-    public function adicionaInfosProcedimento($procedimento)
+    public function adicionaInfosProcedimento($id_procedimento, $procedimento)
     {
-        $novo_infos_procedimento = new InfosProcedimento($procedimento);
+        $novo_infos_procedimento = new InfosProcedimento($id_procedimento, $procedimento);
         array_push($this->infos_procedimentos, $novo_infos_procedimento);
     }
 
-    public function finalizaProcedimento($procedimento, Datetime $data_conclusao)
+    public function finalizaProcedimento($procedimento, $id_procedimento, Datetime $data_conclusao)
     {
         foreach ($this->infos_procedimentos as $infos_procedimento) {
-            if ($infos_procedimento->getProcedimento()->getNome() == $procedimento->getNome()) {
+            if ($infos_procedimento->getId() == $id_procedimento) {
                 $infos_procedimento->setStatus("Finalizado");
                 $infos_procedimento->setDataConclusao($data_conclusao);
             }
         }
     }
 
-    public function agendaConsulta($dentista, Datetime $dataehorario, $duracao_consulta, Procedimento $procedimento)
+    public function agendaConsulta($dentista, Datetime $dataehorario, $duracao_consulta, Procedimento $procedimento, $id_procedimento)
     {
 
         // instancia uma consulta e adiciona o respectivo procedimento
         $nova_consulta = new ConsultaExecucao($dentista, $dataehorario, $duracao_consulta, $procedimento);
         foreach ($this->infos_procedimentos as $infos_procedimento) {
-            if ($infos_procedimento->getProcedimento()->getNome() == $procedimento->getNome()) {
+            if ($infos_procedimento->getId() == $id_procedimento) {
                 $infos_procedimento->adicionaConsulta($nova_consulta);
                 $nova_consulta->save();
             }

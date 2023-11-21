@@ -8,8 +8,8 @@ class ConsultaExecucao extends Consulta
 
     public function __construct($dentista_executor, Datetime $dataehorario, $duracao_consulta, $procedimento)
     {
-        if ($this->validaDentistaExecutor($dentista_executor, $procedimento) === 0) {
-            throw new InvalidArgumentException("O dentista não tem permissão para realizar essa consulta.");
+        if ($this->validaDentistaExecutor($dentista_executor, $procedimento) === false) {
+            throw new InvalidArgumentException("O dentista não tem permissão para realizar esse procedimento. ");
         } else {
             parent::__construct($dentista_executor, $dataehorario, $duracao_consulta);
         }

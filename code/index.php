@@ -58,22 +58,18 @@ $perfil_restricao = new Perfil(
 
 $funcionalidades_sistema = new FuncionalidadesSistema();
 
-
-
 //Criação usuário 1 com perfil com acesso a todas menos Cadastrar Procedimento
 $usuario_restricao = new Usuario("loginrest", "senha321", $perfil_restricao);
 //$usuario_restricao->save();
 
 //Criação usuário 2 com acesso a todas as funcionalidades
 $usuario_adm = new Usuario("loginadm", "senha123", $perfil_adm);
-$profissional_logado = new Profissional("daniel", "gmail", "12345678", "142", new Endereco("Rua dos Flores", "Bairro Primavera", "456", "54321-987", "Cidade Alegre", "Estado AA", "Apto 202"), $usuario_adm);
-
 //$usuario_adm->save();
 
 echo "Teste 1: Acesso funcionalidade sem login <br>";
 //Acesso funcionalidade sem login
 //resultado esperado -> exceção
-$funcionalidades_sistema->cadastrarProcedimento($profissional_logado, "Limpeza", 200, "");
+$funcionalidades_sistema->cadastrarProcedimento("Limpeza", 200, "");
 echo "<br>";
 
 echo "Teste 2: Login com sucesso do usuario com restricao <br>";
@@ -84,7 +80,7 @@ echo "<br>";
 echo "Teste 3: Cadastro de procedimento sem permissao <br>";
 //Cadastro de procedimento com usuário 1
 //resultado esperado -> exceção
-$funcionalidades_sistema->cadastrarProcedimento($profissional_logado, "Limpeza", 200, "");
+$funcionalidades_sistema->cadastrarProcedimento("Limpeza", 200, "");
 $procedimentos_cadastrados = Procedimento::getRecords();
 echo "Array de procedimentos:";
 print_r($procedimentos_cadastrados);
@@ -119,26 +115,7 @@ echo "Número de procedimentos cadastrados: " . count($procedimentos_cadastrados
 // echo "<Br>";
 // echo "<Br>";
 
-echo "Teste 6: Cadastro das formas de pagamento<br>";
-//Cria objetos das formas de pagamento
-$funcionalidades_sistema->cadastrarFormaPagamento("Dinheiro à vista", 0, 0);
-$funcionalidades_sistema->cadastrarFormaPagamento("Pix", 0, 0);
-$funcionalidades_sistema->cadastrarFormaPagamento("Débito", 0, 0.03);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 1x", 1, 0.04);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 2x", 2, 0.04);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 3x", 3, 0.04);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 4x", 4, 0.07);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 5x", 5, 0.07);
-$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 6x", 6, 0.07);
-echo "<br>";
-
-$formas_pagamento_cadastradas = FormaPagamento::getRecords();
-echo "Número de formas de pagamento cadastradas: " . count($formas_pagamento_cadastradas) . "<br> <br>";
-// print_r($formas_pagamento_cadastradas);
-// echo "<Br>";
-// echo "<Br>";
-
-echo "Teste 7: Cadastros das especialidades<br>";
+echo "Teste 6: Cadastros das especialidades<br>";
 //cria especialidades (string $nome, array<Procedimentos> $procedimentospermitidos)
 $funcionalidades_sistema->cadastrarEspecialidade(
     "Clínica Geral",
@@ -169,6 +146,26 @@ echo "Número de especialidades cadastradas: " . count($especialidades_cadastrad
 // print_r($especialidades_cadastradas);
 // echo "<Br>";
 // echo "<Br>";
+
+echo "Teste 7: Cadastro das formas de pagamento<br>";
+//Cria objetos das formas de pagamento
+$funcionalidades_sistema->cadastrarFormaPagamento("Dinheiro à vista", 0, 0);
+$funcionalidades_sistema->cadastrarFormaPagamento("Pix", 0, 0);
+$funcionalidades_sistema->cadastrarFormaPagamento("Débito", 0, 0.03);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 1x", 1, 0.04);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 2x", 2, 0.04);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 3x", 3, 0.04);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 4x", 4, 0.07);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 5x", 5, 0.07);
+$funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 6x", 6, 0.07);
+echo "<br>";
+
+$formas_pagamento_cadastradas = FormaPagamento::getRecords();
+echo "Número de formas de pagamento cadastradas: " . count($formas_pagamento_cadastradas) . "<br> <br>";
+// print_r($formas_pagamento_cadastradas);
+// echo "<Br>";
+// echo "<Br>";
+
 
 echo "Teste 8: Cadastro de dentista funcionário<br>";
 //Dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
@@ -300,6 +297,7 @@ echo "Teste 15: Cadastro de consulta de execução<br>";
 // //Agendamento das consultas de realização
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
+    1,
     DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
     new DateTime("2023-12-05 15:00"),
     "30 minutos",
@@ -307,6 +305,7 @@ $funcionalidades_sistema->marcarConsultaExecucao(
 );
 
 $funcionalidades_sistema->marcarConsultaExecucao(
+    2,
     2,
     DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
     new DateTime("2023-12-12 09:00"),
@@ -316,6 +315,7 @@ $funcionalidades_sistema->marcarConsultaExecucao(
 
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
+    3,
     DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
     new DateTime("2023-12-20 17:00"),
     "60 minutos",
@@ -324,6 +324,7 @@ $funcionalidades_sistema->marcarConsultaExecucao(
 
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
+    4,
     DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
     new DateTime("2024-01-03 14:00"),
     "60 minutos",

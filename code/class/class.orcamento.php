@@ -52,7 +52,7 @@ class Orcamento extends persist
 
     public function getDataOrcamento()
     {
-        return $this->data_orcamento->format('d-m-Y');
+        return $this->data_orcamento;
     }
 
     public function getProcedimentos()

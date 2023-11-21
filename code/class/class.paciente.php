@@ -16,6 +16,7 @@ class Paciente extends Pessoa
         $this->data_nascimento = $data_nascimento;
         $this->cliente_responsavel = $cliente_responsavel;
         $this->cliente_responsavel->adicionaPaciente($this);
+        $this->cliente_responsavel->save();
     }
 
     public function setRg(string $rg)
@@ -28,7 +29,7 @@ class Paciente extends Pessoa
         $this->data_nascimento = $data_nascimento;
     }
 
-    public function setClienteResponsavel(Cliente $cliente_responsavel): void
+    public function setClienteResponsavel(Cliente $cliente_responsavel)
     {
         $this->cliente_responsavel = $cliente_responsavel;
     }
