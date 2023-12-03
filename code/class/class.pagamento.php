@@ -10,14 +10,14 @@ class Pagamento extends persist
     private $valor_pago_impostos;
     private $valor_do_taxamento;
     // objeto de data instanciado com (ano,mes,dia)
-    private DateTime $data_pagamento;
+    private $datas_pagamentos_parcelas = array();
     static $local_filename = "pagamentos.txt";
 
-    public function __construct(FormaPagamento $forma_pagamento, $valor_total_pagamento, Datetime $data_pagamento, $taxa_imposto)
+    public function __construct(FormaPagamento $forma_pagamento, $valor_total_pagamento, $datas_pagamentos_parcelas, $taxa_imposto)
     {
         $this->forma_pagamento = $forma_pagamento;
         $this->valor_total_pagamento = $valor_total_pagamento;
-        $this->data_pagamento = $data_pagamento;
+        $this->datas_pagamentos_parcelas = $datas_pagamentos_parcelas;
         $this->calculaValorImposto($taxa_imposto);
         $this->calculaValorTaxamento();
     }
@@ -42,14 +42,14 @@ class Pagamento extends persist
         $this->valor_total_pagamento = $valor_total_pagamento;
     }
 
-    public function getDataPagamento()
+    public function getDatasPagamento()
     {
-        return $this->data_pagamento;
+        return $this->datas_pagamentos_parcelas;
     }
 
-    public function setDataPagamento($data_pagamento)
+    public function setDataPagamento($datas_pagamentos_parcelas)
     {
-        $this->data_pagamento = $data_pagamento;
+        $this->datas_pagamentos_parcelas = $datas_pagamentos_parcelas;
     }
 
     public function calculaValorImposto($taxa_imposto)

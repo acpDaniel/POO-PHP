@@ -86,18 +86,20 @@ class Tratamento extends Orcamento
         // adicionar pagamento no pagamentos efetuados
         $this->pagamentos_efetuados[] = $pagamento;
         $valor_a_ser_pago_procedimento = 0;
-        $mesAno_do_pagamento = strftime('%B', $pagamento->getDataPagamento()->getTimestamp()) . $pagamento->getDataPagamento()->format('Y');
+        foreach ($pagamento->getDatasPagamento() as $data_pagamento) {
+            $mesAno_do_pagamento = strftime('%B', $data_pagamento->getTimestamp()) . $data_pagamento->format('Y');
 
-        $porcentagem_realizada_pagamento = (($pagamento->getValorTotalPagamento()) / ($this->getValor()));
+            $porcentagem_realizada_pagamento = (($pagamento->getValorTotalPagamento() / count($pagamento->getDatasPagamento())) / ($this->getValor()));
 
-        // cada procedimento pode ser feito por um dentista diferente entao temos que checar todos procedimentos pegando a informacao do dentista de alguma consulta. Todas consultas desse procedimento sao realizadas pelo meno dentista
-        foreach ($this->infos_procedimentos as $infos_procedimento) {
-            $dentista_reponsavel_procedimento = $infos_procedimento->getDentistaExecutor();
-            if ($dentista_reponsavel_procedimento instanceof DentistaParceiro) {
-                $objeto_dentista_parceiro_salvo_clinica = DentistaParceiro::getRecordsByField("cpf", $dentista_reponsavel_procedimento->getCpf())[0];
-                $valor_a_ser_pago_procedimento = $objeto_dentista_parceiro_salvo_clinica->calculaValorProcedimento($infos_procedimento->getProcedimento(), $porcentagem_realizada_pagamento);
-                $objeto_dentista_parceiro_salvo_clinica->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
-                $objeto_dentista_parceiro_salvo_clinica->save();
+            // cada procedimento pode ser feito por um dentista diferente entao temos que checar todos procedimentos pegando a informacao do dentista de alguma consulta. Todas consultas desse procedimento sao realizadas pelo meno dentista
+            foreach ($this->infos_procedimentos as $infos_procedimento) {
+                $dentista_reponsavel_procedimento = $infos_procedimento->getDentistaExecutor();
+                if ($dentista_reponsavel_procedimento instanceof DentistaParceiro) {
+                    $objeto_dentista_parceiro_salvo_clinica = DentistaParceiro::getRecordsByField("cpf", $dentista_reponsavel_procedimento->getCpf())[0];
+                    $valor_a_ser_pago_procedimento = $objeto_dentista_parceiro_salvo_clinica->calculaValorProcedimento($infos_procedimento->getProcedimento(), $porcentagem_realizada_pagamento);
+                    $objeto_dentista_parceiro_salvo_clinica->incrementaSalario($mesAno_do_pagamento, $valor_a_ser_pago_procedimento);
+                    $objeto_dentista_parceiro_salvo_clinica->save();
+                }
             }
         }
     }
@@ -110,9 +112,11 @@ class Tratamento extends Orcamento
 
         // filtrar os pagamentos que estão entre as datas desejadas
         foreach ($this->pagamentos_efetuados as $pagamento) {
-            if ($pagamento->getDataPagamento() >= $data_inicio && $pagamento->getDataPagamento() <= $data_fim) {
-                array_push($pagamentos_data_filtrada, $pagamento);
-                $valor_faturado_total += $pagamento->getValorTotalPagamento();
+            foreach ($pagamento->getDatasPagamento() as $data_pagamento) {
+                if ($data_pagamento >= $data_inicio && $data_pagamento <= $data_fim) {
+                    array_push($pagamentos_data_filtrada, $pagamento);
+                    $valor_faturado_total += $pagamento->getValorTotalPagamento() / count($pagamento->getDatasPagamento());
+                }
             }
         }
 
@@ -126,9 +130,11 @@ class Tratamento extends Orcamento
 
         // filtrar os pagamentos que estão entre as datas desejadas
         foreach ($this->pagamentos_efetuados as $pagamento) {
-            if ($pagamento->getDataPagamento() >= $data_inicio && $pagamento->getDataPagamento() <= $data_fim) {
-                array_push($pagamentos_data_filtrada, $pagamento);
-                $valor_taxado_cartao_total += $pagamento->getValorTaxamento();
+            foreach ($pagamento->getDatasPagamento() as $data_pagamento) {
+                if ($data_pagamento >= $data_inicio && $data_pagamento <= $data_fim) {
+                    array_push($pagamentos_data_filtrada, $pagamento);
+                    $valor_taxado_cartao_total += $pagamento->getValorTaxamento() / count($pagamento->getDatasPagamento());
+                }
             }
         }
 
@@ -142,9 +148,11 @@ class Tratamento extends Orcamento
 
         // filtrar os pagamentos que estão entre as datas desejadas
         foreach ($this->pagamentos_efetuados as $pagamento) {
-            if ($pagamento->getDataPagamento() >= $data_inicio && $pagamento->getDataPagamento() <= $data_fim) {
-                array_push($pagamentos_data_filtrada, $pagamento);
-                $valor_imposto_total += $pagamento->getValorImposto();
+            foreach ($pagamento->getDatasPagamento() as $data_pagamento) {
+                if ($data_pagamento >= $data_inicio && $data_pagamento <= $data_fim) {
+                    array_push($pagamentos_data_filtrada, $pagamento);
+                    $valor_imposto_total += $pagamento->getValorImposto() / count($pagamento->getDatasPagamento());
+                }
             }
         }
 

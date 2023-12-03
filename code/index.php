@@ -59,11 +59,11 @@ $perfil_restricao = new Perfil(
 $funcionalidades_sistema = new FuncionalidadesSistema();
 
 //Criação usuário 1 com perfil com acesso a todas menos Cadastrar Procedimento
-$usuario_restricao = new Usuario("loginrest", "senha321", $perfil_restricao);
+$usuario_restricao = new Usuario("usuario1@gmail.com", "loginrest", "senha321", $perfil_restricao);
 //$usuario_restricao->save();
 
 //Criação usuário 2 com acesso a todas as funcionalidades
-$usuario_adm = new Usuario("loginadm", "senha123", $perfil_adm);
+$usuario_adm = new Usuario("usuario2@gmail.com", "loginadm", "senha123", $perfil_adm);
 //$usuario_adm->save();
 
 echo "Teste 1: Acesso funcionalidade sem login <br>";
@@ -343,31 +343,15 @@ $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
     FormaPagamento::getRecordsByField("nome_forma_pagamento", "Pix")[0],
     0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal(),
-    new DateTime("2023-11-03 14:00"),
+    [new DateTime("2023-11-03 14:00")],
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
     FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
-    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
-    new DateTime("2023-11-15 14:00"),
-    $funcionalidades_sistema->getImpostoDaClinica()
-);
-
-$funcionalidades_sistema->cadastrarPagamentoDoTratamento(
-    2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
-    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
-    new DateTime("2023-12-15 14:00"),
-    $funcionalidades_sistema->getImpostoDaClinica()
-);
-
-$funcionalidades_sistema->cadastrarPagamentoDoTratamento(
-    2,
-    FormaPagamento::getRecordsByField("nome_forma_pagamento", "Crédito de 3x")[0],
-    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()) / 3,
-    new DateTime("2024-01-15 14:00"),
+    (0.5 * Tratamento::getRecordsByField("id", "2")[0]->calculaValorTotal()),
+    [new DateTime("2023-11-15 14:00"), new DateTime("2023-12-15 14:00"), new DateTime("2024-01-15 14:00")],
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 

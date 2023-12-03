@@ -4,16 +4,28 @@ require_once("persist.php");
 
 class Usuario extends persist
 {
+    protected string $email;
     protected string $login;
     protected string $senha;
     protected Perfil $perfil;
     static $local_filename = "usuarios.txt";
 
-    public function __construct(string $login, string $senha, Perfil $perfil)
+    public function __construct(string $email, string $login, string $senha, Perfil $perfil)
     {
+        $this->email = $email;
         $this->login = $login;
         $this->senha = $senha;
         $this->perfil = $perfil;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
     }
 
     public function getLogin()
