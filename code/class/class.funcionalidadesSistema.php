@@ -28,7 +28,7 @@ class FuncionalidadesSistema extends persist
         $usuario_logado = GerenciaLogin::getUsuarioLogado();
         if ($usuario_logado == null) {
             echo "Nenhum usuário logado.";
-            echo "<br>";
+            echo "\n";
             return false;
         }
         // array de funcionalidades permitidas obtida do perfil do profissional
@@ -39,7 +39,7 @@ class FuncionalidadesSistema extends persist
             return true;
         } else {
             echo "Usuário não tem permissão para essa funcionalidade.";
-            echo "<br>";
+            echo "\n";
             return false;
         }
     }
@@ -62,27 +62,27 @@ class FuncionalidadesSistema extends persist
         foreach ($lista_tratamentos as $tratamento) {
             $receita_total_tratamentos_mes += $tratamento->calculaReceita($data_inicio_mes, $data_final_mes);
         }
-        echo "<br>";
+        echo "\n";
         echo "Receita: " . $receita_total_tratamentos_mes;
-        echo "<br>";
+        echo "\n";
         // pegar despesas com dentistas parceiro
         $lista_dentistas_parceiro = DentistaParceiro::getRecords();
         $salario_total_dentistas_parceiro_mes = 0;
         foreach ($lista_dentistas_parceiro as $dentista_parceiro) {
-            $salario_total_dentistas_parceiro_mes += $dentista_parceiro->getSalarioMesAno($mesAno);
+            $salario_total_dentistas_parceiro_mes += (float)$dentista_parceiro->getSalarioMesAno($mesAno);
         }
-        echo "<br>";
+        echo "\n";
         echo "Despesas dentistas parceiro: " . $salario_total_dentistas_parceiro_mes;
-        echo "<br>";
+        echo "\n";
         // pegar despesas com dentistas funcionario
         $lista_dentistas_funcionario = DentistaFuncionario::getRecords();
         $salario_total_dentistas_funcionario_mes = 0;
         foreach ($lista_dentistas_funcionario as $dentista_funcionario) {
             $salario_total_dentistas_funcionario_mes += $dentista_funcionario->getSalario();
         }
-        echo "<br>";
+        echo "\n";
         echo "Despesas dentistas funcionario: " . $salario_total_dentistas_funcionario_mes;
-        echo "<br>";
+        echo "\n";
         return ($receita_total_tratamentos_mes - $salario_total_dentistas_parceiro_mes - $salario_total_dentistas_funcionario_mes);
     }
 
@@ -95,13 +95,13 @@ class FuncionalidadesSistema extends persist
         $novoProcedimento->save();
     }
 
-    public function cadastrarPagamentoDoTratamento($id, $forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto)
+    public function cadastrarPagamentoDoTratamento($id, $forma_pagamento, $valor_total_pagamento,  $datas_pagamento_parcelas, $taxa_imposto)
     {
         if (!$this->validaPermissao(__FUNCTION__)) {
             echo "nao foi permitido";
             return;
         }
-        $novo_pagamento = new Pagamento($forma_pagamento, $valor_total_pagamento,  $data_pagamento, $taxa_imposto);
+        $novo_pagamento = new Pagamento($forma_pagamento, $valor_total_pagamento,  $datas_pagamento_parcelas, $taxa_imposto);
         $lista_tratamentos_possiveis = Tratamento::getRecords();
         $objeto_alvo_modificacao = null;
         // encontrar o tratamento que devemos alterar

@@ -66,18 +66,18 @@ $usuario_restricao = new Usuario("usuario1@gmail.com", "loginrest", "senha321", 
 $usuario_adm = new Usuario("usuario2@gmail.com", "loginadm", "senha123", $perfil_adm);
 //$usuario_adm->save();
 
-echo "Teste 1: Acesso funcionalidade sem login <br>";
+echo "Teste 1: Acesso funcionalidade sem login \n";
 //Acesso funcionalidade sem login
 //resultado esperado -> exceção
 $funcionalidades_sistema->cadastrarProcedimento("Limpeza", 200, "");
-echo "<br>";
+echo "\n";
 
-echo "Teste 2: Login com sucesso do usuario com restricao <br>";
+echo "Teste 2: Login com sucesso do usuario com restricao \n";
 //Login usuário 1
 GerenciaLogin::Login("loginrest", "senha321");
-echo "<br>";
+echo "\n";
 
-echo "Teste 3: Cadastro de procedimento sem permissao <br>";
+echo "Teste 3: Cadastro de procedimento sem permissao \n";
 //Cadastro de procedimento com usuário 1
 //resultado esperado -> exceção
 $funcionalidades_sistema->cadastrarProcedimento("Limpeza", 200, "");
@@ -85,20 +85,20 @@ $procedimentos_cadastrados = Procedimento::getRecords();
 echo "Array de procedimentos:";
 print_r($procedimentos_cadastrados);
 
-echo "<br>";
+echo "\n";
 
-echo "<br>Teste 4: Logout <br>";
+echo "\nTeste 4: Logout \n";
 //Logout usuário 1
 GerenciaLogin::Logout();
-echo "<br>";
+echo "\n";
 
-echo "Login usuario que pode tudo <br>";
+echo "Login usuario que pode tudo \n";
 //Login usuário 2
 GerenciaLogin::Login("loginadm", "senha123");
-echo "<br>";
+echo "\n";
 
-echo "<br>";
-echo "Teste 5: Cadastro dos procedimentos com usuario com permissao <br>";
+echo "\n";
+echo "Teste 5: Cadastro dos procedimentos com usuario com permissao \n";
 //cria procedimentos (string $nome, float $valor, string $descricao)
 $funcionalidades_sistema->cadastrarProcedimento("Limpeza", 200, "");
 $funcionalidades_sistema->cadastrarProcedimento("Restauração", 185, "");
@@ -107,15 +107,15 @@ $funcionalidades_sistema->cadastrarProcedimento("Canal", 800, "");
 $funcionalidades_sistema->cadastrarProcedimento("Extração de Siso", 400, "Valor por dente.");
 $funcionalidades_sistema->cadastrarProcedimento("Clareamento a laser", 1700, "");
 $funcionalidades_sistema->cadastrarProcedimento("Clareamento de moldeira", 900, "Clareamento caseiro.");
-echo "<br>";
+echo "\n";
 
 $procedimentos_cadastrados = Procedimento::getRecords();
-echo "Número de procedimentos cadastrados: " . count($procedimentos_cadastrados) . "<br> <br>";
+echo "Número de procedimentos cadastrados: " . count($procedimentos_cadastrados) . "\n \n";
 // print_r($procedimentos_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 6: Cadastros das especialidades<br>";
+echo "Teste 6: Cadastros das especialidades\n";
 //cria especialidades (string $nome, array<Procedimentos> $procedimentospermitidos)
 $funcionalidades_sistema->cadastrarEspecialidade(
     "Clínica Geral",
@@ -142,12 +142,12 @@ $funcionalidades_sistema->cadastrarEspecialidade(
 );
 
 $especialidades_cadastradas = Especialidade::getRecords();
-echo "Número de especialidades cadastradas: " . count($especialidades_cadastradas) . "<br> <br>";
+echo "Número de especialidades cadastradas: " . count($especialidades_cadastradas) . "\n \n";
 // print_r($especialidades_cadastradas);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 7: Cadastro das formas de pagamento<br>";
+echo "Teste 7: Cadastro das formas de pagamento\n";
 //Cria objetos das formas de pagamento
 $funcionalidades_sistema->cadastrarFormaPagamento("Dinheiro à vista", 0, 0);
 $funcionalidades_sistema->cadastrarFormaPagamento("Pix", 0, 0);
@@ -158,16 +158,16 @@ $funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 3x", 3, 0.04);
 $funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 4x", 4, 0.07);
 $funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 5x", 5, 0.07);
 $funcionalidades_sistema->cadastrarFormaPagamento("Crédito de 6x", 6, 0.07);
-echo "<br>";
+echo "\n";
 
 $formas_pagamento_cadastradas = FormaPagamento::getRecords();
-echo "Número de formas de pagamento cadastradas: " . count($formas_pagamento_cadastradas) . "<br> <br>";
+echo "Número de formas de pagamento cadastradas: " . count($formas_pagamento_cadastradas) . "\n \n";
 // print_r($formas_pagamento_cadastradas);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
 
-echo "Teste 8: Cadastro de dentista funcionário<br>";
+echo "Teste 8: Cadastro de dentista funcionário\n";
 //Dentista funcionario  (string $nome, string $email, string $telefone, string $cpf, Endereco $endereco, string $cro, array $especialidade, float $salario, Usuario $usuario)
 $funcionalidades_sistema->cadastrarDentistaFuncionario(
     "Ana Oliveira",
@@ -180,16 +180,16 @@ $funcionalidades_sistema->cadastrarDentistaFuncionario(
     5000,
     $usuario_adm
 );
-echo "<br>";
+echo "\n";
 
 $dentistas_funcionarios_cadastrados = DentistaFuncionario::getRecords();
-echo "Número de dentistas funcionarios cadastrados:" . count($dentistas_funcionarios_cadastrados) . "<br> <br>";
+echo "Número de dentistas funcionarios cadastrados:" . count($dentistas_funcionarios_cadastrados) . "\n \n";
 // print_r($dentistas_funcionarios_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
 //Cria dentistas parceiros (string $nome, string $email, int $telefone, string $cpf, Endereco $endereco, string $cro, array<Especialidades> $especialidades)
-echo "Teste 9: Cadastro de dentista parceiro<br>";
+echo "Teste 9: Cadastro de dentista parceiro\n";
 $funcionalidades_sistema->cadastrarDentistaParceiro(
     "Carlos Silva",
     "carlos@example.com",
@@ -203,12 +203,12 @@ $funcionalidades_sistema->cadastrarDentistaParceiro(
 );
 
 $dentistas_parceiros_cadastrados = DentistaParceiro::getRecords();
-echo "Número de dentistas parceiros cadastrados:" . count($dentistas_parceiros_cadastrados) . "<br> <br>";
+echo "Número de dentistas parceiros cadastrados:" . count($dentistas_parceiros_cadastrados) . "\n \n";
 // print_r($dentistas_parceiros_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 10: Cadastro de cliente<br>";
+echo "Teste 10: Cadastro de cliente\n";
 //Cadastra cliente responsável financeiro do paciente
 $funcionalidades_sistema->cadastrarCliente(
     "John Smith",
@@ -219,14 +219,14 @@ $funcionalidades_sistema->cadastrarCliente(
 );
 
 $clientes_cadastrados = Cliente::getRecords();
-echo "Número de clientes cadastrados:" . count($clientes_cadastrados) . "<br> <br>";
+echo "Número de clientes cadastrados:" . count($clientes_cadastrados) . "\n \n";
 // print_r($clientes_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
 //print_r (Cliente::getRecordsByField("cpf", "12345678901"));
 
-echo "Teste 11: Cadastro de Paciente<br>";
+echo "Teste 11: Cadastro de Paciente\n";
 //Cadastra paciente
 $funcionalidades_sistema->cadastrarPaciente(
     "Bob Smith",
@@ -238,15 +238,15 @@ $funcionalidades_sistema->cadastrarPaciente(
 );
 
 $pacientes_cadastrados = Paciente::getRecords();
-echo "Número de Pacientes cadastrados:" . count($pacientes_cadastrados) . "<br> <br>";
+echo "Número de Pacientes cadastrados:" . count($pacientes_cadastrados) . "\n \n";
 // print_r($pacientes_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
 
 
 //Agendamento de uma consulta de avaliação
-echo "Teste 12: Marcar consulta de avaliação<br>";
+echo "Teste 12: Marcar consulta de avaliação\n";
 $funcionalidades_sistema->marcarConsultaAvaliacao(
     Paciente::getRecordsByField("rg", "9876543")[0],
     DentistaParceiro::getRecordsByField("cpf", "11122233344")[0],
@@ -254,12 +254,12 @@ $funcionalidades_sistema->marcarConsultaAvaliacao(
 );
 
 $consultas_avaliacao_cadastradas = ConsultaAvaliacao::getRecords();
-echo "Número de consultas de avaliação cadastradas:" . count($consultas_avaliacao_cadastradas) . "<br> <br>";
+echo "Número de consultas de avaliação cadastradas:" . count($consultas_avaliacao_cadastradas) . "\n \n";
 // print_r($consultas_avaliacao_cadastradas);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 13: Cadastro de Orçamento<br>";
+echo "Teste 13: Cadastro de Orçamento\n";
 //Criação de um orçamento a partir de uma consulta de avaliação
 $funcionalidades_sistema->cadastrarOrcamento(
     1,
@@ -275,12 +275,12 @@ $funcionalidades_sistema->cadastrarOrcamento(
 );
 
 $orcamentos_cadastrados = Orcamento::getRecords();
-echo "Número de orçamentos cadastrados:" . count($orcamentos_cadastrados) . "<br> <br>";
+echo "Número de orçamentos cadastrados:" . count($orcamentos_cadastrados) . "\n \n";
 // print_r($orcamentos_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 14: Cadastro de tratamento<br>";
+echo "Teste 14: Cadastro de tratamento\n";
 //Criação de um tratamento a partir da aprovação do orçamento
 $funcionalidades_sistema->aprovarOrcamento(
     1,
@@ -288,12 +288,12 @@ $funcionalidades_sistema->aprovarOrcamento(
 );
 
 $tratamentos_cadastrados = Tratamento::getRecords();
-echo "Número de tratamentos cadastrados:" . count($tratamentos_cadastrados) . "<br> <br>";
+echo "Número de tratamentos cadastrados:" . count($tratamentos_cadastrados) . "\n \n";
 // print_r($tratamentos_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 15: Cadastro de consulta de execução<br>";
+echo "Teste 15: Cadastro de consulta de execução\n";
 // //Agendamento das consultas de realização
 $funcionalidades_sistema->marcarConsultaExecucao(
     2,
@@ -332,12 +332,12 @@ $funcionalidades_sistema->marcarConsultaExecucao(
 );
 
 $consultas_execucao_cadastradas = ConsultaExecucao::getRecords();
-echo "Número de consultas de execução cadastradas:" . count($consultas_execucao_cadastradas) . "<br> <br>";
+echo "Número de consultas de execução cadastradas:" . count($consultas_execucao_cadastradas) . "\n \n";
 // print_r($consultas_execucao_cadastradas);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 16: Cadastro de pagamentos<br>";
+echo "Teste 16: Cadastro de pagamentos\n";
 // //Adiciona os pagamentos
 $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     2,
@@ -355,16 +355,16 @@ $funcionalidades_sistema->cadastrarPagamentoDoTratamento(
     $funcionalidades_sistema->getImpostoDaClinica()
 );
 
-echo "<Br>";
+echo "\n";
 $pagamentos_cadastrados = Pagamento::getRecords();
-echo "Número de pagamentos cadastrados:" . count($pagamentos_cadastrados) . "<br> <br>";
+echo "Número de pagamentos cadastrados:" . count($pagamentos_cadastrados) . "\n \n";
 // print_r($pagamentos_cadastrados);
-// echo "<Br>";
-// echo "<Br>";
+// echo "\n";
+// echo "\n";
 
-echo "Teste 17: Cálculo do resultado mensal da clínica<br>";
+echo "Teste 17: Cálculo do resultado mensal da clínica\n";
 //Calcular resultado mensal da clínica em novembro 2023
 echo "Resultado mensal: " . $funcionalidades_sistema->calcularResultadoMensal(new DateTime("2023-11-01"), new DateTime("2023-11-30"));
-echo "<br>";
+echo "\n";
 
 GerenciaLogin::Logout();

@@ -13,14 +13,14 @@ class GerenciaLogin
         foreach ($todos_usuarios_cadastrados as $usuario) {
             if ($usuario->getLogin() == $login && $usuario->getSenha() == $senha) {
                 self::$usuario_logado = $usuario;
-                echo "<br>";
+                echo "\n";
                 print("Usuario logou");
-                echo "<br>";
+                echo "\n";
             }
         }
         if (self::$usuario_logado == null) {
             print("Não foi possivel logar, usuario ou senha inválidos.");
-            echo "<br>";
+            echo "\n";
             self::$sessao_atual = null;
             self::$usuario_logado = null;
         }
@@ -29,14 +29,14 @@ class GerenciaLogin
     static function Logout()
     {
         if (self::$sessao_atual != null) {
-            echo "<br>";
+            echo "\n";
             print("Logout efetuado.");
-            echo "<br>";
+            echo "\n";
             self::$sessao_atual = null;
             self::$usuario_logado = null;
         } else {
             print("Nenhum usuário em uso, impossível deslogar.");
-            echo "<br>";
+            echo "\n";
         }
     }
 
@@ -46,7 +46,7 @@ class GerenciaLogin
             self::$sessao_atual = new GerenciaLogin($login, $senha);
         } else {
             print("Desconecte da sessão atual para poder logar.");
-            echo "<br>";
+            echo "\n";
         }
         return self::$sessao_atual;
     }
